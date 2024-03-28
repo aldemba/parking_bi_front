@@ -18,7 +18,6 @@ html {
   opacity: 0.05;
   z-index: 230;
   user-select: none;
-  user-drag: none;
 }
 
 .error {
@@ -63,11 +62,11 @@ html {
 .info {
   text-align: center;
   font-family: 'Gilda Display', serif;
-  font-size: 15px;
+  font-size: 3rem;
   font-style: italic;
   text-align: center;
-  width: 200px;
-  height: 60px;
+  width: 60rem;
+  height: 2rem;
   line-height: 60px;
   margin: auto;
   position: absolute;
@@ -96,6 +95,12 @@ html {
   opacity: 0;
   color: red;
   animation: noise-2 .2s linear infinite;
+}
+
+.tesre{
+    width: 70%;
+    height: 100%;
+    
 }
 
 @keyframes noise-1 {
