@@ -7,6 +7,7 @@ const routes: Routes = [
   {path:'client', loadChildren: ()=> import('./client/client.module').then(m=>m.ClientModule)},
   {path:'superadmin', loadChildren: ()=> import('./gestionnaire/gestionnaire.module').then(m=>m.GestionnaireModule)},
   {path:'admin', loadChildren: ()=> import('./proprietaire/proprietaire.module').then(m=>m.ProprietaireModule)},
+  {path:'', redirectTo:'client',pathMatch:'full'},
   {path:'**',component:NotFoundComponent}
   
 
