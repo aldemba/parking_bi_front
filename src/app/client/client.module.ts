@@ -6,13 +6,15 @@ import { NavComponent } from './nav/nav.component';
 import { CatalogueComponent } from './catalogue/catalogue.component';
 import { LayoutModule } from '../layout/layout.module';
 import { CardComponent } from './card/card.component';
+import { ScaleCardDirective } from './scale-card.directive';
 
 
 @NgModule({
   declarations: [
     NavComponent,
     CatalogueComponent,
-    CardComponent
+    CardComponent,
+    ScaleCardDirective
   ],
   imports: [
     CommonModule,
