@@ -1,3 +1,13 @@
 <app-nav></app-nav>
-<p>catalogue works!</p>
+<div class="container">
+    <div class="row">
+        <ng-container *ngFor="let park of parkings">
+
+            <div class="col-12 col-md-4 col-lg-3 mt-3">
+                <app-card [catalogue]="park" ></app-card>
+            </div>
+        </ng-container>
+  
+    </div>
+</div>
 <app-footer></app-footer>
