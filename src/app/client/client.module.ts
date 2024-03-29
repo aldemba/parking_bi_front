@@ -5,12 +5,14 @@ import { ClientRoutingModule } from './client-routing.module';
 import { NavComponent } from './nav/nav.component';
 import { CatalogueComponent } from './catalogue/catalogue.component';
 import { LayoutModule } from '../layout/layout.module';
+import { CardComponent } from './card/card.component';
 
 
 @NgModule({
   declarations: [
     NavComponent,
-    CatalogueComponent
+    CatalogueComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
