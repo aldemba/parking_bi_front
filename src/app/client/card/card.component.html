@@ -3,7 +3,7 @@
         <img src="data:image/PNG;base64,{{catalogue.image}}" class="card__image" alt="">
         <div class="card-body">
             <h1 class="h3 card-title text-center">{{catalogue.nom}}</h1>
-            <p class="card-text">{{catalogue.description.length > 30 ? (catalogue.description | slice:0:100) + '...' : catalogue.description}}</p>
+            <p class="card-text">{{catalogue.description.length > 30 ? (catalogue.description | slice:0:30) + '...' : catalogue.description}}</p>
             <div class="btn-group d-flex justify-content-center">
                 <a class="btn btn-sm btn-warning">Details parking</a>
             </div>
