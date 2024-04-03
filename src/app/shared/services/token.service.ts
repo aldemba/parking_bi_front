@@ -18,6 +18,24 @@ export class TokenService {
 
   getTokenFromStorage(): string | null{  return localStorage.getItem("token") }
 
+  getIdFromToken(token:string){
+  
+  const payload = token.split('.')[1];
+
+  const decodedPayload = atob(payload);
+
+  const payloadObj = JSON.parse(decodedPayload);
+
+  const id = payloadObj.id;
+
+  return id
+
+  }
+
+
+ getUser(token: string){  return JSON.parse(atob(token.split(".")[1]))}
+
+
 
   isLogged():boolean{
 
