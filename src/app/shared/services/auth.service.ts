@@ -32,7 +32,7 @@ export class AuthService {
         catchError( error => {            
           if(error.status == 401)
             console.log("Login et/ou mot de passe incorrect(s)!")
-          return throwError(() => new Error("Login et/ou mot de passe incorrect(s)!"))
+          return throwError(() => ("Login et/ou mot de passe incorrect(s)!"))
         })
       )
     ).then((data) => 
@@ -57,7 +57,7 @@ export class AuthService {
       //   this.tokenserv.saveId(m)        
       // );
             
-       (this.hasRole("ROLE_PROPRIETAIRE")) ?  this.router.navigate(["/admin/"]) : this.router.navigate(["/superadmin/"])
+       (this.hasRole("ROLE_PROPRIETAIRE")) ?  this.router.navigate(["/admin/parkings"]) : this.router.navigate(["/superadmin/"])
     })
   }
 

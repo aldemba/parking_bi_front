@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MesParkingsComponent } from './mes-parkings/mes-parkings.component';
 
 const routes: Routes = [
-  {path:'parkings/:id',component:MesParkingsComponent}
+  {path:'parkings',component:MesParkingsComponent}
 ];
 
 @NgModule({
