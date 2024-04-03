@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { Credentials } from '../models/credentials';
 import { Token } from '../models/token';
 import { TokenService } from './token.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AuthService {
   url="http://localhost:8000/api/login_check"
 
 
-  constructor(private http:HttpClient, private tokenserv:TokenService) { }
+  constructor(private http:HttpClient, private tokenserv:TokenService, private router:Router) { }
 
   public hasRole(role: string){ return this.user?.roles?.includes(role as never); }
 
@@ -38,7 +39,7 @@ export class AuthService {
       this.tokenserv.saveTokenInStorage(data.token);
       this.user=(this.tokenserv.getUser(data.token));
       var id=this.tokenserv.getIdFromToken(data.token);
-      this.tokenserv.saveIdInStorage(id)
+      this.tokenserv.saveIdInStorage(id);
 
 
       // this.tokenserv.saveToken(data.token)  ;  
@@ -50,9 +51,11 @@ export class AuthService {
       //   this.tokenserv.saveId(m)        
       // );
             
-      // (this.hasRole("ROLE_CLIENT")) ?  this.redirige.navigate(["/client"]) : this.redirige.navigate(["/client/details/1"])
+       (this.hasRole("ROLE_PROPRIETAIRE")) ?  this.router.navigate(["/admin/"]) : this.router.navigate(["/superadmin/"])
     })
   }
+
+
 
 
 

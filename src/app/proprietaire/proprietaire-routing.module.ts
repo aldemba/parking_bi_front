@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MesParkingsComponent } from './mes-parkings/mes-parkings.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path:'parkings/:id',component:MesParkingsComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
