@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SecuriteRoutingModule } from './securite-routing.module';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { InscriptionComponent } from './inscription/inscription.component';
   ],
   imports: [
     CommonModule,
-    SecuriteRoutingModule
+    SecuriteRoutingModule,
+    FormsModule
   ]
 })
 export class SecuriteModule { }

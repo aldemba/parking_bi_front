@@ -15,6 +15,7 @@ export class AuthService {
   
 
   user:User|undefined
+  tok:any
 
   url="http://localhost:8000/api/login_check"
 
@@ -35,11 +36,16 @@ export class AuthService {
         })
       )
     ).then((data) => 
-    {
+    { 
       this.tokenserv.saveTokenInStorage(data.token);
       this.user=(this.tokenserv.getUser(data.token));
-      var id=this.tokenserv.getIdFromToken(data.token);
-      this.tokenserv.saveIdInStorage(id);
+      // var id=this.tokenserv.getIdFromToken(data.token);
+      this.tok=this.tokenserv.getIdFromToken(data.token)
+      // console.log(this.tok.id);
+      
+      // console.log(this.user);
+      
+      this.tokenserv.saveIdInStorage(this.tok.id);
 
 
       // this.tokenserv.saveToken(data.token)  ;  

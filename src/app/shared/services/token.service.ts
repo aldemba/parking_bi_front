@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenPayload } from '../models/token-payload';
 
 @Injectable({
   providedIn: 'root'
@@ -18,22 +19,31 @@ export class TokenService {
 
   getTokenFromStorage(): string | null{  return localStorage.getItem("token") }
 
-  getIdFromToken(token:string){
+  // getIdFromToken(token:string){
+    
   
-  const payload = token.split('.')[1];
+  // const payload = token.split('.')[0];
+  // console.log(payload);
+  
 
-  const decodedPayload = atob(payload);
+  // const decodedPayload = atob(payload);
 
-  const payloadObj = JSON.parse(decodedPayload);
+  // const payloadObj = JSON.parse(decodedPayload);
 
-  const id = payloadObj.id;
+  // const id = payloadObj.id;
 
-  return id
+  // return id
 
-  }
+  // }
 
 
  getUser(token: string){  return JSON.parse(atob(token.split(".")[1]))}
+
+
+ getIdFromToken(token: string):TokenPayload{
+  const decodedtoken= JSON.parse(atob(token.split(".")[0]))
+  return decodedtoken as TokenPayload;
+}
 
 
 

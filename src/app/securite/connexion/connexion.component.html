@@ -7,14 +7,21 @@
           <div class="card-body p-5 text-center">
 
             <h3 class="mb-5">Bienvenue sur Parking Bi</h3>
-            <form name="form">
+              <p class="text-danger">{{errorMessage}}</p>
+            <form name="form" #f="ngForm" (ngSubmit)="onSubmit()">
               <div class="form-outline mb-4">
                 <label class="form-label" for="typeEmailX-2">Email</label>
-                <input type="email" name="login" id="typeEmailX-2" class="form-control form-control-lg" required/>
+                <input type="email" name="username" id="typeEmailX-2" class="form-control form-control-lg" [(ngModel)]="form.username" #username="ngModel" required/>
+                <div class="form_error" *ngIf="username.invalid && f.submitted">
+                  <div *ngIf="username.errors?.['required']">email obligatoire !</div>
+                </div>
               </div>
               <div class="form-outline mb-4">
                 <label class="form-label" for="typePasswordX-2">Mot de passe</label>
-                <input type="password" name="password"id="typePasswordX-2" class="form-control form-control-lg" required />
+                <input type="password" name="password"id="typePasswordX-2" class="form-control form-control-lg" [(ngModel)]="form.password" #password="ngModel" required />
+                <div *ngIf="password.invalid &&  f.submitted" class="form_error">
+                  <div *ngIf="password.errors?.['required']">mot de passe obligatoire !</div>
+                </div>
               </div>
               <button class="btn btn-lg btn-block btn1" type="submit">Connexion</button>
             </form>

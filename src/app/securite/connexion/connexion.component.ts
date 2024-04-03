@@ -28,7 +28,7 @@ export class ConnexionComponent {
   }
 
   onSubmit(){
-    this.authserv.login(this.form).catch((err)=>(this.errorMessage))
+    this.authserv.login(this.form).catch((err)=>(this.errorMessage=err))
   }
 
 
