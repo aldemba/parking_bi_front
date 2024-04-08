@@ -1,26 +1,27 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
 import { TokenService } from './token.service';
+import { catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ParkingsService {
+export class DetailsService {
 
-  constructor(private http: HttpClient,private toksev:TokenService) { }
+  constructor(private http:HttpClient, private tokserv:TokenService) { }
 
-  public getParkingsById(id: number)
+
+  public getVoituresByParking(id: number)
   {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': `Bearer ${this.toksev.getTokenFromStorage()}`
+        'Authorization': `Bearer ${this.tokserv.getTokenFromStorage()}`
       })
     };
-    let PARKINGS_PROPRIO = "http://127.0.0.1:8000/api/proprietaire/"+id+"/parkings"
+    let DETAILS_URL = "http://127.0.0.1:8000/api/parkings/"+id+"/voitures"
     
-    return this.http.get<any>(PARKINGS_PROPRIO, httpOptions).pipe( catchError(this.handleError))
+    return this.http.get<any>(DETAILS_URL, httpOptions).pipe( catchError(this.handleError))
     // console.log(this.http.get<any>(PARKINGS_PROPRIO, httpOptions));
     
 
