@@ -18,7 +18,7 @@ export class DetailsParkingComponent {
     this.activatedroute.paramMap.subscribe(
       param=> {
         id=+param.get("id")!;
-
+    
         this.detailserv.getVoituresByParking(id).subscribe((data)=> {
           this.voitures=data;
           console.log(this.voitures);
@@ -28,5 +28,19 @@ export class DetailsParkingComponent {
     )
 
   }
+
+  // ngOnInit(): void {
+  //   let slug:string=this.activatedroute.snapshot.params['slug']
+  //   this.detailserv.getVoituresByParking(slug).subscribe(
+  //     (data)=>{
+  //       this.voitures=data
+
+  //       console.log(this.voitures);
+        
+      
+        
+  //     }
+  //   )
+  //     }
 
 }

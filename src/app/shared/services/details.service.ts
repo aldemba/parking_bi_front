@@ -27,6 +27,23 @@ export class DetailsService {
 
   }
 
+
+  // public getVoituresByParking(slug: string)
+  // {
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type':  'application/json',
+  //       'Authorization': `Bearer ${this.tokserv.getTokenFromStorage()}`
+  //     })
+  //   };
+  //   let DETAILS_URL = "http://127.0.0.1:8000/api/parkings/"+slug+"/voitures"
+    
+  //   return this.http.get<any>(DETAILS_URL, httpOptions).pipe( catchError(this.handleError))
+  //   // console.log(this.http.get<any>(PARKINGS_PROPRIO, httpOptions));
+    
+
+  // }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
