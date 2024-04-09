@@ -21,7 +21,7 @@ export class DetailsService {
     };
     let DETAILS_URL = "http://127.0.0.1:8000/api/parkings/"+id+"/voitures"
     
-    return this.http.get<any>(DETAILS_URL, httpOptions).pipe( catchError(this.handleError))
+    return this.http.get<any>(DETAILS_URL).pipe( catchError(this.handleError))
     // console.log(this.http.get<any>(PARKINGS_PROPRIO, httpOptions));
     
 

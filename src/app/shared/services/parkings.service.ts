@@ -20,7 +20,7 @@ export class ParkingsService {
     };
     let PARKINGS_PROPRIO = "http://127.0.0.1:8000/api/proprietaire/"+id+"/parkings"
     
-    return this.http.get<any>(PARKINGS_PROPRIO, httpOptions).pipe( catchError(this.handleError))
+    return this.http.get<any>(PARKINGS_PROPRIO).pipe( catchError(this.handleError))
     // console.log(this.http.get<any>(PARKINGS_PROPRIO, httpOptions));
     
 
