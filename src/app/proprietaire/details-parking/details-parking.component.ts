@@ -21,7 +21,7 @@ export class DetailsParkingComponent {
     
         this.detailserv.getVoituresByParking(id).subscribe((data)=> {
           this.voitures=data;
-          console.log(this.voitures);
+          // console.log(this.voitures);
           
         })
       }

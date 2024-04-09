@@ -1,11 +1,12 @@
-
-<div class="card">
-    <img src="data:image/PNG;base64, {{parkinglist.image}}" class="card__image" alt="">
-    <div class="card-body">
-        <h1 class="h3 card-title text-center">{{parkinglist.nom}}</h1>
-        <p class="card-text">{{parkinglist.description.length > 30 ? (parkinglist.description | slice:0:30) + '...' : parkinglist.description}}</p>
-        <div class="btn-group d-flex justify-content-center">
-            <a routerLink="/admin/parkings/{{parkinglist.id}}/voitures" class="btn btn-sm btn-warning">Mes voitures</a>
+<a routerLink="/admin/parkings/{{parkinglist.id}}/voitures">
+    <div class="card">
+        <img src="data:image/PNG;base64, {{parkinglist.image}}" class="card__image" alt="">
+        <div class="card-body">
+            <h1 class="h3 card-title text-center">{{parkinglist.nom}}</h1>
+            <p class="card-text">{{parkinglist.description.length > 30 ? (parkinglist.description | slice:0:30) + '...' : parkinglist.description}}</p>
+            <div class="btn-group d-flex justify-content-center">
+                <a routerLink="/admin/parkings/{{parkinglist.id}}/voitures" class="btn btn-sm btn-warning">Mes voitures</a>
+            </div>
         </div>
     </div>
-</div>
+</a>
