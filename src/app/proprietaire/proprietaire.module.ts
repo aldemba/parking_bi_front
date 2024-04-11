@@ -8,6 +8,8 @@ import { CardParkingComponent } from './card-parking/card-parking.component';
 import { DetailsParkingComponent } from './details-parking/details-parking.component';
 import { ScalecardadminDirective } from './scalecardadmin.directive';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FilterPipe } from './filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,13 +19,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MesParkingsComponent,
     CardParkingComponent,
     DetailsParkingComponent,
-    ScalecardadminDirective
+    ScalecardadminDirective,
+    FilterPipe
   ],
   imports: [
     CommonModule,
     ProprietaireRoutingModule,
     LayoutModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ]
 })
 export class ProprietaireModule { }

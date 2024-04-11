@@ -13,6 +13,7 @@ export class DetailsParkingComponent {
 
   totalLength:any;
   page:number=1; 
+  searchTerm: any;
 
   constructor(private activatedroute:ActivatedRoute, private detailserv:DetailsService) { }
 
