@@ -7,6 +7,8 @@ import { LayoutModule } from '../layout/layout.module';
 import { CardParkingComponent } from './card-parking/card-parking.component';
 import { DetailsParkingComponent } from './details-parking/details-parking.component';
 import { ScalecardadminDirective } from './scalecardadmin.directive';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 
@@ -20,7 +22,8 @@ import { ScalecardadminDirective } from './scalecardadmin.directive';
   imports: [
     CommonModule,
     ProprietaireRoutingModule,
-    LayoutModule
+    LayoutModule,
+    NgxPaginationModule
   ]
 })
 export class ProprietaireModule { }

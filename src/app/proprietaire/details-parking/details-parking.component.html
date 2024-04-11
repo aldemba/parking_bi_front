@@ -5,10 +5,10 @@
             <div class="pull-right">
                 <a class="btn btn-warning mb-2 mb-lg-3 text-white"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
             </div>
-            <div *ngIf="voitures.voitures.length === 0" class="text-center my-3">
+            <div *ngIf="voitures.length === 0" class="text-center my-3">
                 <h1>Vous n'avez pas encore de voitures, veuillez en ajouter.</h1>
             </div>
-            <div *ngIf="voitures.voitures.length > 0" class="table-responsive">
+            <div *ngIf="voitures.length > 0" class="table-responsive">
                 <table class="table table-striped table-bordered nowrap">
                     <thead class="table-dark">
                         <tr>
@@ -24,7 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let voiture of voitures.voitures ">
+                        <tr *ngFor="let voiture of voitures | paginate :{itemsPerPage:2,currentPage:page,totalItems:totalLength} ">
                             <th scope="row"><img class="img" src="data:image/PNG;base64, {{voiture.image}}" alt=""></th>
                             <td>{{voiture.nom}}</td>
                             <td>{{voiture.matricule}}</td>
@@ -44,6 +44,9 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="pagination">
+                    <pagination-controls (pageChange)="page=$event"></pagination-controls>
+                </div>
             </div>
         </div>
     </div>

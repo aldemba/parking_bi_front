@@ -11,6 +11,9 @@ export class DetailsParkingComponent {
 
   voitures:any
 
+  totalLength:any;
+  page:number=1; 
+
   constructor(private activatedroute:ActivatedRoute, private detailserv:DetailsService) { }
 
   ngOnInit() {
@@ -20,8 +23,8 @@ export class DetailsParkingComponent {
         id=+param.get("id")!;
     
         this.detailserv.getVoituresByParking(id).subscribe((data)=> {
-          this.voitures=data;
-          // console.log(this.voitures);
+          this.voitures=data.voitures;
+          console.log("test",this.voitures);
           
         })
       }
