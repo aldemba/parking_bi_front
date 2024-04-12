@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-end" >
+    <div class="row justify-content-end" *ngIf="!searchTerm">
         <div class="col-auto">
             <pagination-controls class="pagination" previousLabel="Précédent" nextLabel="Suivant" (pageChange)="page=$event"></pagination-controls>
         </div>
