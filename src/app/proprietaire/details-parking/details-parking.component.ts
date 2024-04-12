@@ -25,13 +25,17 @@ export class DetailsParkingComponent {
     
         this.detailserv.getVoituresByParking(id).subscribe((data)=> {
           this.voitures=data.voitures;
-          console.log("test",this.voitures);
+          this.totalLength=this.voitures.length;
+          // console.log("test",this.voitures);
           
         })
       }
     )
 
   }
+  
+
+  
 
   // ngOnInit(): void {
   //   let slug:string=this.activatedroute.snapshot.params['slug']

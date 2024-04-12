@@ -11,14 +11,21 @@ export class FilterPipe implements PipeTransform {
 
     searchTerm = searchTerm.toLowerCase();
 
-    return items.filter(item =>
-      Object.keys(item).some(key => {
-        const value = item[key];
-        if (typeof value === 'string') {
-          return value.toLowerCase().includes(searchTerm);
-        }
-        return false;
-      })
-    );
+    return items.filter(item => {
+      // Rechercher si le terme est inclus dans les champs spécifiques
+      return (
+        this.checkContains(item.nom, searchTerm) ||
+        this.checkContains(item.matricule, searchTerm) ||
+        this.checkContains(item.marque, searchTerm) ||
+        this.checkContains(item.modele, searchTerm) ||
+        this.checkContains(item.etat, searchTerm) 
+
+        // Ajoutez d'autres champs si nécessaire
+      );
+    });
+  }
+
+  checkContains(value: string, term: string): boolean {
+    return value.toLowerCase().includes(term);
   }
 }

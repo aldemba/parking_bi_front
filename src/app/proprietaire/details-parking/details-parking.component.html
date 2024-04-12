@@ -23,12 +23,12 @@
                             <th scope="col">Modèle</th>
                             <th scope="col">Assurance</th>
                             <th scope="col">Visite Technique</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Statut</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let voiture of voitures| filter: searchTerm | paginate :{itemsPerPage:5,currentPage:page,totalItems:totalLength} ">
+                        <tr *ngFor="let voiture of (voitures | filter: searchTerm | paginate :{itemsPerPage:7,currentPage:page,totalItems:totalLength}) ">
                             <th scope="row"><img class="img" src="data:image/PNG;base64, {{voiture.image}}" alt=""></th>
                             <td>{{voiture.nom}}</td>
                             <td>{{voiture.matricule}}</td>
