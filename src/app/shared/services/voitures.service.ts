@@ -11,21 +11,6 @@ export class VoituresService {
 
 
 
-  // public changeState(body:any,id: number)
-  // {
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //     'Content-type': 'application/merge-patch+json'
-  //     })
-  //   };
-  //   let Cars_URL = "http://127.0.0.1:8000/api/voitures/"+id
-    
-  //   return this.http.patch<any>(Cars_URL,body,httpOptions).pipe( catchError(this.handleError))
-  //   // console.log(this.http.get<any>(PARKINGS_PROPRIO, httpOptions));
-    
-
-  // }
-
   changeState(voiture: any) {
     const httpOptions = {
       headers: new HttpHeaders({
