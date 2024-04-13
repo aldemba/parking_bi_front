@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DetailsService } from 'src/app/shared/services/details.service';
+import { VoituresService } from 'src/app/shared/services/voitures.service';
 
 @Component({
   selector: 'app-details-parking',
@@ -15,7 +17,7 @@ export class DetailsParkingComponent {
   page:number=1; 
   searchTerm: any;
 
-  constructor(private activatedroute:ActivatedRoute, private detailserv:DetailsService) { }
+  constructor(private activatedroute:ActivatedRoute, private detailserv:DetailsService, private voitureserv: VoituresService) { }
 
   ngOnInit() {
     let id=0;
@@ -35,7 +37,15 @@ export class DetailsParkingComponent {
   }
   
 
-  
+  updateEtat(voiture: any) {
+
+    this.voitureserv.changeState(voiture).subscribe({
+      // next: (data:any) => { alert(data)},
+      // error: (err:any) => { alert(err)}
+    });
+  }
+    
+  }
 
   // ngOnInit(): void {
   //   let slug:string=this.activatedroute.snapshot.params['slug']
@@ -51,4 +61,4 @@ export class DetailsParkingComponent {
   //   )
   //     }
 
-}
+

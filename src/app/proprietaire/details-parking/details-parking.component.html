@@ -36,7 +36,12 @@
                             <td>{{voiture.modele}}</td>
                             <td>{{voiture.assurance.date_fin}}</td>
                             <td>{{voiture.visite.date_fin_visite}}</td>
-                            <td>{{voiture.etat}}</td>
+                            <td>
+                                <select [(ngModel)]="voiture.etat" (change)="updateEtat(voiture)">
+                                    <option value="DISPONIBLE">Disponible</option>
+                                    <option value="INDISPONIBLE">Indisponible</option>
+                                </select>
+                            </td>
                             <td>
                                 <a class="text-warning me-4">
                                     <i class="fa fa-edit"></i>
