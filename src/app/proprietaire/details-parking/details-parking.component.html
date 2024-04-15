@@ -17,7 +17,7 @@
             <div *ngIf="voitures.length > 0" class="table-responsive">
         
                
-                <table class="table table-striped table-bordered nowrap">
+                <table class="table table-striped table-bordered nowrap shadow">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">Image</th>
@@ -32,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let voiture of (voitures | filter: searchTerm | paginate :{itemsPerPage:7,currentPage:page,totalItems:totalLength}) ">
+                        <tr *ngFor="let voiture of (voitures | filter: searchTerm | paginate :{itemsPerPage:searchItemsPerPage(),currentPage:page,totalItems:totalLength}) ">
                             <th scope="row"><img class="img" src="data:image/PNG;base64, {{voiture.image}}" alt=""></th>
                             <td>{{voiture.nom}}</td>
                             <td>{{voiture.matricule}}</td>
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-end" *ngIf="!searchTerm">
+    <div class="row justify-content-end" *ngIf="!searchTerm && voitures.length > 0">
         <div class="col-auto">
             <pagination-controls class="pagination" previousLabel="Précédent" nextLabel="Suivant" (pageChange)="page=$event"></pagination-controls>
         </div>

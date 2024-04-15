@@ -37,6 +37,10 @@ export class DetailsParkingComponent {
 
   }
   
+  searchItemsPerPage() {
+    return this.searchTerm ? 50 : 8;
+}
+
 
   // updateEtat(voiture: any) {
 
