@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TokenService } from 'src/app/shared/services/token.service';
 
 @Component({
@@ -8,12 +8,15 @@ import { TokenService } from 'src/app/shared/services/token.service';
 })
 export class NavbarComponent {
 
+  dropdownOpen: boolean = false;
+
+  @Input() user:any;
 
 
   constructor(private tokserv:TokenService){}
 
 
-  logout(){
+  logout() {
     this.tokserv.clearTokenAndId();
   }
 

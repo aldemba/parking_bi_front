@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 export class DetailsParkingComponent {
 
   voitures:any
+  voitureSelectionnee: any;
 
   totalLength:any;
   page:number=1; 
@@ -29,7 +30,7 @@ export class DetailsParkingComponent {
         this.detailserv.getVoituresByParking(id).subscribe((data)=> {
           this.voitures=data.voitures;
           this.totalLength=this.voitures.length;
-          // console.log("test",this.voitures);
+          console.log("test",this.voitures);
           
         })
       }
@@ -39,6 +40,10 @@ export class DetailsParkingComponent {
   
   searchItemsPerPage() {
     return this.searchTerm ? 50 : 8;
+}
+
+afficherDetailsVoiture(voiture: any) {
+  this.voitureSelectionnee = voiture; // Affecter les informations de la voiture sélectionnée à la variable
 }
 
 

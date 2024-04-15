@@ -18,3 +18,20 @@
 .posit{
     padding-top: 6%;
 }
+
+.imgbis{
+    height: 49vh;
+    width: 20vw;
+}
+.tall{
+    position: absolute;
+    height: 80vh;
+    width: 42vw !important;
+    margin-right: 60% !important;
+}
+
+.posi{
+    margin-left: 14% !important;
+    margin-top: 2% !important;
+  
+}

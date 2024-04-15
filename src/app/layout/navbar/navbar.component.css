@@ -2,3 +2,10 @@
     color: #ffc107; /* Couleur de texte "warning" de Bootstrap */
 }
 
+li{
+    list-style-type: none;
+}
+
+.curs{
+    cursor: pointer;
+}

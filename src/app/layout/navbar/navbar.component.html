@@ -8,7 +8,7 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 
 
-            <!--<li class="nav-item"><a class="nav-link px-2 text-white">Mes Parkings</a></li>-->
+            <li class="nav-item"><a class="nav-link px-2 text-white" routerLink="/admin/parkings">Accueil</a></li>
 
             <!--<li class="nav-item"><a class="nav-link px-2 text-white">Catalogue</a></li>-->
           <!--<li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
@@ -17,9 +17,21 @@
         </ul>
 
         <div class="text-end">
-          <button type="button" (click)="logout()" class="btn btn-outline-warning me-2">Deconnexion</button>
+        
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{user.prenom}} {{user.nom}}
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="">Paramètres</a></li>
+                <!--<li><a class="dropdown-item btn btn-outline-warning" href="">Deconnexion</a></li>-->
+                <li class="dropdown-item curs"> <a (click)="logout()">Deconnexion</a> </li>
+              </ul>
+            </li>
+                <!-- <li><button type="button" (click)="logout()" class="btn btn-outline-warning me-2">Deconnexion</button></li> -->
+          </div>
          <!-- <button type="button" class="btn btn-warning">Sign-up</button>-->
         </div>
+        
       </div>
-    </div>
   </header>
