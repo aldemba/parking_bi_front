@@ -1,9 +1,13 @@
 <app-navbar></app-navbar>
 <div class="container">
+
+    <div class="d-flex justify-content-center posit">
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher...">
+    </div>
     <div class="row pad">
         
         <div class="col">
-            <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher...">
+
             <div class="text-end mb-3">
                 <a class="btn btn-warning text-white"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
             </div>
@@ -37,7 +41,7 @@
                             <td>{{voiture.assurance.date_fin}}</td>
                             <td>{{voiture.visite.date_fin_visite}}</td>
                             <td>
-                                <select [(ngModel)]="voiture.etat" (change)="updateEtat(voiture)">
+                                <select class="etat" [(ngModel)]="voiture.etat" (change)="updateEtat(voiture)">
                                     <option value="DISPONIBLE">Disponible</option>
                                     <option value="INDISPONIBLE">Indisponible</option>
                                 </select>

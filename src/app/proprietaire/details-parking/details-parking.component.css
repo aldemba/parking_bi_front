@@ -1,5 +1,5 @@
 .pad{
-    padding-top: 14%;
+    padding-top: 3%;
 }
 
 .img{
@@ -8,4 +8,13 @@
 
 .inp{
     margin-left: 30%;
+}
+
+.etat{
+    border: none;
+    cursor: pointer;
+}
+
+.posit{
+    padding-top: 6%;
 }
