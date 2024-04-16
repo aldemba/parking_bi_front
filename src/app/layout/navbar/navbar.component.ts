@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { TokenService } from 'src/app/shared/services/token.service';
 
 @Component({
@@ -7,17 +8,20 @@ import { TokenService } from 'src/app/shared/services/token.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-
-  dropdownOpen: boolean = false;
+  isVisible:boolean = false;
 
   @Input() user:any;
 
 
-  constructor(private tokserv:TokenService){}
+  constructor(private tokserv:TokenService, private router: Router){}
 
+  ngOnInit() {
+    this.isVisible=this.router.url.includes("voitures")
+  }
 
   logout() {
     this.tokserv.clearTokenAndId();
   }
+
 
 }

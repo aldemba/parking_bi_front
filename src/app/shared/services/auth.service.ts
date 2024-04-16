@@ -7,17 +7,20 @@ import { Token } from '../models/token';
 import { TokenService } from './token.service';
 import { Router } from '@angular/router';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  
+  // url=environment.api;
+  // urlLogin=`${this.url}/login_check`
 
   user:User|undefined
   tok:any
 
-  url="http://localhost:8000/api/login_check"
+   url="http://localhost:8000/api/login_check"
 
 
   constructor(private http:HttpClient, private tokenserv:TokenService, private router:Router) { }

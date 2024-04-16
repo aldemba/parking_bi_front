@@ -104,15 +104,21 @@
               alt=""
             />
           </div>
-          <div>
-          
+          <div class="d-flex flex-column spac">
+            <span class="h4">Marque: {{voitureSelectionnee?.marque}}</span>
+            <span class="h4 mt-4">Modèle: {{voitureSelectionnee?.modele}}</span>
+            <span class="h4 mt-4">Matricule: {{voitureSelectionnee?.matricule}}</span>
+            <span class="h4 mt-4">Viste Technique: {{voitureSelectionnee?.visite.date_fin_visite}}</span>
+            <span class="h4 mt-4">Assurance: {{voitureSelectionnee?.assurance.date_fin}}</span>
+            <span class="h4 mt-4">État: {{voitureSelectionnee?.etat}}</span>
+
           </div>
         </div>
-        <div class="modal-footer">
+        <!--<div class="modal-footer">
           <button class="btn btn-warning text-white" data-bs-dismiss="modal">
             Editer
           </button>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>
