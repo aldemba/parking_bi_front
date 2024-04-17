@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DetailsService } from 'src/app/shared/services/details.service';
 import { VoituresService } from 'src/app/shared/services/voitures.service';
 import Swal from 'sweetalert2';
@@ -21,21 +21,23 @@ export class DetailsParkingComponent {
   totalLength:any;
   page:number=1; 
   searchTerm: any;
+  idbis:number=0;
 
-  constructor(private activatedroute:ActivatedRoute, private detailserv:DetailsService, private voitureserv: VoituresService) { }
+  constructor(private activatedroute:ActivatedRoute, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router) { }
 
   ngOnInit() {
     let id=0;
     this.activatedroute.paramMap.subscribe(
       param=> {
         id=+param.get("id")!;
+        this.idbis=id;
     
         this.detailserv.getVoituresByParking(id).subscribe((data)=> {
           this.voitures=data.voitures;
           this.voitures = this.voitures.filter((voiture: any) => voiture.isVisible ==1);
           this.filtres = this.voitures.filter((voiture: any) => voiture.isVisible ==1);
           this.totalLength=this.voitures.length;
-          console.log("test",this.voitures);
+          // console.log("test",this.voitures);
           
         })
       }
@@ -82,6 +84,34 @@ afficherDetailsVoiture(voiture: any) {
     });
   }
 
+ changeVisibility(voiture: any) {
+  Swal.fire({
+    title: 'Êtes-vous sûr?',
+    text: "Voulez-vous vraiment supprimer cette voiture?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Oui, supprimer cette voiture !',
+    cancelButtonText: 'Annuler'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Si l'utilisateur confirme, changer l'état de la voiture
+      this.voitureserv.changeVisibility(voiture).subscribe({
+        // Vous pouvez gérer les réponses de votre requête ici
+        // next: (data:any) => { alert(data)},
+        // error: (err:any) => { alert(err)}
+      });
+      // this.router.navigate(["/admin/parkings/"+this.idbis+"/voitures"]);
+
+      this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+        this.router.navigate(["/admin/parkings/"+this.idbis+"/voitures"]);
+    }); 
+
+    }
+  });
+ }
+
   clickchanged(type:string){
     switch (type) {
       case "disponibles":
@@ -99,6 +129,8 @@ afficherDetailsVoiture(voiture: any) {
         break;
     }
   }
+
+
     
   }
 

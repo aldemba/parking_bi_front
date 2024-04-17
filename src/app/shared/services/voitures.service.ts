@@ -24,6 +24,20 @@ export class VoituresService {
     );
   }
 
+
+  changeVisibility(voiture: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/merge-patch+json'
+      })
+    };
+    const voitureId = voiture.id; // Assurez-vous que votre objet voiture contient un identifiant unique.
+    const updateUrl = `http://127.0.0.1:8000/api/voitures/${voitureId}`;
+    return this.http.patch(updateUrl, { isVisible: false }, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   
   public getVoituresByEtat(id: number): Observable<any> {
     let DETAILS_URL = "http://127.0.0.1:8000/api/parkings/"+id+"/voitures";

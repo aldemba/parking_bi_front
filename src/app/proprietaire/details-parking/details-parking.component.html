@@ -24,6 +24,7 @@
                   <p class="card-text">{{car.marque}}</p>
                   <p class="card-text">{{car.modele}}</p>
                   <p class="card-text"><i class="fa fa-eye text-warning" (click)="afficherDetailsVoiture(car)" data-bs-toggle="modal" data-bs-target="#myModal"></i></p>
+                  <button (click)="changeVisibility(car)">del</button>
                 </div>
               </div>
             </div>
