@@ -1,24 +1,41 @@
 <app-navbar (clickchanged)="clickchanged($event)"></app-navbar>
 
-<div class="container">
-  <div class="row">
-    <ng-container *ngFor="let car of voitures">
-      <div class="col-12 col-md-4 col-lg-3 mt-3">
-        <div class="card mb-3 shadow" style="max-width: 540px">
-          <div class="row g-0">
-            <div class="col-md-5">
-              <img src="data:image/PNG;base64, {{car.image}}" class="img-fluid rounded-start" alt="..." />
+<ng-container *ngIf="voitures.length > 0" >
+  
+  <div class="container">
+    <div class="row">
+      <div class="d-flex justify-content-center mt-5">
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher...">
+      </div>
+            <div class="text-end mb-3">
+                <a class="btn btn-warning text-white"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
             </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">{{car.nom}}</h5>
-                <p class="card-text">{{car.marque}}</p>
-                <p class="card-text">{{car.modele}}</p>
+
+      <ng-container *ngFor="let car of voitures">
+        <div class="col-12 col-md-4 col-lg-3 mt-3">
+          <div class="card mb-3 shadow maxw">
+            <div class="row g-0">
+              <div class="col-md-5">
+                <img src="data:image/PNG;base64, {{car.image}}" class="img-fluid rounded-start" alt="..." />
+              </div>
+              <div class="col-md-7">
+                <div class="card-body">
+                  <h5 class="card-title">{{car.nom}}</h5>
+                  <p class="card-text">{{car.marque}}</p>
+                  <p class="card-text">{{car.modele}}</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
+    </div>
   </div>
+</ng-container>
+
+<ng-container *ngIf="voitures.length == 0" > 
+  <div class="bout mb-3">
+    <a class="btn btn-warning text-white"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
 </div>
+  <h2 class="d-flex justify-content-center to">Vous n'avez pas de voitures, veuillez en ajouter !</h2>
+</ng-container>

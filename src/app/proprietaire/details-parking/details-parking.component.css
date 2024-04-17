@@ -39,3 +39,21 @@
 .spac{
     padding: 5%;
 }
+
+.to{
+    margin-top: 10%;
+}
+.maxw{
+    max-width: 540px;
+}
+
+.bout{
+    display: flex;
+    justify-content: center;
+    padding-top: 10%;
+    
+}
+
+
+
+

@@ -8,11 +8,11 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 
 
-            <li class="nav-item"><a class="nav-link px-2 text-white" routerLink="/admin/parkings">Accueil</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-white me-2" routerLink="/admin/parkings">Accueil</a></li>
             <ng-container *ngIf="isVisible">
-              <li class="nav-item"><a class="nav-link px-2 text-white" (click)="filterCar('all')" >Liste Voitures</a></li>
-              <li class="nav-item"><a class="nav-link px-2 text-white" (click)="filterCar('disponibles')" >Voitures Disponibles</a></li>
-              <li class="nav-item"><a class="nav-link px-2 text-white" (click)="filterCar('indisponibles')" >Voitures Indisponibles</a></li>
+              <li class="nav-item"><button class="btn btn-outline-warning me-2" (click)="filterCar('all')" >Liste Voitures</button></li>
+              <li class="nav-item"><button class="btn btn-outline-warning me-2" (click)="filterCar('disponibles')" >Voitures Disponibles</button></li>
+              <li class="nav-item"><button class="btn btn-outline-warning me-2" (click)="filterCar('indisponibles')" >Voitures Indisponibles</button></li>
             </ng-container>
 
             <!--<li class="nav-item"><a class="nav-link px-2 text-white">Catalogue</a></li>-->
