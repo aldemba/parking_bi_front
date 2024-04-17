@@ -15,6 +15,7 @@ export class DetailsParkingComponent {
   voitures:any
   voitureSelectionnee: any;
   disponibles:any;
+  filtres:any;
   indisponibles:any;
   all:any;
   totalLength:any;
@@ -31,6 +32,8 @@ export class DetailsParkingComponent {
     
         this.detailserv.getVoituresByParking(id).subscribe((data)=> {
           this.voitures=data.voitures;
+          this.voitures = this.voitures.filter((voiture: any) => voiture.isVisible ==1);
+          this.filtres = this.voitures.filter((voiture: any) => voiture.isVisible ==1);
           this.totalLength=this.voitures.length;
           console.log("test",this.voitures);
           
@@ -40,6 +43,7 @@ export class DetailsParkingComponent {
     this.voitureserv.getVoituresByEtat(id).subscribe((data)=> {
       this.disponibles=data.disponibles;
       this.indisponibles=data.indisponibles;
+    
       this.all=data.all;
     })
 
@@ -90,7 +94,7 @@ afficherDetailsVoiture(voiture: any) {
           break;
     
       default:
-        this.voitures=this.all
+        this.voitures=this.filtres
 
         break;
     }
