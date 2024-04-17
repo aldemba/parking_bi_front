@@ -15,10 +15,8 @@ export class FilterPipe implements PipeTransform {
       // Rechercher si le terme est inclus dans les champs spécifiques
       return (
         this.checkContains(item.nom, searchTerm) ||
-        this.checkContains(item.matricule, searchTerm) ||
         this.checkContains(item.marque, searchTerm) ||
-        this.checkContains(item.modele, searchTerm) ||
-        this.checkContains(item.etat, searchTerm) 
+        this.checkContains(item.modele, searchTerm) 
 
         // Ajoutez d'autres champs si nécessaire
       );
