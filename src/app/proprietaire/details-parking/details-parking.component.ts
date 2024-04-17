@@ -14,7 +14,9 @@ export class DetailsParkingComponent {
 
   voitures:any
   voitureSelectionnee: any;
-
+  disponibles:any;
+  indisponibles:any;
+  all:any;
   totalLength:any;
   page:number=1; 
   searchTerm: any;
@@ -35,6 +37,11 @@ export class DetailsParkingComponent {
         })
       }
     )
+    this.voitureserv.getVoituresByEtat(id).subscribe((data)=> {
+      this.disponibles=data.disponibles;
+      this.indisponibles=data.indisponibles;
+      this.all=data.all;
+    })
 
   }
   
@@ -47,13 +54,6 @@ afficherDetailsVoiture(voiture: any) {
 }
 
 
-  // updateEtat(voiture: any) {
-
-  //   this.voitureserv.changeState(voiture).subscribe({
-  //     // next: (data:any) => { alert(data)},
-  //     // error: (err:any) => { alert(err)}
-  //   });
-  // }
 
   updateEtat(voiture: any) {
     // Afficher la boîte modale SweetAlert pour demander la confirmation
@@ -76,6 +76,24 @@ afficherDetailsVoiture(voiture: any) {
         });
       }
     });
+  }
+
+  clickchanged(type:string){
+    switch (type) {
+      case "disponibles":
+    this.voitures=this.disponibles
+        
+        break;
+        case "indisponibles":
+        this.voitures=this.indisponibles
+      
+          break;
+    
+      default:
+        this.voitures=this.all
+
+        break;
+    }
   }
     
   }

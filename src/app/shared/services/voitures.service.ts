@@ -56,7 +56,8 @@ export class VoituresService {
         
         return {
           disponibles: voituresDisponiblesMapped,
-          indisponibles: voituresIndisponiblesMapped
+          indisponibles: voituresIndisponiblesMapped,
+          all:[...voituresDisponibles,...voituresIndisponiblesMapped]
         };
       }),
       catchError(this.handleError)

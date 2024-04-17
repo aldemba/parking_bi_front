@@ -10,8 +10,9 @@
 
             <li class="nav-item"><a class="nav-link px-2 text-white" routerLink="/admin/parkings">Accueil</a></li>
             <ng-container *ngIf="isVisible">
-              <li class="nav-item"><a class="nav-link px-2 text-white" >Voitures Disponibles</a></li>
-              <li class="nav-item"><a class="nav-link px-2 text-white" >Voitures Indisponibles</a></li>
+              <li class="nav-item"><a class="nav-link px-2 text-white" (click)="filterCar('all')" >Liste Voitures</a></li>
+              <li class="nav-item"><a class="nav-link px-2 text-white" (click)="filterCar('disponibles')" >Voitures Disponibles</a></li>
+              <li class="nav-item"><a class="nav-link px-2 text-white" (click)="filterCar('indisponibles')" >Voitures Indisponibles</a></li>
             </ng-container>
 
             <!--<li class="nav-item"><a class="nav-link px-2 text-white">Catalogue</a></li>-->
@@ -24,7 +25,7 @@
         
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{user.prenom}} {{user.nom}}
+                
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="">Paramètres</a></li>

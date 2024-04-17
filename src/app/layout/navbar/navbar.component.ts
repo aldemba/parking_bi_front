@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/shared/services/token.service';
 
@@ -9,6 +9,8 @@ import { TokenService } from 'src/app/shared/services/token.service';
 })
 export class NavbarComponent {
   isVisible:boolean = false;
+  @Output() clickchanged: EventEmitter<string>=new EventEmitter
+
 
   @Input() user:any;
 
@@ -22,6 +24,11 @@ export class NavbarComponent {
   logout() {
     this.tokserv.clearTokenAndId();
   }
+
+  filterCar(value:string){
+    this.clickchanged.emit(value)
+    }
+    
 
 
 }
