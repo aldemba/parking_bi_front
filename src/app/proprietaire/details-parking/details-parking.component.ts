@@ -121,11 +121,11 @@ showSuccess() {
   clickchanged(type:string){
     switch (type) {
       case "disponibles":
-    this.voitures=this.disponibles
+    this.voitures=this.filtres.filter((voiture: any) => voiture.etat =="DISPONIBLE")
         
         break;
         case "indisponibles":
-        this.voitures=this.indisponibles
+        this.voitures=this.filtres.filter((voiture: any) => voiture.etat =="INDISPONIBLE")
       
           break;
     
