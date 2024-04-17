@@ -38,6 +38,13 @@
   </div>
 </ng-container>
 
+<ng-container *ngIf="voitures.length == 0" > 
+  <div class="bout mb-3">
+    <a class="btn btn-warning text-white"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
+</div>
+  <h2 class="d-flex justify-content-center to">Vous n'avez pas de voitures, veuillez en ajouter !</h2>
+</ng-container>
+
 <div class="modal posi" id="myModal">
   <div class="modal-dialog posi">
     <div class="modal-content tall">
@@ -78,9 +85,3 @@
   </div>
 </div>
 
-<ng-container *ngIf="voitures.length == 0" > 
-  <div class="bout mb-3">
-    <a class="btn btn-warning text-white"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
-</div>
-  <h2 class="d-flex justify-content-center to">Vous n'avez pas de voitures, veuillez en ajouter !</h2>
-</ng-container>
