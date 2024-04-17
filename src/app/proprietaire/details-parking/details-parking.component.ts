@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DetailsService } from 'src/app/shared/services/details.service';
 import { VoituresService } from 'src/app/shared/services/voitures.service';
+import { ToastrService } from 'ngx-toastr';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,7 +25,7 @@ export class DetailsParkingComponent {
   searchTerm: any;
   idbis:number=0;
 
-  constructor(private activatedroute:ActivatedRoute, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router) { }
+  constructor(private activatedroute:ActivatedRoute, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService) { }
 
   ngOnInit() {
     let id=0;
@@ -59,6 +61,9 @@ afficherDetailsVoiture(voiture: any) {
   this.voitureSelectionnee = voiture; // Affecter les informations de la voiture sélectionnée à la variable
 }
 
+showSuccess() {
+  this.toastr.success('Hello world!', 'Toastr fun!');
+}
 
 
   updateEtat(voiture: any) {
@@ -106,6 +111,7 @@ afficherDetailsVoiture(voiture: any) {
 
       this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
         this.router.navigate(["/admin/parkings/"+this.idbis+"/voitures"]);
+        this.showSuccess()
     }); 
 
     }
