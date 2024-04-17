@@ -10,7 +10,6 @@ import { ScalecardadminDirective } from './scalecardadmin.directive';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterPipe } from './filter.pipe';
 import { FormsModule } from '@angular/forms';
-import { EtatVoituresComponent } from './etat-voitures/etat-voitures.component';
 
 
 
@@ -22,7 +21,6 @@ import { EtatVoituresComponent } from './etat-voitures/etat-voitures.component';
     DetailsParkingComponent,
     ScalecardadminDirective,
     FilterPipe,
-    EtatVoituresComponent
   ],
   imports: [
     CommonModule,
