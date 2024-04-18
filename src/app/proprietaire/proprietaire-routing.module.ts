@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MesParkingsComponent } from './mes-parkings/mes-parkings.component';
 import { DetailsParkingComponent } from './details-parking/details-parking.component';
+import { AddCarComponent } from './add-car/add-car.component';
 
 
 const routes: Routes = [
+  {path:'parkings/:id/voitures/add',component:AddCarComponent},
   {path:'parkings/:id/voitures',component:DetailsParkingComponent},
   {path:'parkings',component:MesParkingsComponent},
   // {path:'parkings/voitures',component:DetailsParkingComponent}

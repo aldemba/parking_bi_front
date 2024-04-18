@@ -32,7 +32,7 @@ export class DetailsParkingComponent {
     this.activatedroute.paramMap.subscribe(
       param=> {
         id=+param.get("id")!;
-        this.idbis=id;
+        // this.idbis=id;
     
         this.detailserv.getVoituresByParking(id).subscribe((data)=> {
           this.voitures=data.voitures;
@@ -40,6 +40,8 @@ export class DetailsParkingComponent {
           this.filtres = this.voitures.filter((voiture: any) => voiture.isVisible ==1);
           this.totalLength=this.voitures.length;
           // console.log("test",this.voitures);
+          // console.log("id",this.idbis);
+          
           
         })
       }
