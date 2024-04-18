@@ -9,7 +9,7 @@ import { DetailsParkingComponent } from './details-parking/details-parking.compo
 import { ScalecardadminDirective } from './scalecardadmin.directive';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterPipe } from './filter.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCarComponent } from './add-car/add-car.component';
 
 
@@ -29,7 +29,8 @@ import { AddCarComponent } from './add-car/add-car.component';
     ProprietaireRoutingModule,
     LayoutModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ProprietaireModule { }
