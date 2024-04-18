@@ -1,0 +1,37 @@
+
+  
+  .content{
+    
+    background: #fff;
+    border-radius: 10px;
+    padding:20px;
+    box-sizing: border-box;
+    height: 100vh;
+    /* border:1px solid #C2B364; */
+    overflow: hidden;
+
+}
+.btn{
+    border-radius: 10px;
+    border: solid 2px;
+
+    
+
+}
+h2{
+    text-align: center;
+    text-decoration: underline;
+    color: #C2B364;
+}
+
+
+span{
+    color: red;
+}
+.card-body{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.test{
+    display: flex;
+}
