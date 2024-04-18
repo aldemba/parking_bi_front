@@ -46,9 +46,15 @@ export class AuthService {
       this.tok=this.tokenserv.getIdFromToken(data.token)
       // console.log(this.tok.id);
       
-      // console.log(this.user);
+    //  console.log("user",this.user);
       
       this.tokenserv.saveIdInStorage(this.tok.id);
+
+      this.tokenserv.saveNomInStorage(this.tok.nom);
+
+      this.tokenserv.savePrenomInStorage(this.tok.prenom);
+
+
 
 
       // this.tokenserv.saveToken(data.token)  ;  

@@ -35,6 +35,13 @@ export class TokenService {
   // return id
 
   // }
+  savePrenomInStorage(prenom: string){ localStorage.setItem("prenom",prenom)}
+
+  saveNomInStorage(nom: string){ localStorage.setItem("nom",nom)}
+
+  getPrenomFromStorage(){ return localStorage.getItem("prenom")}
+
+  getNomFromStorage(){ return localStorage.getItem("nom")}
 
 
  getUser(token: string){  return JSON.parse(atob(token.split(".")[1]))}
@@ -42,6 +49,8 @@ export class TokenService {
 
  getIdFromToken(token: string):TokenPayload{
   const decodedtoken= JSON.parse(atob(token.split(".")[0]))
+  console.log("decoded",decodedtoken);
+  
   return decodedtoken as TokenPayload;
 }
 
@@ -59,8 +68,9 @@ export class TokenService {
   {
     localStorage.removeItem("token");
     localStorage.removeItem("id");
-    // location.reload();
-     this.router.navigate(["security/login"])
+    localStorage.removeItem("nom");
+    localStorage.removeItem("prenom");
+    this.router.navigate(["security/login"])
   }
 
 

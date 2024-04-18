@@ -11,6 +11,8 @@ export class NavbarComponent {
   isVisible:boolean = false;
   @Output() clickchanged: EventEmitter<string>=new EventEmitter
 
+  prenom:string|null=null;
+  nom:string|null=null;
 
   @Input() user:any;
 
@@ -19,6 +21,10 @@ export class NavbarComponent {
 
   ngOnInit() {
     this.isVisible=this.router.url.includes("voitures")
+    // console.log("nom",this.tokserv.getNomFromStorage());
+    this.getNom();
+    this.getPrenom();
+    
   }
 
   logout() {
@@ -29,6 +35,12 @@ export class NavbarComponent {
     this.clickchanged.emit(value)
     }
     
+    getPrenom(){
+      this.prenom=this.tokserv.getPrenomFromStorage()
+    }
 
+    getNom(){
+      this.nom=this.tokserv.getNomFromStorage()
+    }
 
 }
