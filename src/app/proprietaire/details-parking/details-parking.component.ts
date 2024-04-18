@@ -62,7 +62,7 @@ afficherDetailsVoiture(voiture: any) {
 }
 
 showSuccess() {
-  this.toastr.success('Hello world!', 'Toastr fun!');
+  this.toastr.success('La voiture a été supprimé avec succès!', 'Suppression!');
 }
 
 
