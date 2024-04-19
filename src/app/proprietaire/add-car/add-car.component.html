@@ -12,9 +12,13 @@
                     <div class="col-6">
                         <div class="form-group">
                             <label class="form-label" for="nom">Nom</label>
-                            <input  type="text" id="nom" class="form-control form-control-lg" formControlName="nom" />
-                        </div>
+                            <input  type="text" id="nom" class="form-control form-control-lg" formControlName="nom" />   
+                            <span class="error" *ngIf="fm['nom'].errors?.['required']" >Le nom est obligatoire ! </span>
+                            <span class="error" *ngIf="fm['nom'].errors?.['pattern']" >Le nom ne doit pas contenir de chiffres </span>
+                             <span class="error" *ngIf="fm['nom'].errors?.['minlength']" >Le nom doit faire au minimum 2 caractères </span>
+                             <span class="error" *ngIf="fm['nom'].errors?.['maxlength']" >Le nom doit faire au maximum 20 caractères </span>
 
+                          </div>
                     </div>
                     <div class="col-6">
 
@@ -22,7 +26,7 @@
                          
                               <label class="form-label" for="modele">Modele</label>
                               <input type="text" id="modele" class="form-control form-control-lg" formControlName="modele" />
-                        
+                             <span class="error" *ngIf="fm['modele'].errors?.['required']" >Le modele est obligatoire ! </span>
                         </div>
                     </div>
                 </div>
@@ -34,7 +38,10 @@
                            
                               <label class="form-label" for="marque">Marque</label>
                               <input type="text" id="marque" class="form-control form-control-lg" formControlName="marque"/>
-                      
+                              <span class="error" *ngIf="fm['marque'].errors?.['required']" >La marque est obligatoire ! </span>
+                              <span class="error" *ngIf="fm['marque'].errors?.['pattern']" >La marque ne doit pas contenir de chiffres </span>
+                              <span class="error" *ngIf="fm['marque'].errors?.['minlength']" >La marque doit faire au minimum 2 caractères </span>
+                              <span class="error" *ngIf="fm['marque'].errors?.['maxlength']" >La marque doit faire au maximum 20 caractères </span>
                         </div>
                     </div>
                     <div class="col-6">
@@ -42,7 +49,10 @@
                           
                               <label class="form-label" for="categorie">Catégorie</label>
                               <input type="text" id="categorie" class="form-control form-control-lg" formControlName="categorie" />
-                          
+                              <span class="error" *ngIf="fm['categorie'].errors?.['required']" >La categorie est obligatoire ! </span>
+                              <span class="error" *ngIf="fm['categorie'].errors?.['pattern']" >La categorie ne doit pas contenir de chiffres </span>
+                              <span class="error" *ngIf="fm['categorie'].errors?.['minlength']" >La categorie doit faire au minimum 4 caractères </span>
+                              <span class="error" *ngIf="fm['categorie'].errors?.['maxlength']" >La categorie doit faire au maximum 20 caractères </span>
                         </div>
 
                     </div>
@@ -51,7 +61,11 @@
               
                       <label class="form-label" for="matricule">Matricule</label>
                       <input type="text" id="matricule" class="form-control form-control-lg"  formControlName="matricule" />
-                 
+                      <span class="error" *ngIf="fm['matricule'].errors?.['minlength']" >Le matricule doit faire au minimum 8 caractères </span>
+                      <span class="error" *ngIf="fm['categorie'].errors?.['required']" >Le matricule est obligatoire ! </span>
+                      <span class="error" *ngIf="fm['categorie'].errors?.['pattern']" >Le matricule ne doit pas contenir de chiffres </span>
+                      <span class="error" *ngIf="fm['categorie'].errors?.['maxlength']" >Le matricule doit faire au maximum 20 caractères </span>
+
                 </div>
                 <div class="form-group mt-2" formGroupName="assurance">
               

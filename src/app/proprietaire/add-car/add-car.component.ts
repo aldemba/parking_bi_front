@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { VoituresService } from 'src/app/shared/services/voitures.service';
@@ -19,11 +19,11 @@ export class AddCarComponent {
 
   constructor(private activatedroute:ActivatedRoute,  private router:Router, private toastr: ToastrService, private formBuilder:FormBuilder,private voitureserv:VoituresService) {
     this.formulaire=this.formBuilder.group({
-      nom: ['', Validators.required],
-      marque: ['', Validators.required],
+      nom: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(20)])),
+      marque: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(20)])),
       modele: ['', Validators.required],
-      categorie: ['', Validators.required],
-      matricule: ['', Validators.required],
+      categorie:new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(4), Validators.maxLength(20)])),
+      matricule: new FormControl("",Validators.compose([ Validators.required, Validators.minLength(8)])),
       images: ['null', Validators.required],
       visite: this.formBuilder.group({
         date_fin_visite: ['', Validators.required] // Utilisation de formatDate ici
@@ -31,9 +31,6 @@ export class AddCarComponent {
       assurance: this.formBuilder.group({
         date_fin: ['', Validators.required] // Utilisation de formatDate ici
       }),
-
-
-
 
     })
    }
@@ -49,7 +46,14 @@ export class AddCarComponent {
     })
   }
 
+  get fm(){
+    return this.formulaire.controls;
+  }
 
+
+  // get nom(){
+  //   return this.formulaire.get("nom");
+  // }
 
   public onFileChange(event:any) {
     
@@ -77,6 +81,15 @@ export class AddCarComponent {
     this.toastr.warning('La voiture a été ajouté avec success!', 'Ajout!');
   }
 
+  dateSupérieureValidator(control: AbstractControl): { [key: string]: any } | null {
+    const dateSaisie = new Date(control.value);
+    const dateActuelle = new Date();
+    if (dateSaisie <= dateActuelle) {
+      return { 'dateInférieure': true };
+    }
+    return null;
+  }
+
 
   onSubmit(){
     
@@ -84,7 +97,6 @@ export class AddCarComponent {
 
       formValues=Object.assign({}, formValues, {"parkings":{
         "id":this.idParking
-        // "test":this.idParking
       }})
 
     
