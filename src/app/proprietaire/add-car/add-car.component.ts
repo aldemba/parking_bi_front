@@ -73,6 +73,10 @@ export class AddCarComponent {
     }
   }
 
+  showSuccess() {
+    this.toastr.warning('La voiture a été ajouté avec success!', 'Ajout!');
+  }
+
 
   onSubmit(){
     
@@ -86,12 +90,15 @@ export class AddCarComponent {
     
       
       this.voitureserv.saveCar(formValues).subscribe({
-        next: (data:any) => { alert(data)},
-        error: (err:any) => { alert(err)}
+        // next: (data:any) => { alert(data)},
+        // error: (err:any) => { alert(err)}
       }); 
-      console.log(formValues);
+      // console.log(formValues);
+      this.formulaire.reset();
+
+      this.router.navigate(["/admin/parkings/"+this.idParking+"/voitures"]);
       
-    
+      this.showSuccess()
   }
 
 

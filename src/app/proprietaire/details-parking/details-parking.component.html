@@ -70,8 +70,8 @@
           <span class="h4">Marque: {{voitureSelectionnee?.marque}}</span>
           <span class="h4 mt-4">Modèle: {{voitureSelectionnee?.modele}}</span>
           <span class="h4 mt-4">Matricule: {{voitureSelectionnee?.matricule}}</span>
-          <span class="h4 mt-4">Visite Technique: {{voitureSelectionnee?.visite.date_fin_visite}}</span>
-          <span class="h4 mt-4">Assurance: {{voitureSelectionnee?.assurance.date_fin}}</span>
+          <span class="h4 mt-4">Visite Technique: {{voitureSelectionnee?.visite.date_fin_visite | date:'dd-MM-yyyy'}}</span>
+          <span class="h4 mt-4">Assurance: {{voitureSelectionnee?.assurance.date_fin | date:'dd-MM-yyyy'}}</span>
           <span class="h4 mt-4">État: {{voitureSelectionnee?.etat}}</span>
 
         </div>
