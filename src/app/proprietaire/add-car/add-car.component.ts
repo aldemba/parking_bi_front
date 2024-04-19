@@ -22,7 +22,7 @@ export class AddCarComponent {
       nom: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(20)])),
       marque: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(2), Validators.maxLength(20)])),
       modele: ['', Validators.required],
-      categorie:new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-z]+$/), Validators.minLength(4), Validators.maxLength(20)])),
+      categorie:new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])),
       matricule: new FormControl("",Validators.compose([ Validators.required, Validators.minLength(8)])),
       images: ['null', Validators.required],
       visite: this.formBuilder.group({
@@ -91,28 +91,52 @@ export class AddCarComponent {
   }
 
 
-  onSubmit(){
+  // onSubmit(){
     
-      let formValues=this.formulaire.value
+  //     let formValues=this.formulaire.value
 
-      formValues=Object.assign({}, formValues, {"parkings":{
-        "id":this.idParking
-      }})
+  //     formValues=Object.assign({}, formValues, {"parkings":{
+  //       "id":this.idParking
+  //     }})
 
     
       
-      this.voitureserv.saveCar(formValues).subscribe({
-        // next: (data:any) => { alert(data)},
-        // error: (err:any) => { alert(err)}
-      }); 
-      // console.log(formValues);
-      this.formulaire.reset();
+  //     this.voitureserv.saveCar(formValues).subscribe({
+  //       // next: (data:any) => { alert(data)},
+  //       // error: (err:any) => { alert(err)}
+  //     }); 
+  //     // console.log(formValues);
+  //     this.formulaire.reset();
 
-      this.router.navigate(["/admin/parkings/"+this.idParking+"/voitures"]);
+  //     this.router.navigate(["/admin/parkings/"+this.idParking+"/voitures"]);
       
-      this.showSuccess()
+  //     this.showSuccess()
+  // }
+
+  onSubmit() {
+    let formValues = this.formulaire.value;
+  
+    formValues = Object.assign({}, formValues, {
+      "parkings": {
+        "id": this.idParking
+      }
+    });
+  
+    this.voitureserv.saveCar(formValues).subscribe({
+      next: (data: any) => {
+        // Succès de l'appel à saveCar(), exécuter les actions suivantes
+        this.formulaire.reset();
+        this.router.navigate(["/admin/parkings/"+this.idParking+"/voitures"]);
+        this.showSuccess();
+      },
+      error: (err: any) => {
+        // Gérer l'erreur ici, si nécessaire
+        console.error(err);
+        // Vous pouvez également afficher un message d'erreur ici si vous le souhaitez
+      }
+    });
   }
-
+  
 
 
 }

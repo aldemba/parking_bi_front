@@ -62,9 +62,9 @@
                       <label class="form-label" for="matricule">Matricule</label>
                       <input type="text" id="matricule" class="form-control form-control-lg"  formControlName="matricule" />
                       <span class="error" *ngIf="fm['matricule'].errors?.['minlength']" >Le matricule doit faire au minimum 8 caractères </span>
-                      <span class="error" *ngIf="fm['categorie'].errors?.['required']" >Le matricule est obligatoire ! </span>
-                      <span class="error" *ngIf="fm['categorie'].errors?.['pattern']" >Le matricule ne doit pas contenir de chiffres </span>
-                      <span class="error" *ngIf="fm['categorie'].errors?.['maxlength']" >Le matricule doit faire au maximum 20 caractères </span>
+                      <span class="error" *ngIf="fm['matricule'].errors?.['required']" >Le matricule est obligatoire ! </span>
+                      <!--<span class="error" *ngIf="fm['matricule'].errors?.['pattern']" >Le matricule ne doit pas contenir de chiffres </span>-->
+                      <span class="error" *ngIf="fm['matricule'].errors?.['maxlength']" >Le matricule doit faire au maximum 20 caractères </span>
 
                 </div>
                 <div class="form-group mt-2" formGroupName="assurance">
