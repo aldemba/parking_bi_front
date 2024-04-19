@@ -9,6 +9,7 @@ export class VoituresService {
 
   constructor(private http: HttpClient) { }
 
+  private addCarUrl:string="http://127.0.0.1:8000/api/voitures"
 
 
   changeState(voiture: any) {
@@ -77,6 +78,10 @@ export class VoituresService {
       catchError(this.handleError)
     );
   }
+
+  saveCar(body:any):Observable<any>{
+    return this.http.post<any>(this.addCarUrl,body).pipe(catchError(this.handleError));
+  } 
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

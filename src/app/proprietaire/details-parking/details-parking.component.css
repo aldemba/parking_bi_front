@@ -46,6 +46,7 @@
 }
 .maxw{
     max-width: 540px;
+    min-height: 95%;
 }
 
 .bout{
@@ -53,6 +54,10 @@
     justify-content: center;
     padding-top: 10%;
     
+}
+
+.haut{
+    height: 100%;
 }
 
 

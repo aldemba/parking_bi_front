@@ -1,4 +1,4 @@
-{{formulaire.value|json}}
+
   <div class="content">
     <div class="container h-100">
       <div class="row justify-content-center align-items-center">
@@ -69,13 +69,13 @@
                
                       <label for="image" class="form-label">Image</label>
                       <input type="file"
-                      class="form-control form-control-lg" (change)="onFileChange($event)" id="image" />
+                      class="form-control form-control-lg" accept="image/*" (change)="onFileChange($event)" id="image" />
                 
                 </div>
  
 
                 <div class="mt-4 justify-content-center d-flex align-items-center ">
-                  <button type="submit" class="btn btn-lg btn-outline-warning">Ajouter</button>
+                  <button type="submit" class="btn btn-lg btn-outline-warning" [disabled]="formulaire.invalid">Ajouter</button>
                 </div>
 
               </form>

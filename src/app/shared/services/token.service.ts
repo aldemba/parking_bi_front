@@ -49,7 +49,7 @@ export class TokenService {
 
  getIdFromToken(token: string):TokenPayload{
   const decodedtoken= JSON.parse(atob(token.split(".")[0]))
-  console.log("decoded",decodedtoken);
+  // console.log("decoded",decodedtoken);
   
   return decodedtoken as TokenPayload;
 }

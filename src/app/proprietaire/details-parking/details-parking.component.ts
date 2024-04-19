@@ -32,7 +32,7 @@ export class DetailsParkingComponent {
     this.activatedroute.paramMap.subscribe(
       param=> {
         id=+param.get("id")!;
-        // this.idbis=id;
+        this.idbis=id;
     
         this.detailserv.getVoituresByParking(id).subscribe((data)=> {
           this.voitures=data.voitures;
@@ -118,6 +118,10 @@ showSuccess() {
 
     }
   });
+ }
+
+ redirectToAdd(){
+  this.router.navigate(["/admin/parkings/"+this.idbis+"/voitures/add"]);
  }
 
   clickchanged(type:string){

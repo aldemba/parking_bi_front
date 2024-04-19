@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { VoituresService } from 'src/app/shared/services/voitures.service';
 
 @Component({
   selector: 'app-add-car',
@@ -12,10 +13,11 @@ export class AddCarComponent {
   idParking:any;
   formulaire!:FormGroup
   file!: File;
+  imageSrc=""
 
 
 
-  constructor(private activatedroute:ActivatedRoute,  private router:Router, private toastr: ToastrService, private formBuilder:FormBuilder) {
+  constructor(private activatedroute:ActivatedRoute,  private router:Router, private toastr: ToastrService, private formBuilder:FormBuilder,private voitureserv:VoituresService) {
     this.formulaire=this.formBuilder.group({
       nom: ['', Validators.required],
       marque: ['', Validators.required],
@@ -36,12 +38,6 @@ export class AddCarComponent {
     })
    }
 
-  //   transformDateFormat(date: Date): string {
-  //   const day = date.getDate().toString().padStart(2, '0');
-  //   const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  //   const year = date.getFullYear().toString();
-  //   return `${day}-${month}-${year}`;
-  // }
 
   ngOnInit() {
     let id=0;
@@ -53,16 +49,27 @@ export class AddCarComponent {
     })
   }
 
-  // onChange(event: any) {
-  //   this.file = event.target.files[0];
-  // }
 
-  onFileChange(event:any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.formulaire.patchValue({
-          images: file
-      });
+
+  public onFileChange(event:any) {
+    
+    const reader = new FileReader();
+    
+    if(event.target.files && event.target.files.length) {
+      
+      const [file] = event.target.files;
+      
+      reader.readAsDataURL(file); 
+      
+      reader.onload = () => 
+      {
+        this.imageSrc = reader.result as string;
+
+        this.formulaire.patchValue({  
+          images: reader.result  
+        });
+
+      };
     }
   }
 
@@ -76,44 +83,16 @@ export class AddCarComponent {
         // "test":this.idParking
       }})
 
-
-      // const date_fin_visite:string=this.formulaire.get("visite.date_fin_visite")?.value
-      // const date_fin_assurance:string=this.formulaire.get("assurance.date_fin")?.value
-
-      // const formData = new FormData();
-      // formData.append('nom',this.formulaire.get("nom")?.value)
-      // formData.append('modele',formValues.modele)
-      // formData.append('marque',formValues.marque)
-      // formData.append('categorie',formValues.categorie)
-      // formData.append('matricule',formValues.matricule)
-      // formData.append('visite',date_fin_visite)
-      // formData.append('assurance',date_fin_assurance)
-      // formData.append('images', this.formulaire.get("images")?.value);
-      // console.log(formData);
-
+    
+      
+      this.voitureserv.saveCar(formValues).subscribe({
+        next: (data:any) => { alert(data)},
+        error: (err:any) => { alert(err)}
+      }); 
       console.log(formValues);
       
-      
-
-
-
-
-
     
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
