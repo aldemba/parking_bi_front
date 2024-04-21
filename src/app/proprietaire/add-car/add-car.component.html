@@ -65,6 +65,9 @@
                       <span class="error" *ngIf="fm['matricule'].errors?.['required']" >Le matricule est obligatoire ! </span>
                       <!--<span class="error" *ngIf="fm['matricule'].errors?.['pattern']" >Le matricule ne doit pas contenir de chiffres </span>-->
                       <span class="error" *ngIf="fm['matricule'].errors?.['maxlength']" >Le matricule doit faire au maximum 20 caractères </span>
+                      <div *ngIf="fm['matricule'].errors">
+                        <div *ngIf="fm['matricule'].hasError('unique')">Le matricule doit être unique !</div>
+                      </div>
 
                 </div>
                 <div class="form-group mt-2" formGroupName="assurance">

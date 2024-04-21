@@ -131,12 +131,17 @@ export class AddCarComponent {
       },
       error: (err: any) => {
         // Gérer l'erreur ici, si nécessaire
-        console.error(err);
+      // alert(err);
+
+      if(err.status === 422) {
+        const validationErrors = err.error["hydra:description"];
+        console.log(validationErrors);
+        
+      }
         // Vous pouvez également afficher un message d'erreur ici si vous le souhaitez
       }
     });
   }
   
-
 
 }
