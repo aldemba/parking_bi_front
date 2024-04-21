@@ -78,7 +78,7 @@ export class AddCarComponent {
   }
 
   showSuccess() {
-    this.toastr.warning('La voiture a été ajouté avec success!', 'Ajout!');
+    this.toastr.success('La voiture a été ajouté avec success!', 'Ajout!');
   }
 
   dateSupérieureValidator(control: AbstractControl): { [key: string]: any } | null {
@@ -131,13 +131,14 @@ export class AddCarComponent {
       },
       error: (err: any) => {
         // Gérer l'erreur ici, si nécessaire
-      // alert(err);
-
-      if(err.status === 422) {
-        const validationErrors = err.error["hydra:description"];
-        console.log(validationErrors);
-        
-      }
+      alert(err.error);
+      //  let errorData;
+      // console.log(errorData);
+      // if (err.status === 422 && err.error.violations) {
+      //   const validationErrors = err.error.violations.map((violation: any) => violation.message);
+      //   console.log(validationErrors);
+      // }
+      
         // Vous pouvez également afficher un message d'erreur ici si vous le souhaitez
       }
     });

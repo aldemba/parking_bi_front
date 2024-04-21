@@ -24,6 +24,7 @@ export class DetailsParkingComponent {
   page:number=1; 
   searchTerm: any;
   idbis:number=0;
+  etatSwitch: boolean = false;
 
   constructor(private activatedroute:ActivatedRoute, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService) { }
 
@@ -42,7 +43,9 @@ export class DetailsParkingComponent {
           // console.log("test",this.voitures);
           // console.log("id",this.idbis);
           
-          
+          this.voitures.forEach((voiture: any) => {
+            voiture.etatSwitch = voiture.etat === 'DISPONIBLE';
+          });
         })
       }
     )
@@ -68,6 +71,29 @@ showSuccess() {
 }
 
 
+  // updateEtat(voiture: any) {
+  //   // Afficher la boîte modale SweetAlert pour demander la confirmation
+  //   Swal.fire({
+  //     title: 'Êtes-vous sûr?',
+  //     text: "Voulez-vous vraiment changer l'état de cette voiture?",
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#3085d6',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Oui, changer l\'état!',
+  //     cancelButtonText: 'Annuler'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       // Si l'utilisateur confirme, changer l'état de la voiture
+  //       this.voitureserv.changeState(voiture).subscribe({
+  //         // Vous pouvez gérer les réponses de votre requête ici
+  //         // next: (data:any) => { alert(data)},
+  //         // error: (err:any) => { alert(err)}
+  //       });
+  //     }
+  //   });
+  // }
+
   updateEtat(voiture: any) {
     // Afficher la boîte modale SweetAlert pour demander la confirmation
     Swal.fire({
@@ -81,7 +107,9 @@ showSuccess() {
       cancelButtonText: 'Annuler'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Si l'utilisateur confirme, changer l'état de la voiture
+        // Inverser l'état de la voiture
+        const nouvelEtat = voiture.etat === 'DISPONIBLE' ? 'INDISPONIBLE' : 'DISPONIBLE';
+        voiture.etat = nouvelEtat; // Met à jour l'état
         this.voitureserv.changeState(voiture).subscribe({
           // Vous pouvez gérer les réponses de votre requête ici
           // next: (data:any) => { alert(data)},
@@ -90,6 +118,21 @@ showSuccess() {
       }
     });
   }
+  
+  
+  
+  
+
+  // updateEtat(voiture: any) {
+
+  //   this.voitureserv.changeState(voiture).subscribe({
+  //     // next: (data:any) => { alert(data)},
+  //     // error: (err:any) => { alert(err)}
+  //   });
+  // }
+
+  // }
+  
 
  changeVisibility(voiture: any) {
   Swal.fire({

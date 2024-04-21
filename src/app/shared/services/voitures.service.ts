@@ -79,16 +79,16 @@ export class VoituresService {
     );
   }
 
+  editCard(voitureData:any):Observable<any>{
+    const voitureId = voitureData.id; // Assurez-vous que votre objet voiture contient un identifiant unique.
+    // const CarUrl = `http://127.0.0.1:8000/api/voitures/${voitureId}`;
+    return this.http.put<any>(`http://127.0.0.1:8000/api/voitures/${voitureId}`,voitureData).pipe(catchError(this.handleError));
+  }
   saveCar(body:any):Observable<any>{
     return this.http.post<any>(this.addCarUrl,body).pipe(catchError(this.handleError));
   } 
 
 
-editCard(voitureData:any):Observable<any>{
-  const voitureId = voitureData.id; // Assurez-vous que votre objet voiture contient un identifiant unique.
-  // const CarUrl = `http://127.0.0.1:8000/api/voitures/${voitureId}`;
-  return this.http.put<any>(`http://127.0.0.1:8000/api/voitures/${voitureId}`,voitureData).pipe(catchError(this.handleError));
-}
 
 
   private handleError(error: HttpErrorResponse) {
