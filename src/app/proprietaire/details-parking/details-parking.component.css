@@ -26,14 +26,17 @@
 .tall{
     position: absolute;
     height: 80vh;
-    width: 46vw !important;
+    width: 48vw !important;
     margin-right: 60% !important;
 }
 
 .posi{
-    margin-left: 14% !important;
-    margin-top: 2% !important;
+    margin-left: 12% !important;
+   
   
+}
+.visite-date{
+    white-space: nowrap;
 }
 
 .spac{

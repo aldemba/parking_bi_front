@@ -46,7 +46,7 @@
 </ng-container>
 
 <div class="modal posi" id="myModal">
-  <div class="modal-dialog posi">
+  <div class="modal-dialog posi modal-dialog-centered modal-dialog-scrollable modal-xl">
     <div class="modal-content tall">
       <div class="modal-header">
         <h1 class="h5 modal-title">Details Voiture</h1>
@@ -68,11 +68,16 @@
 
         <div class="d-flex flex-column spac">
           <span class="h4">Marque: {{voitureSelectionnee?.marque}}</span>
-          <span class="h4 mt-4">Modèle: {{voitureSelectionnee?.modele}}</span>
-          <span class="h4 mt-4">Matricule: {{voitureSelectionnee?.matricule}}</span>
-          <span class="h4 mt-4">Visite Technique: {{voitureSelectionnee?.visite.date_fin_visite | date:'dd-MM-yyyy'}}</span>
-          <span class="h4 mt-4">Assurance: {{voitureSelectionnee?.assurance.date_fin | date:'dd-MM-yyyy'}}</span>
-          <span class="h4 mt-4">État: {{voitureSelectionnee?.etat}}</span>
+          <hr>
+          <span class="h4 mt-2">Modèle: {{voitureSelectionnee?.modele}}</span>
+          <hr>
+          <span class="h4 mt-2">Matricule: {{voitureSelectionnee?.matricule}}</span>
+          <hr>
+          <span class="h4 mt-2 visite-date">Visite Technique: {{voitureSelectionnee?.visite.date_fin_visite | date:'dd-MM-yyyy'}}</span>
+          <hr>
+          <span class="h4 mt-2">Assurance: {{voitureSelectionnee?.assurance.date_fin | date:'dd-MM-yyyy'}}</span>
+          <hr>
+          <span class="h4 mt-2">État: {{voitureSelectionnee?.etat}}</span>
 
         </div>
       </div>
