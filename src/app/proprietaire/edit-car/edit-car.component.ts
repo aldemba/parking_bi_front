@@ -45,10 +45,10 @@ export class EditCarComponent {
               matricule:this.voiture.matricule,
               categorie:this.voiture.categorie,
               assurance:{
-                date_fin: new Date(assuranceDate)
+                date_fin: assuranceDate
               },
               visite:{
-                date_fin_visite: new Date(visiteDate)
+                date_fin_visite:visiteDate
               },
               images:this.voiture.image
             })
