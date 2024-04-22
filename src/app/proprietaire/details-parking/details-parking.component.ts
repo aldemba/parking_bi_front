@@ -167,6 +167,10 @@ showSuccess() {
   this.router.navigate(["/admin/parkings/"+this.idbis+"/voitures/add"]);
  }
 
+ redirectToEdit(idv:number){
+  this.router.navigate(["/admin/parkings/"+this.idbis+"/voitures/edit/"+idv]);
+ }
+
   clickchanged(type:string){
     switch (type) {
       case "disponibles":

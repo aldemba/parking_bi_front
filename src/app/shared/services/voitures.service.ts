@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { Observable, catchError, map, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -84,10 +84,20 @@ export class VoituresService {
     // const CarUrl = `http://127.0.0.1:8000/api/voitures/${voitureId}`;
     return this.http.put<any>(`http://127.0.0.1:8000/api/voitures/${voitureId}`,voitureData).pipe(catchError(this.handleError));
   }
+
+
   saveCar(body:any):Observable<any>{
     return this.http.post<any>(this.addCarUrl,body).pipe(catchError(this.handleError));
   } 
 
+
+  getVoitureById(voitureId:number):Observable<any>{
+    return this.http.get<any>(`http://localhost:8000/api/voitures/${voitureId}`).pipe(
+      tap((response:any)=>console.log(response)
+      ),
+      catchError(this.handleError)
+    )
+  }
 
 
 
