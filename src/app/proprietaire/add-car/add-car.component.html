@@ -73,6 +73,7 @@
                     <label class="form-label" for="matricule">Date Fin Assurance</label>
                     <input type="date" id="matricule" class="form-control form-control-lg" formControlName="date_fin" />
                     <span class="error" *ngIf="formulaire.get('assurance')?.get('date_fin')?.hasError('required')" >La date d'assurance est obligatoire ! </span>
+                    <span class="error" *ngIf="formulaire.get('assurance')?.get('date_fin')?.hasError('LessThanToday')" >La date doit être supérieure à la date du jour ! </span>
 
 
                
@@ -81,8 +82,9 @@
               
                 <label class="form-label" for="matricule">Date Fin Visite Technique</label>
                 <input type="date" id="matricule" class="form-control form-control-lg" formControlName="date_fin_visite" />
-                <span class="error" *ngIf="formulaire.get('visite')?.get('date_fin_visite')?.hasError('required')" >La date d'assurance est obligatoire ! </span>
-
+                <span class="error" *ngIf="formulaire.get('visite')?.get('date_fin_visite')?.hasError('required')" >La date de visite est obligatoire ! </span>
+                <span class="error" *ngIf="formulaire.get('visite')?.get('date_fin_visite')?.hasError('LessThanToday')" >La date doit être supérieure à la date du jour ! </span>
+                
            
           </div>
                 <div class="form-group mt-2">
