@@ -79,10 +79,10 @@ export class VoituresService {
     );
   }
 
-  editCard(voitureData:any):Observable<any>{
-    const voitureId = voitureData.id; // Assurez-vous que votre objet voiture contient un identifiant unique.
+  editCar(body:any, voitureId:number):Observable<any>{
+    // const voitureId = voitureData.id; // Assurez-vous que votre objet voiture contient un identifiant unique.
     // const CarUrl = `http://127.0.0.1:8000/api/voitures/${voitureId}`;
-    return this.http.put<any>(`http://127.0.0.1:8000/api/voitures/${voitureId}`,voitureData).pipe(catchError(this.handleError));
+    return this.http.put<any>(`http://127.0.0.1:8000/api/voitures/${voitureId}`,body).pipe(catchError(this.handleError));
   }
 
 
@@ -92,10 +92,8 @@ export class VoituresService {
 
 
   getVoitureById(voitureId:number):Observable<any>{
-    return this.http.get<any>(`http://localhost:8000/api/voitures/${voitureId}`).pipe(
-      tap((response:any)=>console.log(response)
-      ),
-      catchError(this.handleError)
+    return this.http.get<any>(`http://localhost:8000/api/voitures/${voitureId}`).pipe(  
+    catchError(this.handleError)
     )
   }
 

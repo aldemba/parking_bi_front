@@ -73,7 +73,7 @@
                 <div class="form-group mt-2" formGroupName="assurance">
               
                     <label class="form-label" for="matricule">Date Fin Assurance</label>
-                    <input type="date" id="matricule" class="form-control form-control-lg" value="{{voiture.assurance.date_fin | date:'dd/MM/YYYY'}}" formControlName="date_fin" />
+                    <input type="date" id="matricule" class="form-control form-control-lg" formControlName="date_fin" />
                
               </div>
               <div class="form-group mt-2" formGroupName="visite">

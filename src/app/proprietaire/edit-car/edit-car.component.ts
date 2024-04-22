@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
 import { VoituresService } from 'src/app/shared/services/voitures.service';
 
@@ -14,15 +15,27 @@ export class EditCarComponent {
   formulaire!:FormGroup
 
   voiture:any
-
+  parkingId: number=0
   imageSrc=""
+  idv:number=0
 
-  constructor(private formBuilder :FormBuilder,private voitureServ : VoituresService, private route:ActivatedRoute){}
+  constructor(private formBuilder :FormBuilder,private voitureServ : VoituresService, private route:ActivatedRoute,private router:Router, private toastr: ToastrService){}
 
 
   ngOnInit(){
-    const carId:any=this.route.snapshot.paramMap.get('idv')
-
+    // const carId=this.route.snapshot.paramMap.get('idv')
+    let carId=0;
+    this.route.paramMap.subscribe(param=>{
+      carId=+param.get("idv")!;
+      this.idv=carId
+    })
+    let id=0;
+    this.route.paramMap.subscribe(param=>{
+      id=+param.get("id")!;
+      this.parkingId=id;
+      console.log(this.parkingId);
+      
+    })
     // console.log("car",carId);
     if(carId){
 
@@ -32,11 +45,6 @@ export class EditCarComponent {
           if(this.voiture){
             const assuranceDate = this.voiture.assurance.date_fin;
             const visiteDate = this.voiture.visite.date_fin_visite;
-
-            console.log(visiteDate);
-            console.log(assuranceDate);
-            
-            
 
             this.formulaire.patchValue({
               nom:this.voiture.nom,
@@ -63,7 +71,7 @@ export class EditCarComponent {
       modele: ['', Validators.required],
       categorie:new FormControl("", Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(20)])),
       matricule: new FormControl("",Validators.compose([ Validators.required, Validators.minLength(8)])),
-      images: ['null', Validators.required],
+      images: ['', Validators.required],
       visite: this.formBuilder.group({
         date_fin_visite: ['', Validators.required] // Utilisation de formatDate ici
       }),
@@ -93,18 +101,55 @@ export class EditCarComponent {
       reader.onload = () => 
       {
         this.imageSrc = reader.result as string;
+        // console.log(this.imageSrc);
+        
 
         this.formulaire.patchValue({  
           images: reader.result  
+          
         });
 
       };
     }
   }
 
+  showSuccess() {
+    this.toastr.success('La voiture a été ajouté avec success!', 'Ajout!');
+  }
 
-  onEdit(){
-    
+
+  onEdit() {
+    let formValues = this.formulaire.value;
+  
+    formValues = Object.assign({}, formValues, {
+      "parkings": {
+        "id": this.parkingId
+      }
+    });
+  console.log(formValues);
+  
+    this.voitureServ.editCar(formValues,+this.idv).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        
+        // Succès de l'appel à saveCar(), exécuter les actions suivantes
+        this.formulaire.reset();
+        this.router.navigate(["/admin/parkings/"+this.parkingId+"/voitures"]);
+        this.showSuccess();
+      },
+      error: (err: any) => {
+        // Gérer l'erreur ici, si nécessaire
+       alert(err.error);
+      //  let errorData;
+      // console.log(errorData);
+      // if (err.status === 422 && err.error.violations) {
+      //   const validationErrors = err.error.violations.map((violation: any) => violation.message);
+      //   console.log(validationErrors);
+      // }
+      
+        // Vous pouvez également afficher un message d'erreur ici si vous le souhaitez
+      }
+    });
   }
 
 }

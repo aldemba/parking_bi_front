@@ -1,5 +1,6 @@
+import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { VoituresService } from 'src/app/shared/services/voitures.service';
@@ -26,10 +27,10 @@ export class AddCarComponent {
       matricule: new FormControl("",Validators.compose([ Validators.required, Validators.minLength(8)])),
       images: ['null', Validators.required],
       visite: this.formBuilder.group({
-        date_fin_visite: ['', Validators.required] // Utilisation de formatDate ici
+        date_fin_visite: new FormControl(formatDate(new Date(Date.now()), 'yyyy-MM-dd', 'en'), Validators.compose([Validators.required, this.LessThanToday ])) // Utilisation de formatDate ici
       }),
       assurance: this.formBuilder.group({
-        date_fin: ['', Validators.required] // Utilisation de formatDate ici
+        date_fin: new FormControl(formatDate(new Date(Date.now()), 'yyyy-MM-dd', 'en'), Validators.compose([Validators.required, this.LessThanToday ])) // Utilisation de formatDate ici
       }),
 
     })
@@ -51,9 +52,6 @@ export class AddCarComponent {
   }
 
 
-  // get nom(){
-  //   return this.formulaire.get("nom");
-  // }
 
   public onFileChange(event:any) {
     
@@ -68,6 +66,8 @@ export class AddCarComponent {
       reader.onload = () => 
       {
         this.imageSrc = reader.result as string;
+        console.log(this.imageSrc);
+        
 
         this.formulaire.patchValue({  
           images: reader.result  
@@ -91,27 +91,17 @@ export class AddCarComponent {
   }
 
 
-  // onSubmit(){
-    
-  //     let formValues=this.formulaire.value
 
-  //     formValues=Object.assign({}, formValues, {"parkings":{
-  //       "id":this.idParking
-  //     }})
+   LessThanToday(control: FormControl): ValidationErrors | null {
+    let today : Date = new Date();
 
-    
-      
-  //     this.voitureserv.saveCar(formValues).subscribe({
-  //       // next: (data:any) => { alert(data)},
-  //       // error: (err:any) => { alert(err)}
-  //     }); 
-  //     // console.log(formValues);
-  //     this.formulaire.reset();
+    if (new Date(control.value) < today)
+        return { "LessThanToday": true };
 
-  //     this.router.navigate(["/admin/parkings/"+this.idParking+"/voitures"]);
-      
-  //     this.showSuccess()
-  // }
+    return null;
+}
+
+
 
   onSubmit() {
     let formValues = this.formulaire.value;
