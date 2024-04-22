@@ -33,7 +33,7 @@ export class EditCarComponent {
     this.route.paramMap.subscribe(param=>{
       id=+param.get("id")!;
       this.parkingId=id;
-      console.log(this.parkingId);
+      // console.log(this.parkingId);
       
     })
     // console.log("car",carId);
@@ -139,7 +139,7 @@ export class EditCarComponent {
       },
       error: (err: any) => {
         // Gérer l'erreur ici, si nécessaire
-       alert(err.error);
+      //  alert(err.error);
       //  let errorData;
       // console.log(errorData);
       // if (err.status === 422 && err.error.violations) {

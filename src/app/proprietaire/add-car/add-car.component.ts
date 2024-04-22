@@ -42,7 +42,8 @@ export class AddCarComponent {
     this.activatedroute.paramMap.subscribe(param=>{
       id=+param.get("id")!;
       this.idParking=id;
-      console.log(id);
+      // console.log(id);
+      console.log(this.formulaire.controls);
       
     })
   }
@@ -65,9 +66,7 @@ export class AddCarComponent {
       
       reader.onload = () => 
       {
-        this.imageSrc = reader.result as string;
-        console.log(this.imageSrc);
-        
+        this.imageSrc = reader.result as string;        
 
         this.formulaire.patchValue({  
           images: reader.result  
@@ -121,9 +120,10 @@ export class AddCarComponent {
       },
       error: (err: any) => {
         // Gérer l'erreur ici, si nécessaire
-      alert(err.error);
-      //  let errorData;
-      // console.log(errorData);
+      // alert(err.error);
+       let errorData;
+       errorData=err
+      console.log(errorData);
       // if (err.status === 422 && err.error.violations) {
       //   const validationErrors = err.error.violations.map((violation: any) => violation.message);
       //   console.log(validationErrors);
