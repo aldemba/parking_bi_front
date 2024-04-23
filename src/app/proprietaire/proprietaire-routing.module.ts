@@ -7,8 +7,8 @@ import { EditCarComponent } from './edit-car/edit-car.component';
 
 
 const routes: Routes = [
-  {path:'parkings/:id/voitures/add',component:AddCarComponent},
   {path:'parkings/:id/voitures/edit/:idv',component:EditCarComponent},
+  {path:'parkings/:id/voitures/add',component:AddCarComponent},
   {path:'parkings/:id/voitures',component:DetailsParkingComponent},
   {path:'parkings',component:MesParkingsComponent},
   // {path:'parkings/voitures',component:DetailsParkingComponent}

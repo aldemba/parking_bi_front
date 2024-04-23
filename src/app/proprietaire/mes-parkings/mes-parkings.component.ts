@@ -11,14 +11,14 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./mes-parkings.component.css']
 })
 export class MesParkingsComponent {
-  // routerObservableInstance$:any;
+  //  routerObservableInstance$:any;
 
   // routerObservableInstance$!: Subscription;
 
   parkings:any
 
   constructor(private tokserv:TokenService, private parkserv:ParkingsService,private router:Router){
-    // this.subscribeToRouteChange();
+    //  this.subscribeToRouteChange();
   }
 
   

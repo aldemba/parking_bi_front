@@ -12,6 +12,7 @@ import { FilterPipe } from './filter.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCarComponent } from './add-car/add-car.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
+import { ReservationsComponent } from './reservations/reservations.component';
 
 
 
@@ -25,6 +26,7 @@ import { EditCarComponent } from './edit-car/edit-car.component';
     FilterPipe,
     AddCarComponent,
     EditCarComponent,
+    ReservationsComponent,
   ],
   imports: [
     CommonModule,
