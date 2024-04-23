@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
@@ -13,10 +13,13 @@ import { VoituresService } from 'src/app/shared/services/voitures.service';
 export class EditCarComponent {
 
   formulaire!:FormGroup
+  file!: File;
 
   voiture:any
   parkingId: number=0
   imageSrc=""
+  imageSrci:string|undefined=""
+
   idv:number=0
 
   constructor(private formBuilder :FormBuilder,private voitureServ : VoituresService, private route:ActivatedRoute,private router:Router, private toastr: ToastrService){}
@@ -60,6 +63,7 @@ export class EditCarComponent {
               },
               images:this.voiture.image
             })
+            this.imageSrci=this.voiture.image
           }
           return []
         })
@@ -73,10 +77,10 @@ export class EditCarComponent {
       matricule: new FormControl("",Validators.compose([ Validators.required, Validators.minLength(8)])),
       images: ['', Validators.required],
       visite: this.formBuilder.group({
-        date_fin_visite: ['', Validators.required] // Utilisation de formatDate ici
+        date_fin_visite: new FormControl('', Validators.compose([Validators.required, this.LessThanToday ])) // Utilisation de formatDate ici
       }),
       assurance: this.formBuilder.group({
-        date_fin: ['', Validators.required] // Utilisation de formatDate ici
+        date_fin: new FormControl('', Validators.compose([Validators.required, this.LessThanToday ])) // Utilisation de formatDate ici
       }),
 
     })
@@ -100,7 +104,7 @@ export class EditCarComponent {
       
       reader.onload = () => 
       {
-        this.imageSrc = reader.result as string;
+        this.imageSrci= reader.result as string;
         // console.log(this.imageSrc);
         
 
@@ -110,11 +114,31 @@ export class EditCarComponent {
         });
 
       };
+
     }
   }
 
+
+  
+  
+
+
+
+  onChange(event: any) {
+    this.file = event.target.files[0];
+  }
+
+  LessThanToday(control: FormControl): ValidationErrors | null {
+    let today : Date = new Date();
+
+    if (new Date(control.value) < today)
+        return { "LessThanToday": true };
+
+    return null;
+}
+
   showSuccess() {
-    this.toastr.success('La voiture a été ajouté avec success!', 'Ajout!');
+    this.toastr.warning('La voiture a été modifiée avec success!', 'Edition!');
   }
 
 
@@ -126,7 +150,20 @@ export class EditCarComponent {
         "id": this.parkingId
       }
     });
-  console.log(formValues);
+
+    if (!this.file) {
+      delete formValues.images;
+      formValues = Object.assign({}, formValues, {
+        images: 'data:image/PNG;base64,'+this.imageSrci
+      });
+    }else{
+      formValues = Object.assign({}, formValues, {
+        images: this.imageSrci
+      });
+    }
+
+
+     console.log(formValues);
   
     this.voitureServ.editCar(formValues,+this.idv).subscribe({
       next: (data: any) => {

@@ -8,7 +8,7 @@
     box-sizing: border-box;
     height: 100vh;
     /* border:1px solid #C2B364; */
-    overflow: hidden;
+    /* overflow: hidden; */
 
 }
 .btn{
@@ -20,8 +20,7 @@
 }
 h2{
     text-align: center;
-    text-decoration: underline;
-    color: #C2B364;
+    
 }
 
 
@@ -34,4 +33,21 @@ span{
 
 .test{
     display: flex;
+}
+
+input[type="file"]{
+    display: none;
+}
+
+.design{
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    border: 2px solid #ffdd75;
+}
+
+.ava{
+    height: 10vh;
+    width: 10vh;
+
 }

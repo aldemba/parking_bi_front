@@ -14,7 +14,9 @@ export class AddCarComponent {
   idParking:any;
   formulaire!:FormGroup
   file!: File;
-  imageSrc=""
+  // imageSrc=""
+  defaultImageSrc: string = '../../assets/img/avatar.jpg';
+  imageSrc:string=this.defaultImageSrc
 
 
 
@@ -76,6 +78,10 @@ export class AddCarComponent {
     }
   }
 
+  onChange(event: any) {
+    this.file = event.target.files[0];
+  }
+
   showSuccess() {
     this.toastr.success('La voiture a été ajouté avec success!', 'Ajout!');
   }
@@ -104,6 +110,8 @@ export class AddCarComponent {
 
   onSubmit() {
     let formValues = this.formulaire.value;
+    console.log(formValues);
+    
   
     formValues = Object.assign({}, formValues, {
       "parkings": {
