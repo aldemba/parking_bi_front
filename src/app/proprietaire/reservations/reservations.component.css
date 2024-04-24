@@ -46,3 +46,17 @@ input[type="file"]{
     border: none;
 }
 
+.animation{
+    animation-name: contenu;
+    animation-duration: 2s;
+}
+
+@keyframes contenu{
+    0% {
+        opacity: 0;
+        transform: scale3d(.3, .3, .3);
+    }
+    50% {
+        opacity: 1;
+    }
+}
