@@ -17,8 +17,7 @@ export class AddCarComponent {
   // imageSrc=""
   defaultImageSrc: string = '../../assets/img/avatar.jpg';
   imageSrc:string=this.defaultImageSrc
-
-
+  message:string=""
 
   constructor(private activatedroute:ActivatedRoute,  private router:Router, private toastr: ToastrService, private formBuilder:FormBuilder,private voitureserv:VoituresService) {
     this.formulaire=this.formBuilder.group({
@@ -80,10 +79,12 @@ export class AddCarComponent {
 
   onChange(event: any) {
     this.file = event.target.files[0];
+    console.log(this.file);
+    
   }
 
   showSuccess() {
-    this.toastr.success('La voiture a été ajouté avec success!', 'Ajout!');
+    this.toastr.warning('La voiture a été ajouté avec success!', 'Ajout!');
   }
 
   dateSupérieureValidator(control: AbstractControl): { [key: string]: any } | null {
@@ -109,37 +110,42 @@ export class AddCarComponent {
 
 
   onSubmit() {
-    let formValues = this.formulaire.value;
-    console.log(formValues);
-    
-  
-    formValues = Object.assign({}, formValues, {
-      "parkings": {
-        "id": this.idParking
-      }
-    });
-  
-    this.voitureserv.saveCar(formValues).subscribe({
-      next: (data: any) => {
-        // Succès de l'appel à saveCar(), exécuter les actions suivantes
-        this.formulaire.reset();
-        this.router.navigate(["/admin/parkings/"+this.idParking+"/voitures"]);
-        this.showSuccess();
-      },
-      error: (err: any) => {
-        // Gérer l'erreur ici, si nécessaire
-      // alert(err.error);
-       let errorData;
-       errorData=err
-      console.log(errorData);
-      // if (err.status === 422 && err.error.violations) {
-      //   const validationErrors = err.error.violations.map((violation: any) => violation.message);
-      //   console.log(validationErrors);
-      // }
+    if (this.file) {
+
+      let formValues = this.formulaire.value;
+      console.log(formValues);
       
-        // Vous pouvez également afficher un message d'erreur ici si vous le souhaitez
-      }
-    });
+    
+      formValues = Object.assign({}, formValues, {
+        "parkings": {
+          "id": this.idParking
+        }
+      });
+    
+      this.voitureserv.saveCar(formValues).subscribe({
+        next: (data: any) => {
+          // Succès de l'appel à saveCar(), exécuter les actions suivantes
+          this.formulaire.reset();
+          this.router.navigate(["/admin/parkings/"+this.idParking+"/voitures"]);
+          this.showSuccess();
+        },
+        error: (err: any) => {
+          // Gérer l'erreur ici, si nécessaire
+        // alert(err.error);
+         let errorData;
+         errorData=err
+        console.log(errorData);
+        // if (err.status === 422 && err.error.violations) {
+        //   const validationErrors = err.error.violations.map((violation: any) => violation.message);
+        //   console.log(validationErrors);
+        // }
+        
+          // Vous pouvez également afficher un message d'erreur ici si vous le souhaitez
+        }
+      });
+    }else{
+      this.message="a"
+    }
   }
   
 

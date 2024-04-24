@@ -1,5 +1,9 @@
+<div class="container mt-3"><button class="btn btn-outline-warning mr-3">Retour</button></div>
 <div class="container">
+
+
   <div class="row">
+    
     <div class="col-6 mt-5 h-25 flex-nowrap">
         
       <div class="card mb-5 vn shadow">
@@ -13,31 +17,31 @@
           </div>
           <div class="col-md-6 ">
             <div class="text-center mt-4">
-              <h4>nom: {{voiture?.nom}}</h4>
+              <h4>Nom: {{voiture?.nom}}</h4>
            
             </div>
             <div class="text-center mt-4">
-                <h4>modele: {{voiture?.modele}}</h4>
+                <h4>Modele: {{voiture?.modele}}</h4>
              
               </div>
               <div class="text-center mt-4">
-                <h4>marque: {{voiture?.marque}}</h4>
+                <h4>Marque: {{voiture?.marque}}</h4>
              
               </div>
               <div class="text-center mt-4">
-                <h4>matricule :{{voiture?.matricule}}</h4>
+                <h4>Matricule :{{voiture?.matricule}}</h4>
+                
+              </div>
+              <div class="text-center mt-4">
+                <h4>Categorie: {{voiture?.categorie}}</h4>
              
               </div>
               <div class="text-center mt-4">
-                <h4>categorie: {{voiture?.categorie}}</h4>
+                <h4>Fin_assurance: {{voiture?.assurance?.date_fin| date:'dd-MM-yyyy'}}</h4>
              
               </div>
               <div class="text-center mt-4">
-                <h4>fin_assurance: {{voiture?.assurance?.date_fin}}</h4>
-             
-              </div>
-              <div class="text-center mt-4">
-                <h4>fin_visite: {{voiture?.visite?.date_fin_visite}}</h4>
+                <h4>Fin_visite: {{voiture?.visite?.date_fin_visite| date:'dd-MM-yyyy'}}</h4>
              
               </div>
           </div>
@@ -139,3 +143,4 @@
     </div>
   </div>
 </div>
+

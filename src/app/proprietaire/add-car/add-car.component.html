@@ -97,8 +97,9 @@
             <img [src]="imageSrc" class="ava" alt="">
 
             <input type="file" class="form-control form-control-lg" accept="image/*" (change)="onFileChange($event);onChange($event)" id="image" />
-                
-            </div>
+            
+          </div>
+          <span class="error" *ngIf="message" >L'image est obligatoire</span>
  
 
                 <div class="mt-4 justify-content-center d-flex align-items-center ">
