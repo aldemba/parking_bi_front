@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-6 mt-5 shadow h-25">
-      <div class="card mb-3 vn">
+    <div class="col-6 mt-5 h-25 flex-nowrap">
+        
+      <div class="card mb-5 vn shadow">
         <div class="row g-0">
           <div class="col-md-6">
             <img
@@ -42,11 +43,20 @@
           </div>
         </div>
       </div>
+
+    <div>
+
+    </div>
+    <div class="mt-4 justify-content-center d-flex align-items-center">
+        <button (click)="showModal()" class="btn btn-lg btn-outline-warning">
+          Faire une location
+        </button>
+      </div>
     </div>
     
 
-    <div class="col-5 offset-1">
-      <h2>Ajouter une réservation</h2>
+    <div class="col-5 offset-1" *ngIf="visible">
+      <h2>Ajouter une location</h2>
       <div class="" >
         <div class="shadow p-2 p-md-4">
           <form>

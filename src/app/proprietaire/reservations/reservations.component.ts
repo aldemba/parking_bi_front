@@ -11,7 +11,7 @@ import { VoituresService } from 'src/app/shared/services/voitures.service';
 export class ReservationsComponent {
   parkingId: number=0
   idv:number=0
-
+  visible:boolean=false;
   voiture:Voiture|undefined
 
 
@@ -40,6 +40,10 @@ export class ReservationsComponent {
     })
 
 
+  }
+
+  showModal(){
+    this.visible=!this.visible
   }
 
 }
