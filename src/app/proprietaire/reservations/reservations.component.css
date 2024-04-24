@@ -1,0 +1,47 @@
+.img{
+    height: 60vh;
+  
+}
+
+
+.btn{
+    border-radius: 10px;
+    border: solid 2px;
+
+    
+
+}
+h2{
+    text-align: center;
+    
+}
+
+
+/* 
+.card-body{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+} */
+
+.test{
+    display: flex;
+}
+
+input[type="file"]{
+    display: none;
+}
+
+.design{
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    border: 2px solid #ffdd75;
+}
+
+.ava{
+    height: 10vh;
+    width: 10vh;
+
+}
+.vn{
+    border: none;
+}

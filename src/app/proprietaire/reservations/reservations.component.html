@@ -1,1 +1,131 @@
-<p>reservations works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-6 mt-5 shadow h-25">
+      <div class="card mb-3 vn">
+        <div class="row g-0">
+          <div class="col-md-6">
+            <img
+              src="data:image/PNG;base64,{{ voiture?.image }}"
+              class="img-fluid img"
+              alt="..."
+            />
+          </div>
+          <div class="col-md-6 ">
+            <div class="text-center mt-4">
+              <h4>nom: {{voiture?.nom}}</h4>
+           
+            </div>
+            <div class="text-center mt-4">
+                <h4>modele: {{voiture?.modele}}</h4>
+             
+              </div>
+              <div class="text-center mt-4">
+                <h4>marque: {{voiture?.marque}}</h4>
+             
+              </div>
+              <div class="text-center mt-4">
+                <h4>matricule :{{voiture?.matricule}}</h4>
+             
+              </div>
+              <div class="text-center mt-4">
+                <h4>categorie: {{voiture?.categorie}}</h4>
+             
+              </div>
+              <div class="text-center mt-4">
+                <h4>fin_assurance: {{voiture?.assurance?.date_fin}}</h4>
+             
+              </div>
+              <div class="text-center mt-4">
+                <h4>fin_visite: {{voiture?.visite?.date_fin_visite}}</h4>
+             
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="col-5 offset-1">
+      <h2>Ajouter une réservation</h2>
+      <div class="" >
+        <div class="shadow p-2 p-md-4">
+          <form>
+            <div class="form-group mt-2">
+                <label class="form-label" for="nom_complet">Nom Complet</label>
+                <input
+                  type="text"
+                  id="nom_complet"
+                  class="form-control form-control-lg"
+                  formControlName="nom_complet"
+                />
+              </div>
+
+              <div class="form-group mt-2">
+                <label class="form-label" for="adresse">Adresse</label>
+                <input
+                  type="text"
+                  id="adresse"
+                  class="form-control form-control-lg"
+                  formControlName="adresse"
+                />
+              </div>
+
+       
+            <div class="form-group mt-2">
+              <label class="form-label" for="telephone">Téléphone</label>
+              <input
+                type="text"
+                id="telephone"
+                class="form-control form-control-lg"
+                formControlName="telephone"
+              />
+            </div>
+            <div class="form-group mt-2" >
+              <label class="form-label" for="date_debut_reservation"
+                >Date début réservation</label
+              >
+              <input
+                type="date"
+                id="date_debut_reservation"
+                class="form-control form-control-lg"
+                formControlName="date_debut_reservation"
+              />
+            </div>
+            <div class="form-group mt-2">
+              <label class="form-label" for="date_fin_reservation"
+                >Date fin réservation</label
+              >
+              <input
+                type="date"
+                id="date_fin_reservation"
+                class="form-control form-control-lg"
+                formControlName="date_fin_reservation"
+              />
+          
+            </div>
+
+            <div class="form-group mt-2 d-flex">
+              <div class="design me-4 mt-4">
+                <label for="image" class="form-label">Choisir une image</label>
+              </div>
+             
+
+              <input
+                type="file"
+                class="form-control form-control-lg"
+                accept="image/*"
+                id="image"
+              />
+            </div>
+
+            <div class="mt-4 justify-content-center d-flex align-items-center">
+              <button type="submit" class="btn btn-lg btn-outline-warning">
+                Ajouter
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
