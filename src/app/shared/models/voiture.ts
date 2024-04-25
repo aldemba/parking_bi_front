@@ -1,4 +1,5 @@
 export interface Voiture {
+  id:number
     nom: string
     modele: string
     categorie: string

@@ -1,6 +1,10 @@
+import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Voiture } from 'src/app/shared/models/voiture';
+import { LocationService } from 'src/app/shared/services/location.service';
 import { VoituresService } from 'src/app/shared/services/voitures.service';
 
 @Component({
@@ -13,9 +17,25 @@ export class ReservationsComponent {
   idv:number=0
   visible:boolean=false;
   voiture:Voiture|undefined
+  formulaire!:FormGroup
+  file!:File
+  imageSrc=""
 
 
-  constructor(private route:ActivatedRoute,private voitureServ : VoituresService) { }
+
+  constructor(private route:ActivatedRoute,private voitureServ : VoituresService,private formBuilder:FormBuilder, private locationserv:LocationService,private router:Router,private toast:ToastrService) {
+    this.formulaire=this.formBuilder.group({
+
+      nom_complet: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-zÀ-ÿ ]+$/)])),
+      adresse: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-zÀ-ÿ0-9 ]+$/),Validators.minLength(3)])),
+      telephone: new FormControl("", Validators.compose([Validators.required, Validators.pattern('[- +()0-9]{9,}')])),
+      date_debut_reservation:new FormControl('', Validators.compose([Validators.required, this.LessThanToday])),
+      date_fin_reservation:new FormControl('', Validators.compose([Validators.required, this.LessThanToday])),
+      images: ['']
+    },{validators:this.LessThanTo.bind(this)})
+   }
+
+
 
   ngOnInit(){
     let carId=0;
@@ -32,18 +52,117 @@ export class ReservationsComponent {
       if (carId) {
         this.voitureServ.getVoitureById(+carId).subscribe(data=>{
           this.voiture=data;
-          console.log(this.voiture);
+          // console.log(this.voiture);
           
         })
       }
       
     })
 
-
   }
+
+  LessThanToday(control: FormControl): ValidationErrors | null {
+    let today : Date = new Date();
+
+    if (new Date(control.value) < today)
+        return { "LessThanToday": true };
+
+    return null;
+}
+
+
+// fonction pour controler la date de sorite et d'entrée d'une réservation
+LessThanTo(controls: FormGroup): ValidationErrors | null {
+  var startDate = new Date(controls.get('date_debut_reservation')?.value);
+  var endDate=new Date(controls.get('date_fin_reservation')?.value);
+  if (startDate && endDate) {
+  
+    // Validation logique
+    if (startDate > endDate) {
+      return { 'LessThanTo': true }; // Retourner un objet avec la clé 'invalidDateRange' si la validation échoue
+    }
+  
+  }
+     return null;
+}
+
+
+get fm(){
+    // console.log("deux", this.formulaire.get('date_debut_reservation'), this.formulaire.get('date_fin_reservation'));
+    
+  return this.formulaire.controls;
+}
+
 
   showModal(){
     this.visible=!this.visible
   }
 
-}
+
+  public onFileChange(event:any) {
+    
+    const reader = new FileReader();
+    
+    if(event.target.files && event.target.files.length) {
+      
+      const [file] = event.target.files;
+      
+      reader.readAsDataURL(file); 
+      
+      reader.onload = () => 
+      {
+        this.imageSrc = reader.result as string;        
+
+        this.formulaire.patchValue({  
+          images: reader.result  
+        });
+
+      };
+    }
+  }
+
+  onChange(event: any) {
+    this.file = event.target.files[0];
+    console.log(this.file);
+    
+  }
+
+  showSuccess() {
+    this.toast.success('La réservation a été ajouté avec success!', 'Ajout!');
+  }
+
+  onSubmitRervation() {
+      let formValues = this.formulaire.value;
+      console.log(formValues);
+      formValues = Object.assign({}, formValues, {
+        "voiture": {
+          "id": this.voiture?.id
+        }
+      });
+    
+      this.locationserv.saveLocation(formValues).subscribe({
+        next: (data: any) => {
+          // Succès de l'appel à saveCar(), exécuter les actions suivantes
+          this.formulaire.reset();
+          this.router.navigate(["/admin/parkings/"+this.parkingId+"/voitures"]);
+          this.showSuccess();
+        },
+        error: (err: any) => {
+          // Gérer l'erreur ici, si nécessaire
+        // alert(err.error);
+         let errorData;
+         errorData=err
+        console.log(errorData);
+        // if (err.status === 422 && err.error.violations) {
+        //   const validationErrors = err.error.violations.map((violation: any) => violation.message);
+        //   console.log(validationErrors);
+        // }
+        
+          // Vous pouvez également afficher un message d'erreur ici si vous le souhaitez
+        }
+      });
+    }
+ 
+  }
+
+  

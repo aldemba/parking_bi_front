@@ -44,7 +44,7 @@ export class AddCarComponent {
       id=+param.get("id")!;
       this.idParking=id;
       // console.log(id);
-      console.log(this.formulaire.controls);
+      // console.log(this.formulaire.controls);
       
     })
   }
@@ -52,7 +52,6 @@ export class AddCarComponent {
   get fm(){
     return this.formulaire.controls;
   }
-
 
 
   public onFileChange(event:any) {
@@ -106,7 +105,6 @@ export class AddCarComponent {
 
     return null;
 }
-
 
 
   onSubmit() {
