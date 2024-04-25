@@ -23,7 +23,6 @@ export class ParkingsService {
     return this.http.get<any>(PARKINGS_PROPRIO).pipe( catchError(this.handleError))
     // console.log(this.http.get<any>(PARKINGS_PROPRIO, httpOptions));
     
-
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -41,7 +41,6 @@ export class EditCarComponent {
     })
     // console.log("car",carId);
     if(carId){
-
       this.voitureServ.getVoitureById(+carId).pipe(
         switchMap((data)=>{
           this.voiture=data

@@ -14,9 +14,28 @@ export class LocationService {
 
 
 
+
+  editLocation(body:Reservation, locationId:number):Observable<any>{
+  
+    return this.http.patch<any>(`http://127.0.0.1:8000/api/reservations/${locationId}`,body).pipe(catchError(this.handleError));
+
+  }
+
+
+
   saveLocation(body:Reservation):Observable<any>{
     return this.http.post<Reservation>(this.addReservation,body).pipe(catchError(this.handleError));
   } 
+
+
+
+
+  public getReservationsByParking(id:number){
+    let RESERV_URL = "http://127.0.0.1:8000/api/proprietaire/"+id+"/parkings"
+    
+    return this.http.get<any>(RESERV_URL).pipe( catchError(this.handleError))
+  }
+
 
 
   private handleError(error: HttpErrorResponse) {
@@ -32,4 +51,7 @@ export class LocationService {
     // Return an observable with a user-facing error message.
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
+
+
+
 }

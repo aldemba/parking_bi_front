@@ -20,8 +20,6 @@ export class MesParkingsComponent {
   constructor(private tokserv:TokenService, private parkserv:ParkingsService,private router:Router){
     //  this.subscribeToRouteChange();
   }
-
-  
   
   ngOnInit(){
     
@@ -30,7 +28,6 @@ export class MesParkingsComponent {
     if (idFromStorage !== null && idFromStorage !== undefined) {
         idClientConnecté = +idFromStorage;
     }
-    // console.log(idClientConnecté);
     
 
     this.parkserv.getParkingsById(+idClientConnecté).subscribe({next:data =>{
@@ -39,11 +36,9 @@ export class MesParkingsComponent {
       this.parkings=data}})
     
 
-    // console.log(this.parkings);
-    
+    // console.log(this.parkings);  
 
   }
-
   // subscribeToRouteChange() {
   //   this.routerObservableInstance$ = this.router.events.pipe(
   //     filter((event): event is NavigationEnd => event instanceof NavigationEnd)
@@ -53,7 +48,5 @@ export class MesParkingsComponent {
   //     }
   //   });
   // }
-
-
 
 }

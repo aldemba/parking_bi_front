@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCarComponent } from './add-car/add-car.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { EditReservationComponent } from './edit-reservation/edit-reservation.component';
+import { MesReservationsComponent } from './mes-reservations/mes-reservations.component';
 
 
 
@@ -27,6 +29,8 @@ import { ReservationsComponent } from './reservations/reservations.component';
     AddCarComponent,
     EditCarComponent,
     ReservationsComponent,
+    EditReservationComponent,
+    MesReservationsComponent,
   ],
   imports: [
     CommonModule,

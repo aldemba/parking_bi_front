@@ -5,6 +5,7 @@ import { DetailsParkingComponent } from './details-parking/details-parking.compo
 import { AddCarComponent } from './add-car/add-car.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { MesReservationsComponent } from './mes-reservations/mes-reservations.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path:'parkings/:id/voitures/add/:idv',component:ReservationsComponent},
   {path:'parkings/:id/voitures/add',component:AddCarComponent},
   {path:'parkings/:id/voitures',component:DetailsParkingComponent},
+  {path:'parkings/:id/reservations',component:MesReservationsComponent},
   {path:'parkings',component:MesParkingsComponent},
   // {path:'parkings/voitures',component:DetailsParkingComponent}
 ];
