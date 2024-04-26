@@ -127,3 +127,24 @@
     border-radius: 50%;
   }
   
+  .bouge {
+    animation: bouge 1s infinite;
+  }
+  
+  @keyframes bouge {
+    0% {
+      transform: scale(1.5);
+    }
+    25% {
+      transform: scale(var(--fa-beat-scale, 1.1));
+    }
+    40% {
+      transform: scale(1.5);
+    }
+    60% {
+      transform: scale(var(--fa-beat-scale, 1.1));
+    }
+    100% {
+      transform: scale(1.5);
+    }
+  }

@@ -25,8 +25,8 @@
                   <p class="card-text">{{car.modele}}
 
                     <span class="text-danger float-end">
-                      <i class="fa fa-exclamation-circle me-2" aria-hidden="true" *ngIf="getDifferenceInDays(car.assurance.date_fin)" ></i>
-                      <i class="fa fa-exclamation-triangle " aria-hidden="true" *ngIf="getDifferenceInDays(car.visite.date_fin_visite)"></i>
+                      <i class="fa fa-exclamation-circle me-2 bouge" aria-hidden="true" *ngIf="getDifferenceInDays(car.assurance.date_fin)" ></i>
+                      <i class="fa fa-exclamation-triangle bouge" aria-hidden="true" *ngIf="getDifferenceInDays(car.visite.date_fin_visite)"></i>
                     </span>
                   </p>
                   <p class="card-text">
