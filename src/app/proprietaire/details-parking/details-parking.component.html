@@ -8,7 +8,7 @@
         <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher...">
       </div>
             <div class="text-end mb-3">
-                <a class="btn btn-warning text-white" (click)="redirectToAdd()"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
+                <a class="btn btn-warning text-white" (click)="redirectToAdd();pushToHistory()"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
             </div>
 
       <ng-container *ngFor="let car of voitures | filter: searchTerm">
@@ -47,7 +47,7 @@
 <ng-container *ngIf="voitures.length == 0" > 
   <div class="bout mb-3">
     <a class="btn btn-warning text-white" (click)="redirectToAdd()"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
-</div>
+  </div>
   <h2 class="d-flex justify-content-center to">Vous n'avez pas de voitures, veuillez en ajouter !</h2>
 </ng-container>
 

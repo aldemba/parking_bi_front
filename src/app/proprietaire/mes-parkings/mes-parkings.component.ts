@@ -31,7 +31,7 @@ export class MesParkingsComponent {
     
 
     this.parkserv.getParkingsById(+idClientConnecté).subscribe({next:data =>{
-      //  console.log(data);
+     console.log(data);
       
       this.parkings=data}})
     
@@ -39,6 +39,7 @@ export class MesParkingsComponent {
     // console.log(this.parkings);  
 
   }
+  
   // subscribeToRouteChange() {
   //   this.routerObservableInstance$ = this.router.events.pipe(
   //     filter((event): event is NavigationEnd => event instanceof NavigationEnd)

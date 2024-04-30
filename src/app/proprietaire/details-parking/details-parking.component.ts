@@ -4,9 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DetailsService } from 'src/app/shared/services/details.service';
 import { VoituresService } from 'src/app/shared/services/voitures.service';
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
+
 
 import Swal from 'sweetalert2';
-import { Voiture } from 'src/app/shared/models/voiture';
+
 
 @Component({
   selector: 'app-details-parking',
@@ -31,7 +33,7 @@ export class DetailsParkingComponent {
 
   // objets:Voiture[] = [];
 
-  constructor(private activatedroute:ActivatedRoute, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService) { }
+  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService) { }
 
   ngOnInit() {
     let id=0;
@@ -62,12 +64,10 @@ export class DetailsParkingComponent {
       this.all=data.all;
     })
 
-    // this.objets = this.verifierDifference(this.objets);
-    // console.log("a", this.objets);
-
+ 
   }
   
-  searchItemsPerPage() {
+searchItemsPerPage() {
     return this.searchTerm ? 50 : 8;
 }
 
@@ -76,10 +76,12 @@ afficherDetailsVoiture(voiture: any) {
 }
 
 showSuccess() {
-  this.toastr.success('La voiture a été supprimé avec succès!', 'Suppression!');
+  this.toastr.success('La voiture a été supprimée avec succès!', 'Suppression!');
 }
 
 
+
+// // Fonction pour calculer la différence entre deux dates en jours
 getDifferenceInDays(dateString: string): boolean {
   const today = new Date();
   const expirationDate = new Date(dateString);
@@ -87,48 +89,6 @@ getDifferenceInDays(dateString: string): boolean {
   const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
   return differenceInDays <= 7;
 }
-
-
-// // Fonction pour calculer la différence entre deux dates en jours
-//  differenceEnJours(date1:any, date2:any) {
-//   const unJour = 24 * 60 * 60 * 1000; // Nombre de millisecondes dans un jour
-//   const diffTemps = Math.abs(date1.getTime() - date2.getTime());;
-//   return Math.round(diffTemps / unJour);
-// }
-
-
-// Fonction principale pour vérifier la différence et ajouter ou supprimer un attribut
-// verifierDifference(objets: any) {
-//   let dateDuJour = new Date(); // Date actuelle
-
-//   console.log("table",objets);
-  
-
-//    objets[0].forEach((objet: any) => {
-//     let dateFinVisite = objet.visite.date_fin_visite;
-//     let dateFinAssurance = objet.assurance.date_fin;
-
-//     console.log(dateFinVisite);
-//     console.log(dateFinAssurance);
-    
-    
-
-//   //   // Calcul de la différence en jours
-//   //   // const differenceVisite: number = Math.ceil((dateFinVisite.getTime() - dateDuJour.getTime()) / (1000 * 3600 * 24));
-//   //   // const differenceAssurance: number = Math.ceil((dateFinAssurance.getTime() - dateDuJour.getTime()) / (1000 * 3600 * 24));
-
-//   //   // // Vérification de la différence et ajout ou suppression de l'attribut
-//   //   // if (differenceVisite < 7 || differenceAssurance < 7) {
-//   //   //   objet = Object.assign({}, objet, {
-//   //   //     "differenceInf7Jours": true
-//   //   //   });
-//   //   // } else {
-//   //   //   delete objet.differenceInf7Jours;
-//   //   // }
-//    });
-
-//   return objets; // Retourne les objets modifiés
-// }
 
 
 
@@ -225,8 +185,20 @@ getDifferenceInDays(dateString: string): boolean {
  }
 
  redirectToAdd(){
-  this.router.navigate(["/admin/parkings/"+this.idbis+"/voitures/add"]);
+  const navigation="/admin/parkings/"+this.idbis+"/voitures/add"
+  //  const urlToDisplay = '/admin/parkings/add';
+  //   this.location.replaceState(urlToDisplay);
+  // this.router.navigate(["/admin/parkings/"+this.idbis+"/voitures/add"]);
+  // this.router.navigateByUrl(navigation,{skipLocationChange:true})
+  this.router.navigateByUrl(navigation)
  }
+
+ pushToHistory(){
+  this.location.go(this.location.path())
+}
+
+
+
 
  redirectToEdit(idv:number){
   this.router.navigate(["/admin/parkings/"+this.idbis+"/voitures/edit/"+idv]);
@@ -235,6 +207,7 @@ getDifferenceInDays(dateString: string): boolean {
  redirectToReservation(idv:number){
   this.router.navigate(["/admin/parkings/"+this.idbis+"/voitures/add/"+idv]);
  }
+
 
   clickchanged(type:string){
     switch (type) {
