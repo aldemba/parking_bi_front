@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 
 
 import Swal from 'sweetalert2';
+import { Voiture } from 'src/app/shared/models/voiture';
 
 
 @Component({
@@ -49,8 +50,17 @@ export class DetailsParkingComponent {
           this.filtres = this.voitures.filter((voiture: any) => voiture.isVisible ==1);
           this.totalLength=this.voitures.length;
           // this.objets.push(data.voitures)
-           console.log("test",this.voitures);
+          //  console.log("test",this.voitures);
           // console.log("id",this.idbis);
+
+          this.voitures.forEach((voiture: any) => {
+            if (this.getDifferenceInDaysbis(voiture.assurance.date_fin) || this.getDifferenceInDaysbis(voiture.visite.date_fin_visite)) {
+              // Update state to unavailable
+              voiture.etat = 'INDISPONIBLE';
+              // Call service method to update state in database
+              this.voitureserv.changeState(voiture).subscribe();
+            }
+          });
           
           // this.voitures.forEach((voiture: any) => {
           //   voiture.etatSwitch = voiture.etat === 'DISPONIBLE';
@@ -103,6 +113,15 @@ export class DetailsParkingComponent {
     // this.saveStorage(this.idbis)
  
   }
+
+  getDifferenceInDaysbis(dateString: string): boolean {
+    const today = new Date();
+    const date = new Date(dateString);
+    const differenceInMs = date.getTime() - today.getTime();
+    const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
+    return differenceInDays <= 0;
+  }
+
   
 searchItemsPerPage() {
     return this.searchTerm ? 50 : 8;
