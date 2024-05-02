@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { DetailsService } from 'src/app/shared/services/details.service';
 import { VoituresService } from 'src/app/shared/services/voitures.service';
 import { ToastrService } from 'ngx-toastr';
@@ -29,6 +29,7 @@ export class DetailsParkingComponent {
   idbis:number=0;
   etatSwitch: boolean = false;
   test:boolean=true
+  expectedUrl=''
   
 
   // objets:Voiture[] = [];
@@ -64,6 +65,42 @@ export class DetailsParkingComponent {
       this.all=data.all;
     })
 
+    //  this.expectedUrl="/admin/parkings/"+this.idbis+"/voitures"
+
+    //  window.onpopstate = () => {
+    //   // const newId=this.activatedroute.snapshot.params["id"];
+    //   const newId = +localStorage.getItem("idvt")!;
+    //   if(newId && newId !== id){
+    //     this.router.navigateByUrl('/admin/parkings/'+newId+'/voitures')
+    //   }
+    // }
+
+    // this.router.events.subscribe((event)=> {
+    //   if (event instanceof NavigationEnd) {
+    //     // const newId=this.activatedroute.snapshot.params["id"];
+    //     const newId = +localStorage.getItem("idvt")!;
+    //     if(newId && newId !== id){
+    //       this.router.navigateByUrl('/admin/parkings/'+id+'/voitures')
+    //     }
+    //   }
+    // })
+
+//     this.router.events.subscribe((event) => {
+//   if (event instanceof NavigationEnd) {
+//     const newId = +localStorage.getItem("idvt")!;
+//     const currentId = +this.activatedroute.snapshot.paramMap.get("id")!;
+
+//     if (newId && newId !== currentId) {
+//       // Utilisation de newId pour construire la nouvelle URL
+//       this.router.navigateByUrl('/admin/parkings/' + newId + '/voitures');
+//     }
+//   }
+// });
+
+
+    // console.log("a",this.router.url);
+    
+    // this.saveStorage(this.idbis)
  
   }
   
@@ -79,6 +116,14 @@ showSuccess() {
   this.toastr.success('La voiture a été supprimée avec succès!', 'Suppression!');
 }
 
+// saveStorage(id:number){
+//   return localStorage.setItem("idvt",id.toString());
+// }
+
+
+// ngOnDestroy(){
+//   localStorage.removeItem("idvt");
+// }
 
 
 // // Fonction pour calculer la différence entre deux dates en jours
