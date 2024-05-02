@@ -13,7 +13,7 @@ const routes: Routes = [
   {path:'parkings/:id/voitures/add/:idv',component:ReservationsComponent},
   {path:'parkings/:id/voitures/add',component:AddCarComponent},
   {path:'parkings/:id/voitures',component:DetailsParkingComponent},
-  {path:'parkings/:id/reservations',component:MesReservationsComponent},
+  {path:'parkings/reservations',component:MesReservationsComponent},
   {path:'parkings',component:MesParkingsComponent},
   // {path:'parkings/voitures',component:DetailsParkingComponent}
 ];

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Reservation } from 'src/app/shared/models/reservation';
 import { LocationService } from 'src/app/shared/services/location.service';
+import { ParkingsService } from 'src/app/shared/services/parkings.service';
+import { TokenService } from 'src/app/shared/services/token.service';
 
 @Component({
   selector: 'app-mes-reservations',
@@ -11,29 +13,42 @@ import { LocationService } from 'src/app/shared/services/location.service';
 export class MesReservationsComponent {
 
  
-  reservations:Reservation|undefined;
+reservations:any;
 
 
-constructor(private activatedroute:ActivatedRoute,private locationsserv:LocationService){
+constructor(private activatedroute:ActivatedRoute,private locationsserv:LocationService,private tokserv:TokenService,private parkserv:ParkingsService){
 
 }
 
 
 ngOnInit() {
-  let id=0;
-  this.activatedroute.paramMap.subscribe(
-    param=> {
-      id=+param.get("id")!;
+  // let id=0;
+  // this.activatedroute.paramMap.subscribe(
+  //   param=> {
+  //     id=+param.get("id")!;
 
-      this.locationsserv.getReservationsByParking(id).subscribe((data)=> {
-        this.reservations=data;
-        console.log(data);
+  //     this.locationsserv.getReservationsByParking(id).subscribe((data)=> {
+  //       this.reservations=data;
+  //       console.log(data);
         
 
-      })
-    }
-  )
+  //     })
+  //   }
+  // )
+  
+   
+  let idClientConnecté: any;
+  const idFromStorage = this.tokserv.getIdFromStorage();
+  if (idFromStorage !== null && idFromStorage !== undefined) {
+      idClientConnecté = +idFromStorage;
+  }
+  
+  this.parkserv.getParkingsById(+idClientConnecté).subscribe(data=>{
+    this.reservations=data.allReservations
+    console.log(this.reservations);
+  })
 
+  
 }
 
 
