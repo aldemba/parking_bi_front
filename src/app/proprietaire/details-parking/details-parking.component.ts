@@ -43,12 +43,18 @@ export class DetailsParkingComponent {
       param=> {
         id=+param.get("id")!;
         this.idbis=id;
+        // console.log(id);
+        
     
         this.detailserv.getVoituresByParking(id).subscribe((data)=> {
-          this.voitures=data.voitures;
+          // console.log(data["parking"].voitures);
+          
+          this.voitures=data["parking"].voitures;
           this.voitures = this.voitures.filter((voiture: any) => voiture.isVisible ==1);
           this.filtres = this.voitures.filter((voiture: any) => voiture.isVisible ==1);
           this.totalLength=this.voitures.length;
+          // console.log("donnees",data);
+          
           // this.objets.push(data.voitures)
           //  console.log("test",this.voitures);
           // console.log("id",this.idbis);
@@ -65,6 +71,17 @@ export class DetailsParkingComponent {
           // this.voitures.forEach((voiture: any) => {
           //   voiture.etatSwitch = voiture.etat === 'DISPONIBLE';
           // });
+        }, (error:any)=>{
+          console.log(error);
+          
+          // if (error.status=="403") {
+          //   this.toastr.error("Vous n'êtes pas autorisé à accéder aux voitures de ce parking.");
+          //   alert("non")
+          // }
+          // else{
+          //   this.toastr.error("Une erreur s'est produite lors de la récupération des voitures.");
+
+          // } 
         })
       }
     )
