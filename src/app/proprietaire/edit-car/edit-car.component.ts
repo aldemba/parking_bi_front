@@ -162,7 +162,7 @@ export class EditCarComponent {
     }
 
 
-     console.log(formValues);
+    //  console.log(formValues);
   
     this.voitureServ.editCar(formValues,+this.idv).subscribe({
       next: (data: any) => {
