@@ -9,3 +9,10 @@ li{
 .curs{
     cursor: pointer;
 }
+
+.selected {
+    /* Vos styles pour l'élément sélectionné */
+    background-color:#ffc107; /* Par exemple, une couleur de fond différente */
+    color:#ffc107 ; /* Par exemple, une couleur de texte différente */
+  }
+  

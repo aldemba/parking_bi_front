@@ -15,6 +15,8 @@ export class NavbarComponent {
   nom:string|null=null;
 
   @Input() user:any;
+  selectedItem: string | null = null; // Pour suivre l'élément sélectionné
+
 
 
   constructor(private tokserv:TokenService, private router: Router){}
@@ -32,6 +34,7 @@ export class NavbarComponent {
   }
 
   filterCar(value:string){
+    this.selectedItem = value;
     this.clickchanged.emit(value)
     }
     
