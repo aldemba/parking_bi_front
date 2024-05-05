@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } fro
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
+import { TokenService } from 'src/app/shared/services/token.service';
 import { VoituresService } from 'src/app/shared/services/voitures.service';
 
 @Component({
@@ -22,11 +23,20 @@ export class EditCarComponent {
 
   idv:number=0
 
-  constructor(private formBuilder :FormBuilder,private voitureServ : VoituresService, private route:ActivatedRoute,private router:Router, private toastr: ToastrService){}
+  idUser:number=0
+
+  constructor(private formBuilder :FormBuilder,private voitureServ : VoituresService, private route:ActivatedRoute,private router:Router, private toastr: ToastrService,private tokserv:TokenService){}
 
 
   ngOnInit(){
     // const carId=this.route.snapshot.paramMap.get('idv')
+    let idClientConnecté: any;
+    const idFromStorage = this.tokserv.getIdFromStorage();
+    if (idFromStorage !== null && idFromStorage !== undefined) {
+        idClientConnecté = +idFromStorage;
+        this.idUser= +idClientConnecté
+    }
+    
     let carId=0;
     this.route.paramMap.subscribe(param=>{
       carId=+param.get("idv")!;
@@ -149,6 +159,8 @@ export class EditCarComponent {
         "id": this.parkingId
       }
     });
+
+ 
 
     if (!this.file) {
       delete formValues.images;

@@ -15,13 +15,13 @@ export class DetailsService {
   {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type':  'application/problem+json',
         'Authorization': `Bearer ${this.tokserv.getTokenFromStorage()}`
       })
     };
     let DETAILS_URL = "http://127.0.0.1:8000/api/detailss/"+id
     
-    return this.http.get<any>(DETAILS_URL).pipe( catchError(this.handleError))
+    return this.http.get<any>(DETAILS_URL)
     // console.log(this.http.get<any>(PARKINGS_PROPRIO, httpOptions));
     
 

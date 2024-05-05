@@ -117,6 +117,15 @@
     -ms-transform: translateX(26px);
     transform: translateX(26px);
   }
+
+  .error-message {
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20%;
+  }
+  
   
   /* Rounded sliders */
   .slider.round {

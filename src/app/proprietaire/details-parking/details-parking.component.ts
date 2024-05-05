@@ -9,6 +9,7 @@ import { Location } from '@angular/common';
 
 import Swal from 'sweetalert2';
 import { Voiture } from 'src/app/shared/models/voiture';
+import { ErrorService } from 'src/app/shared/services/error.service';
 
 
 @Component({
@@ -31,11 +32,12 @@ export class DetailsParkingComponent {
   etatSwitch: boolean = false;
   test:boolean=true
   expectedUrl=''
+  errorMessage: string | null = null;
   
 
-  // objets:Voiture[] = [];
 
-  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService) { }
+
+  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService,private errorService: ErrorService) { }
 
   ngOnInit() {
     let id=0;
@@ -72,15 +74,16 @@ export class DetailsParkingComponent {
           //   voiture.etatSwitch = voiture.etat === 'DISPONIBLE';
           // });
         }, (error:any)=>{
-          console.log(error);
-           this.toastr.error("Vous n'êtes pas autorisé à accéder aux voitures de ce parking.","error");
+          // console.log(error);
+          //  this.toastr.error("Vous n'êtes pas autorisé à accéder aux voitures de ce parking.","error");
+          // alert("Attention, quelque chose s'est mal passée !")
+          // console.log(error);
           
-          // if (error.status=="403") {
-          //   this.toastr.error("Vous n'êtes pas autorisé à accéder aux voitures de ce parking.");
-          //   alert("non")
+          // if (error.status===403) {
+          //   console.log("Vous n'êtes pas autorisé à accéder aux voitures de ce parking.");
           // }
           // else{
-          //   this.toastr.error("Une erreur s'est produite lors de la récupération des voitures.");
+          //   // this.toastr.error("Une erreur s'est produite lors de la récupération des voitures.");
 
           // } 
         })
@@ -93,42 +96,9 @@ export class DetailsParkingComponent {
       this.all=data.all;
     })
 
-    //  this.expectedUrl="/admin/parkings/"+this.idbis+"/voitures"
-
-    //  window.onpopstate = () => {
-    //   // const newId=this.activatedroute.snapshot.params["id"];
-    //   const newId = +localStorage.getItem("idvt")!;
-    //   if(newId && newId !== id){
-    //     this.router.navigateByUrl('/admin/parkings/'+newId+'/voitures')
-    //   }
-    // }
-
-    // this.router.events.subscribe((event)=> {
-    //   if (event instanceof NavigationEnd) {
-    //     // const newId=this.activatedroute.snapshot.params["id"];
-    //     const newId = +localStorage.getItem("idvt")!;
-    //     if(newId && newId !== id){
-    //       this.router.navigateByUrl('/admin/parkings/'+id+'/voitures')
-    //     }
-    //   }
-    // })
-
-//     this.router.events.subscribe((event) => {
-//   if (event instanceof NavigationEnd) {
-//     const newId = +localStorage.getItem("idvt")!;
-//     const currentId = +this.activatedroute.snapshot.paramMap.get("id")!;
-
-//     if (newId && newId !== currentId) {
-//       // Utilisation de newId pour construire la nouvelle URL
-//       this.router.navigateByUrl('/admin/parkings/' + newId + '/voitures');
-//     }
-//   }
-// });
-
-
-    // console.log("a",this.router.url);
-    
-    // this.saveStorage(this.idbis)
+    this.errorService.errorMessage$.subscribe(message=>{
+      this.errorMessage=message;
+    })
  
   }
 
@@ -173,68 +143,6 @@ getDifferenceInDays(dateString: string): boolean {
 }
 
 
-
-  // updateEtat(voiture: any) {
-  //   // Afficher la boîte modale SweetAlert pour demander la confirmation
-  //   Swal.fire({
-  //     title: 'Êtes-vous sûr?',
-  //     text: "Voulez-vous vraiment changer l'état de cette voiture?",
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#3085d6',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Oui, changer l\'état!',
-  //     cancelButtonText: 'Annuler'
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       // Si l'utilisateur confirme, changer l'état de la voiture
-  //       this.voitureserv.changeState(voiture).subscribe({
-  //         // Vous pouvez gérer les réponses de votre requête ici
-  //         // next: (data:any) => { alert(data)},
-  //         // error: (err:any) => { alert(err)}
-  //       });
-  //     }
-  //   });
-  // }
-
-  // updateEtat(voiture: any) {
-  //   // Afficher la boîte modale SweetAlert pour demander la confirmation
-  //   Swal.fire({
-  //     title: 'Êtes-vous sûr?',
-  //     text: "Voulez-vous vraiment changer l'état de cette voiture?",
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#3085d6',
-  //     cancelButtonColor: '#d33',
-  //     confirmButtonText: 'Oui, changer l\'état!',
-  //     cancelButtonText: 'Annuler'
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       // Inverser l'état de la voiture
-  //       const nouvelEtat = voiture.etat === 'DISPONIBLE' ? 'INDISPONIBLE' : 'DISPONIBLE';
-  //       voiture.etat = nouvelEtat; // Met à jour l'état
-  //       this.voitureserv.changeState(voiture).subscribe({
-  //         // Vous pouvez gérer les réponses de votre requête ici
-  //         // next: (data:any) => { alert(data)},
-  //         // error: (err:any) => { alert(err)}
-  //       });
-  //     }
-  //   });
-  // }
-  
-  
-  
-  
-
-  // updateEtat(voiture: any) {
-
-  //   this.voitureserv.changeState(voiture).subscribe({
-  //     // next: (data:any) => { alert(data)},
-  //     // error: (err:any) => { alert(err)}
-  //   });
-  // }
-
-  // }
   
 
  changeVisibility(voiture: any) {
@@ -316,3 +224,105 @@ getDifferenceInDays(dateString: string): boolean {
 
 
 
+
+
+  // updateEtat(voiture: any) {
+  //   // Afficher la boîte modale SweetAlert pour demander la confirmation
+  //   Swal.fire({
+  //     title: 'Êtes-vous sûr?',
+  //     text: "Voulez-vous vraiment changer l'état de cette voiture?",
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#3085d6',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Oui, changer l\'état!',
+  //     cancelButtonText: 'Annuler'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       // Si l'utilisateur confirme, changer l'état de la voiture
+  //       this.voitureserv.changeState(voiture).subscribe({
+  //         // Vous pouvez gérer les réponses de votre requête ici
+  //         // next: (data:any) => { alert(data)},
+  //         // error: (err:any) => { alert(err)}
+  //       });
+  //     }
+  //   });
+  // }
+
+  // updateEtat(voiture: any) {
+  //   // Afficher la boîte modale SweetAlert pour demander la confirmation
+  //   Swal.fire({
+  //     title: 'Êtes-vous sûr?',
+  //     text: "Voulez-vous vraiment changer l'état de cette voiture?",
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#3085d6',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Oui, changer l\'état!',
+  //     cancelButtonText: 'Annuler'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       // Inverser l'état de la voiture
+  //       const nouvelEtat = voiture.etat === 'DISPONIBLE' ? 'INDISPONIBLE' : 'DISPONIBLE';
+  //       voiture.etat = nouvelEtat; // Met à jour l'état
+  //       this.voitureserv.changeState(voiture).subscribe({
+  //         // Vous pouvez gérer les réponses de votre requête ici
+  //         // next: (data:any) => { alert(data)},
+  //         // error: (err:any) => { alert(err)}
+  //       });
+  //     }
+  //   });
+  // }
+  
+  
+  
+  
+
+  // updateEtat(voiture: any) {
+
+  //   this.voitureserv.changeState(voiture).subscribe({
+  //     // next: (data:any) => { alert(data)},
+  //     // error: (err:any) => { alert(err)}
+  //   });
+  // }
+
+  // }
+
+
+
+    //  this.expectedUrl="/admin/parkings/"+this.idbis+"/voitures"
+
+    //  window.onpopstate = () => {
+    //   // const newId=this.activatedroute.snapshot.params["id"];
+    //   const newId = +localStorage.getItem("idvt")!;
+    //   if(newId && newId !== id){
+    //     this.router.navigateByUrl('/admin/parkings/'+newId+'/voitures')
+    //   }
+    // }
+
+    // this.router.events.subscribe((event)=> {
+    //   if (event instanceof NavigationEnd) {
+    //     // const newId=this.activatedroute.snapshot.params["id"];
+    //     const newId = +localStorage.getItem("idvt")!;
+    //     if(newId && newId !== id){
+    //       this.router.navigateByUrl('/admin/parkings/'+id+'/voitures')
+    //     }
+    //   }
+    // })
+
+//     this.router.events.subscribe((event) => {
+//   if (event instanceof NavigationEnd) {
+//     const newId = +localStorage.getItem("idvt")!;
+//     const currentId = +this.activatedroute.snapshot.paramMap.get("id")!;
+
+//     if (newId && newId !== currentId) {
+//       // Utilisation de newId pour construire la nouvelle URL
+//       this.router.navigateByUrl('/admin/parkings/' + newId + '/voitures');
+//     }
+//   }
+// });
+
+
+    // console.log("a",this.router.url);
+    
+    // this.saveStorage(this.idbis)
