@@ -7,7 +7,7 @@
 
   <app-navbar (clickchanged)="clickchanged($event)"></app-navbar>
   
-  <ng-container *ngIf="voitures.length > 0" >
+  <ng-container *ngIf="taille()" >
     
     <div class="container">
       <div class="row">
@@ -51,7 +51,7 @@
     </div>
   </ng-container>
   
-  <ng-container *ngIf="voitures.length == 0" > 
+  <ng-container *ngIf="!taille()" > 
     <div class="bout mb-3">
       <a class="btn btn-warning text-white" (click)="redirectToAdd()"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
     </div>

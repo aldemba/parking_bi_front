@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -15,6 +15,10 @@ export class EditReservationComponent {
   formulaire!:FormGroup
   idr:number=0
   reservation:any
+
+  
+  @ViewChild('input') elementRef!: ElementRef;
+
 
   constructor(private formBuilder :FormBuilder,private toastr:ToastrService,private locationserv:LocationService,private route:ActivatedRoute,private router:Router){
 
@@ -45,17 +49,20 @@ export class EditReservationComponent {
       ).subscribe()
     }
     this.formulaire=this.formBuilder.group({
-      date_debut_reservation: new FormControl('', Validators.compose([Validators.required, this.LessThanToday])),    
+      // date_debut_reservation: new FormControl('', Validators.compose([Validators.required, this.LessThanToday])),    
       date_fin_reservation: new FormControl('', Validators.compose([Validators.required, this.LessThanToday]))
     
     },{validators:this.LessThanTo.bind(this)})
+
+    // this.formulaire.get('date_debut_reservation')?.disable()
     
+    // this.elementRef.nativeElement.setAttribute('readonly', true);
   }
 
   onEdit() {
     let formValues = this.formulaire.value;
   
-    console.log('m10',formValues);
+    // console.log('m10',formValues);
 
     this.locationserv.editLocation(formValues,+this.idr).subscribe({
       next: (data: any) => {
@@ -74,7 +81,7 @@ export class EditReservationComponent {
   }
 
   showSuccess() {
-    this.toastr.warning('La voiture a été modifiée avec success!', 'Edition!');
+    this.toastr.success('La date a été rallongée avec success!', 'Edition!');
   }
 
 

@@ -49,7 +49,7 @@ export class DetailsParkingComponent {
         
     
         this.detailserv.getVoituresByParking(id).subscribe((data)=> {
-          // console.log(data["parking"].voitures);
+          console.log(data["parking"].voitures);
           
           this.voitures=data["parking"].voitures;
           this.voitures = this.voitures.filter((voiture: any) => voiture.isVisible ==1);
@@ -100,6 +100,13 @@ export class DetailsParkingComponent {
       this.errorMessage=message;
     })
  
+  }
+
+  taille(){
+    if (this.voitures && this.voitures.length >0) {
+      return true
+    }
+    return false
   }
 
   getDifferenceInDaysbis(dateString: string): boolean {
