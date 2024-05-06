@@ -26,7 +26,6 @@ export class EditReservationComponent {
     this.route.paramMap.subscribe(param=>{
       locationId=+param.get("idr")!;
       this.idr=locationId
-      // console.log(locationId);
       
     })
 
@@ -56,8 +55,8 @@ export class EditReservationComponent {
   onEdit() {
     let formValues = this.formulaire.value;
   
-    console.log(formValues);
-  
+    console.log('m10',formValues);
+
     this.locationserv.editLocation(formValues,+this.idr).subscribe({
       next: (data: any) => {
         console.log(data);
@@ -105,5 +104,6 @@ LessThanTo(controls: FormGroup): ValidationErrors | null {
 get fm(){
   return this.formulaire.controls;
 }
-  
+
+
 }
