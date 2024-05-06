@@ -36,6 +36,13 @@ export class LocationService {
     return this.http.get<any>(RESERV_URL).pipe( catchError(this.handleError))
   }
 
+  
+  getReservationById(reservationId:number):Observable<any>{
+    return this.http.get<any>(`http://localhost:8000/api/reservations/${reservationId}`).pipe(  
+    catchError(this.handleError)
+    )
+  }
+
 
 
   private handleError(error: HttpErrorResponse) {

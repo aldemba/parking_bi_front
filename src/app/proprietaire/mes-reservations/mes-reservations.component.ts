@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Reservation } from 'src/app/shared/models/reservation';
 import { LocationService } from 'src/app/shared/services/location.service';
 import { ParkingsService } from 'src/app/shared/services/parkings.service';
@@ -16,7 +16,7 @@ export class MesReservationsComponent {
 reservations:any;
 
 
-constructor(private activatedroute:ActivatedRoute,private locationsserv:LocationService,private tokserv:TokenService,private parkserv:ParkingsService){
+constructor(private activatedroute:ActivatedRoute,private locationsserv:LocationService,private tokserv:TokenService,private parkserv:ParkingsService, private router:Router){
 
 }
 
@@ -49,6 +49,11 @@ ngOnInit() {
   })
 
   
+}
+
+
+redirectToEditR(idr: number) {
+  this.router.navigate(["/admin/parkings/reservations/edit/" + idr]);
 }
 
 

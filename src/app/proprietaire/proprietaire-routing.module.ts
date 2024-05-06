@@ -6,11 +6,13 @@ import { AddCarComponent } from './add-car/add-car.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { MesReservationsComponent } from './mes-reservations/mes-reservations.component';
+import { EditReservationComponent } from './edit-reservation/edit-reservation.component';
 
 
 const routes: Routes = [
   {path:'parkings/:id/voitures/edit/:idv',component:EditCarComponent},
   {path:'parkings/:id/voitures/add/:idv',component:ReservationsComponent},
+  {path:'parkings/reservations/edit/:idr',component:EditReservationComponent},
   {path:'parkings/:id/voitures/add',component:AddCarComponent},
   {path:'parkings/:id/voitures',component:DetailsParkingComponent},
   {path:'parkings/reservations',component:MesReservationsComponent},

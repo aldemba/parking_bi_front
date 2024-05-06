@@ -46,4 +46,8 @@ export class NavbarComponent {
       this.nom=this.tokserv.getNomFromStorage()
     }
 
+    goToResreservation(){
+      this.router.navigate(["/admin/parkings/reservations"]);
+    }
+
 }
