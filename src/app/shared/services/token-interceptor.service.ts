@@ -23,7 +23,7 @@ export class TokenInterceptorService implements HttpInterceptor {
              if(error.status == 401){
                this.tokserv.clearTokenAndId();
              }else if(error.status == 403){
-                console.log(error.error.detail)  ;
+                // console.log(error.error.detail)  ;
                 this.errorService.setErrorMessage(error.error.detail);
                 
              }

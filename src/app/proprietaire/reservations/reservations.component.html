@@ -47,7 +47,7 @@
 
       <div></div>
       <div class="mt-4 justify-content-center d-flex align-items-center">
-        <button (click)="showModal()" class="btn btn-lg btn-outline-warning">
+        <button (click)="showModal()" class="btn btn-lg btn-outline-warning" *ngIf="boutonVisible">
           Faire une location
         </button>
       </div>

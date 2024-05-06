@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 import Swal from 'sweetalert2';
 import { Voiture } from 'src/app/shared/models/voiture';
 import { ErrorService } from 'src/app/shared/services/error.service';
+import { DisponibiliteService } from 'src/app/shared/services/disponibilite.service';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class DetailsParkingComponent {
 
 
 
-  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService,private errorService: ErrorService) { }
+  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService,private errorService: ErrorService, private disponibiliteService: DisponibiliteService) { }
 
   ngOnInit() {
     let id=0;
@@ -129,6 +130,11 @@ afficherDetailsVoiture(voiture: any) {
 showSuccess() {
   this.toastr.success('La voiture a été supprimée avec succès!', 'Suppression!');
 }
+
+mettreAJourDisponibiliteVoiture(disponibilite: string) {
+  this.disponibiliteService.mettreAJourDisponibilite(disponibilite);
+}
+
 
 // saveStorage(id:number){
 //   return localStorage.setItem("idvt",id.toString());

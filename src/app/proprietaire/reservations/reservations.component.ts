@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Voiture } from 'src/app/shared/models/voiture';
+import { DisponibiliteService } from 'src/app/shared/services/disponibilite.service';
 import { LocationService } from 'src/app/shared/services/location.service';
 import { VoituresService } from 'src/app/shared/services/voitures.service';
 
@@ -20,10 +21,10 @@ export class ReservationsComponent {
   formulaire!:FormGroup
   file!:File
   imageSrc=""
+  boutonVisible = true;
 
 
-
-  constructor(private route:ActivatedRoute,private voitureServ : VoituresService,private formBuilder:FormBuilder, private locationserv:LocationService,private router:Router,private toast:ToastrService) {
+  constructor(private route:ActivatedRoute,private voitureServ : VoituresService,private formBuilder:FormBuilder, private locationserv:LocationService,private router:Router,private toast:ToastrService, private disponibiliteService: DisponibiliteService) {
     this.formulaire=this.formBuilder.group({
 
       nom_complet: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-zÀ-ÿ ]+$/)])),
@@ -59,6 +60,9 @@ export class ReservationsComponent {
       
     })
 
+    this.disponibiliteService.disponibilite$.subscribe(disponibilite=>{
+      this.boutonVisible=disponibilite==="DISPONIBLE";
+    })
   }
 
   LessThanToday(control: FormControl): ValidationErrors | null {
