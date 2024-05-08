@@ -15,6 +15,8 @@ export class MesReservationsComponent {
  
 reservations:any;
 
+idp:number|0=0
+
 
 constructor(private activatedroute:ActivatedRoute,private locationsserv:LocationService,private tokserv:TokenService,private parkserv:ParkingsService, private router:Router){
 
@@ -35,6 +37,10 @@ ngOnInit() {
   //     })
   //   }
   // )
+this.idp= +localStorage.getItem("idP")!;
+
+
+  
   
    
   let idClientConnecté: any;
@@ -44,8 +50,8 @@ ngOnInit() {
   }
   
   this.parkserv.getParkingsById(+idClientConnecté).subscribe(data=>{
-    this.reservations=data.allReservations
-    // this.reservations=data.allReservations.filter((r:any) => r.voiture.parking==2)
+    // this.reservations=data.allReservations
+   this.reservations=data.allReservations.filter((r:any) => r.voiture.parking==this.idp)
 
     console.log(this.reservations);
   })
@@ -53,9 +59,22 @@ ngOnInit() {
   
 }
 
+// ngOnDestroy() {
+//   localStorage.removeItem("idP")
+// }
+
 
 redirectToEditR(idr: number) {
   this.router.navigate(["/admin/parkings/reservations/edit/" + idr]);
+}
+
+getIdParking():string|null{
+ return localStorage.getItem("idP");
+}
+
+goBack() {
+  this.router.navigate(["/admin/parkings/"+this.idp+"/voitures"]);
+
 }
 
 

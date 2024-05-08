@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { Voiture } from 'src/app/shared/models/voiture';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { DisponibiliteService } from 'src/app/shared/services/disponibilite.service';
+import { GestionReservationService } from 'src/app/shared/services/gestion-reservation.service';
 
 
 @Component({
@@ -38,7 +39,9 @@ export class DetailsParkingComponent {
 
 
 
-  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService,private errorService: ErrorService, private disponibiliteService: DisponibiliteService) { }
+  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService,private errorService: ErrorService, private disponibiliteService: DisponibiliteService,
+    private gestion:GestionReservationService
+  ) { }
 
   ngOnInit() {
     let id=0;
@@ -46,6 +49,7 @@ export class DetailsParkingComponent {
       param=> {
         id=+param.get("id")!;
         this.idbis=id;
+        // this.gestion.setId(this.idbis);
         // console.log(id);
         
     
@@ -136,14 +140,6 @@ mettreAJourDisponibiliteVoiture(disponibilite: string) {
 }
 
 
-// saveStorage(id:number){
-//   return localStorage.setItem("idvt",id.toString());
-// }
-
-
-// ngOnDestroy(){
-//   localStorage.removeItem("idvt");
-// }
 
 
 // // Fonction pour calculer la différence entre deux dates en jours
@@ -303,39 +299,4 @@ getDifferenceInDays(dateString: string): boolean {
 
 
 
-    //  this.expectedUrl="/admin/parkings/"+this.idbis+"/voitures"
-
-    //  window.onpopstate = () => {
-    //   // const newId=this.activatedroute.snapshot.params["id"];
-    //   const newId = +localStorage.getItem("idvt")!;
-    //   if(newId && newId !== id){
-    //     this.router.navigateByUrl('/admin/parkings/'+newId+'/voitures')
-    //   }
-    // }
-
-    // this.router.events.subscribe((event)=> {
-    //   if (event instanceof NavigationEnd) {
-    //     // const newId=this.activatedroute.snapshot.params["id"];
-    //     const newId = +localStorage.getItem("idvt")!;
-    //     if(newId && newId !== id){
-    //       this.router.navigateByUrl('/admin/parkings/'+id+'/voitures')
-    //     }
-    //   }
-    // })
-
-//     this.router.events.subscribe((event) => {
-//   if (event instanceof NavigationEnd) {
-//     const newId = +localStorage.getItem("idvt")!;
-//     const currentId = +this.activatedroute.snapshot.paramMap.get("id")!;
-
-//     if (newId && newId !== currentId) {
-//       // Utilisation de newId pour construire la nouvelle URL
-//       this.router.navigateByUrl('/admin/parkings/' + newId + '/voitures');
-//     }
-//   }
-// });
-
-
-    // console.log("a",this.router.url);
-    
-    // this.saveStorage(this.idbis)
+   

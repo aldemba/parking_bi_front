@@ -23,7 +23,14 @@ export class TokenInterceptorService implements HttpInterceptor {
          catchError( error => {            
              if(error.status == 401){
                this.tokserv.clearTokenAndId();
-               Swal.fire("Session expirée !")
+               Swal.fire({
+                title: "Session expirée !",
+                icon: "warning",
+                showConfirmButton: false,
+                width: '90px', // spécifiez la largeur de la fenêtre modale
+                padding: '2rem' // spécifiez l'espacement intérieur de la fenêtre modale
+              });
+              
              }else if(error.status == 403){
                 // console.log(error.error.detail)  ;
                 this.errorService.setErrorMessage(error.error.detail);

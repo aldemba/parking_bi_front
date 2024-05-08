@@ -1,9 +1,10 @@
-.back{
+/* .back{
   background-image: url(../../../assets/img/design.png); 
   background-size: cover ;
-  height: 100vh;
+  background-repeat: repeat;
+  height: auto;
 
-}
+} */
 
 .pad{
     padding-top: 3%;
