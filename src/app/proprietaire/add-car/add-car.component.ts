@@ -106,6 +106,7 @@ export class AddCarComponent {
     return null;
 }
 
+goBack() {}
 
   onSubmit() {
     if (this.file) {

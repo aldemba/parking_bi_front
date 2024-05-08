@@ -45,6 +45,8 @@ ngOnInit() {
   
   this.parkserv.getParkingsById(+idClientConnecté).subscribe(data=>{
     this.reservations=data.allReservations
+    // this.reservations=data.allReservations.filter((r:any) => r.voiture.parking==2)
+
     console.log(this.reservations);
   })
 

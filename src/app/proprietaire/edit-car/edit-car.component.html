@@ -1,113 +1,117 @@
 <div class="content">
   <div class="container h-100">
-    <div class="row justify-content-center align-items-center">
-      <div class="col-12 col-lg-9 col-xl-7">
-        <h2>Editer une voiture</h2>
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-          <div class="card-body p-2 p-md-4">
-            <form [formGroup]="formulaire" (ngSubmit)="onEdit()">
-              <div class="form-group">
-              </div>
-              <div class="row">
-                  <div class="col-6">
-                      <div class="form-group">
-                          <label class="form-label" for="nom">Nom</label>
-                          <input  type="text" id="nom" class="form-control form-control-lg" formControlName="nom" />   
-                          <span class="error" *ngIf="fm['nom'].errors?.['required']" >Le nom est obligatoire ! </span>
-                          <span class="error" *ngIf="fm['nom'].errors?.['pattern']" >Le nom ne doit pas contenir de chiffres </span>
-                           <span class="error" *ngIf="fm['nom'].errors?.['minlength']" >Le nom doit faire au minimum 2 caractères </span>
-                           <span class="error" *ngIf="fm['nom'].errors?.['maxlength']" >Le nom doit faire au maximum 20 caractères </span>
-
-                        </div>
-                  </div>
-                  <div class="col-6">
-
-                      <div class="form-group">
-                       
-                            <label class="form-label" for="modele">Modele</label>
-                            <input type="text" id="modele" class="form-control form-control-lg" formControlName="modele" />
-                           <span class="error" *ngIf="fm['modele'].errors?.['required']" >Le modele est obligatoire ! </span>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="row mt-2">
-                  <div class="col-6">
-
-                      <div class="form-group">
-                         
-                            <label class="form-label" for="marque">Marque</label>
-                            <input type="text" id="marque" class="form-control form-control-lg" formControlName="marque"/>
-                            <span class="error" *ngIf="fm['marque'].errors?.['required']" >La marque est obligatoire ! </span>
-                            <span class="error" *ngIf="fm['marque'].errors?.['pattern']" >La marque ne doit pas contenir de chiffres </span>
-                            <span class="error" *ngIf="fm['marque'].errors?.['minlength']" >La marque doit faire au minimum 2 caractères </span>
-                            <span class="error" *ngIf="fm['marque'].errors?.['maxlength']" >La marque doit faire au maximum 20 caractères </span>
-                      </div>
-                  </div>
-                  <div class="col-6">
-                      <div class="form-group">
-                        
-                            <label class="form-label" for="categorie">Catégorie</label>
-                            <input type="text" id="categorie" class="form-control form-control-lg" formControlName="categorie" />
-                            <span class="error" *ngIf="fm['categorie'].errors?.['required']" >La categorie est obligatoire ! </span>
-                            <span class="error" *ngIf="fm['categorie'].errors?.['pattern']" >La categorie ne doit pas contenir de chiffres </span>
-                            <span class="error" *ngIf="fm['categorie'].errors?.['minlength']" >La categorie doit faire au minimum 4 caractères </span>
-                            <span class="error" *ngIf="fm['categorie'].errors?.['maxlength']" >La categorie doit faire au maximum 20 caractères </span>
-                      </div>
-
-                  </div>
-              </div>
-              <div class="form-group mt-2">
-            
-                    <label class="form-label" for="matricule">Matricule</label>
-                    <input type="text" id="matricule" class="form-control form-control-lg"  formControlName="matricule" />
-                    <span class="error" *ngIf="fm['matricule'].errors?.['minlength']" >Le matricule doit faire au minimum 8 caractères </span>
-                    <span class="error" *ngIf="fm['matricule'].errors?.['required']" >Le matricule est obligatoire ! </span>
-                    <span class="error" *ngIf="fm['matricule'].errors?.['maxlength']" >Le matricule doit faire au maximum 20 caractères </span>
-                    <div *ngIf="fm['matricule'].errors">
-                      <div *ngIf="fm['matricule'].hasError('unique')">Le matricule doit être unique !</div>
+      <div class="container mt-3">
+        <button class="btn btn-warning mr-3" (click)="goBack()">Retour</button>
+      </div>
+      <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <h2>Editer une voiture</h2>
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+            <div class="card-body p-2 p-md-4">
+              <form [formGroup]="formulaire" (ngSubmit)="onEdit()">
+                <div class="form-group">
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label class="form-label" for="nom">Nom</label>
+                            <input  type="text" id="nom" class="form-control form-control-lg" formControlName="nom" />   
+                            <span class="error" *ngIf="fm['nom'].errors?.['required']" >Le nom est obligatoire ! </span>
+                            <span class="error" *ngIf="fm['nom'].errors?.['pattern']" >Le nom ne doit pas contenir de chiffres </span>
+                             <span class="error" *ngIf="fm['nom'].errors?.['minlength']" >Le nom doit faire au minimum 2 caractères </span>
+                             <span class="error" *ngIf="fm['nom'].errors?.['maxlength']" >Le nom doit faire au maximum 20 caractères </span>
+  
+                          </div>
                     </div>
-
-              </div>
-              <div class="form-group mt-2" formGroupName="assurance">
-            
-                  <label class="form-label" for="matricule">Date Fin Assurance</label>
-                  <input type="date" id="matricule" class="form-control form-control-lg" formControlName="date_fin" />
-                  <span class="error" *ngIf="formulaire.get('assurance')?.get('date_fin')?.hasError('required')" >La date d'assurance est obligatoire ! </span>
-                  <span class="error" *ngIf="formulaire.get('assurance')?.get('date_fin')?.hasError('LessThanToday')" >La date doit être supérieure à la date du jour ! </span>
-
-
-             
-            </div>
-            <div class="form-group mt-2" formGroupName="visite">
-            
-              <label class="form-label" for="matricule">Date Fin Visite Technique</label>
-              <input type="date" id="matricule" class="form-control form-control-lg" formControlName="date_fin_visite" />
-              <span class="error" *ngIf="formulaire.get('visite')?.get('date_fin_visite')?.hasError('required')" >La date de visite est obligatoire ! </span>
-              <span class="error" *ngIf="formulaire.get('visite')?.get('date_fin_visite')?.hasError('LessThanToday')" >La date doit être supérieure à la date du jour ! </span>
-
-         
-           </div>
-        
-        <div class="form-group mt-2 d-flex">
-          <input formControlName="images" type="hidden">
-          <div class="design me-4 mt-4">
-            <label for="image" class="form-label">Changer image</label>
-          </div>
-
-          <input type="file" class="form-control form-control-lg form-control-file" accept="image/*" (change)="onFileChange($event);onChange($event)" id="image" />
+                    <div class="col-6">
+  
+                        <div class="form-group">
+                         
+                              <label class="form-label" for="modele">Modele</label>
+                              <input type="text" id="modele" class="form-control form-control-lg" formControlName="modele" />
+                             <span class="error" *ngIf="fm['modele'].errors?.['required']" >Le modele est obligatoire ! </span>
+                        </div>
+                    </div>
+                </div>
+  
+                <div class="row mt-2">
+                    <div class="col-6">
+  
+                        <div class="form-group">
+                           
+                              <label class="form-label" for="marque">Marque</label>
+                              <input type="text" id="marque" class="form-control form-control-lg" formControlName="marque"/>
+                              <span class="error" *ngIf="fm['marque'].errors?.['required']" >La marque est obligatoire ! </span>
+                              <span class="error" *ngIf="fm['marque'].errors?.['pattern']" >La marque ne doit pas contenir de chiffres </span>
+                              <span class="error" *ngIf="fm['marque'].errors?.['minlength']" >La marque doit faire au minimum 2 caractères </span>
+                              <span class="error" *ngIf="fm['marque'].errors?.['maxlength']" >La marque doit faire au maximum 20 caractères </span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                          
+                              <label class="form-label" for="categorie">Catégorie</label>
+                              <input type="text" id="categorie" class="form-control form-control-lg" formControlName="categorie" />
+                              <span class="error" *ngIf="fm['categorie'].errors?.['required']" >La categorie est obligatoire ! </span>
+                              <span class="error" *ngIf="fm['categorie'].errors?.['pattern']" >La categorie ne doit pas contenir de chiffres </span>
+                              <span class="error" *ngIf="fm['categorie'].errors?.['minlength']" >La categorie doit faire au minimum 4 caractères </span>
+                              <span class="error" *ngIf="fm['categorie'].errors?.['maxlength']" >La categorie doit faire au maximum 20 caractères </span>
+                        </div>
+  
+                    </div>
+                </div>
+                <div class="form-group mt-2">
               
-          </div>
-
-
-              <div class="mt-4 justify-content-center d-flex align-items-center ">
-                <button type="submit" class="btn btn-lg btn-outline-warning" [disabled]="formulaire.invalid">Editer</button>
+                      <label class="form-label" for="matricule">Matricule</label>
+                      <input type="text" id="matricule" class="form-control form-control-lg"  formControlName="matricule" />
+                      <span class="error" *ngIf="fm['matricule'].errors?.['minlength']" >Le matricule doit faire au minimum 8 caractères </span>
+                      <span class="error" *ngIf="fm['matricule'].errors?.['required']" >Le matricule est obligatoire ! </span>
+                      <span class="error" *ngIf="fm['matricule'].errors?.['maxlength']" >Le matricule doit faire au maximum 20 caractères </span>
+                      <div *ngIf="fm['matricule'].errors">
+                        <div *ngIf="fm['matricule'].hasError('unique')">Le matricule doit être unique !</div>
+                      </div>
+  
+                </div>
+                <div class="form-group mt-2" formGroupName="assurance">
+              
+                    <label class="form-label" for="matricule">Date Fin Assurance</label>
+                    <input type="date" id="matricule" class="form-control form-control-lg" formControlName="date_fin" />
+                    <span class="error" *ngIf="formulaire.get('assurance')?.get('date_fin')?.hasError('required')" >La date d'assurance est obligatoire ! </span>
+                    <span class="error" *ngIf="formulaire.get('assurance')?.get('date_fin')?.hasError('LessThanToday')" >La date doit être supérieure à la date du jour ! </span>
+  
+  
+               
               </div>
-
-            </form>
+              <div class="form-group mt-2" formGroupName="visite">
+              
+                <label class="form-label" for="matricule">Date Fin Visite Technique</label>
+                <input type="date" id="matricule" class="form-control form-control-lg" formControlName="date_fin_visite" />
+                <span class="error" *ngIf="formulaire.get('visite')?.get('date_fin_visite')?.hasError('required')" >La date de visite est obligatoire ! </span>
+                <span class="error" *ngIf="formulaire.get('visite')?.get('date_fin_visite')?.hasError('LessThanToday')" >La date doit être supérieure à la date du jour ! </span>
+  
+           
+             </div>
+          
+          <div class="form-group mt-2 d-flex">
+            <input formControlName="images" type="hidden">
+            <div class="design me-4 mt-4">
+              <label for="image" class="form-label">Changer image</label>
+            </div>
+  
+            <input type="file" class="form-control form-control-lg form-control-file" accept="image/*" (change)="onFileChange($event);onChange($event)" id="image" />
+                
+            </div>
+  
+  
+                <div class="mt-4 justify-content-center d-flex align-items-center ">
+                  <button type="submit" class="btn btn-lg btn-outline-warning" [disabled]="formulaire.invalid">Editer</button>
+                </div>
+  
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+

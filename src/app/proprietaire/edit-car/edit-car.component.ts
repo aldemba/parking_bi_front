@@ -150,6 +150,9 @@ export class EditCarComponent {
     this.toastr.warning('La voiture a été modifiée avec success!', 'Edition!');
   }
 
+  goBack() {
+    this.router.navigate(["/admin/parkings/"+this.parkingId+"/voitures"]);
+  }
 
   onEdit() {
     let formValues = this.formulaire.value;

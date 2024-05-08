@@ -7,6 +7,10 @@
     padding:20px;
     box-sizing: border-box;
     height: 100vh;
+    background-image: url(../../../assets/img/design.png); 
+    background-size: cover;
+   
+  
     /* border:1px solid #C2B364; */
     /* overflow: hidden; */
 
@@ -49,5 +53,5 @@ input[type="file"]{
 .ava{
     height: 10vh;
     width: 10vh;
-
 }
+

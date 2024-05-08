@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { TokenService } from './token.service';
 import { ErrorService } from './error.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class TokenInterceptorService implements HttpInterceptor {
          catchError( error => {            
              if(error.status == 401){
                this.tokserv.clearTokenAndId();
+               Swal.fire("Session expirée !")
              }else if(error.status == 403){
                 // console.log(error.error.detail)  ;
                 this.errorService.setErrorMessage(error.error.detail);

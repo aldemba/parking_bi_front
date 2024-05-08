@@ -1,4 +1,4 @@
-<header class="p-3 bg-dark text-white">
+<header class="p-3 b shadow">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -8,11 +8,11 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 
 
-            <li class="nav-item"><a class="nav-link px-2 text-white me-2" routerLink="/admin/parkings">Accueil</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-dark me-2" routerLink="/admin/parkings">Accueil</a></li>
             <ng-container *ngIf="isVisible">
-              <li class="nav-item"><button class="btn btn-outline-warning text-white me-2" (click)="filterCar('all')" [class.selected]="selectedItem === 'all'" >Liste Voitures</button></li>
-              <li class="nav-item"><button class="btn btn-outline-warning text-white me-2" (click)="filterCar('disponibles')" [class.selected]="selectedItem === 'disponibles'" >Voitures Disponibles</button></li>
-              <li class="nav-item"><button class="btn btn-outline-warning text-white me-2" (click)="goToResreservation()" >Reservations</button></li>
+              <li class="nav-item"><button class="btn btn-outline-warning text-dark me-2" (click)="filterCar('all')" [class.selected]="selectedItem === 'all'" >Liste Voitures</button></li>
+              <li class="nav-item"><button class="btn btn-outline-warning text-dark me-2" (click)="filterCar('disponibles')" [class.selected]="selectedItem === 'disponibles'" >Voitures Disponibles</button></li>
+              <li class="nav-item"><button class="btn btn-outline-warning text-dark me-2" (click)="goToResreservation()" >Reservations</button></li>
               <!--<li class="nav-item"><button class="btn btn-outline-warning text-white me-2" (click)="filterCar('indisponibles')" [class.selected]="selectedItem === 'indisponibles'" >Voitures Indisponibles</button></li>-->
             </ng-container>
 
