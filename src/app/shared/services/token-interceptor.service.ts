@@ -27,7 +27,7 @@ export class TokenInterceptorService implements HttpInterceptor {
                 title: "Session expirée !",
                 icon: "warning",
                 showConfirmButton: false,
-                width: '90px', // spécifiez la largeur de la fenêtre modale
+                width: '300px', // spécifiez la largeur de la fenêtre modale
                 padding: '2rem' // spécifiez l'espacement intérieur de la fenêtre modale
               });
               

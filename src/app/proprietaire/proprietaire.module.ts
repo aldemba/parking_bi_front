@@ -15,6 +15,7 @@ import { EditCarComponent } from './edit-car/edit-car.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { EditReservationComponent } from './edit-reservation/edit-reservation.component';
 import { MesReservationsComponent } from './mes-reservations/mes-reservations.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 
@@ -31,6 +32,7 @@ import { MesReservationsComponent } from './mes-reservations/mes-reservations.co
     ReservationsComponent,
     EditReservationComponent,
     MesReservationsComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,

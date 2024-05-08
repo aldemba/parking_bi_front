@@ -35,13 +35,13 @@ export class DetailsParkingComponent {
   test:boolean=true
   expectedUrl=''
   errorMessage: string | null = null;
+  loading: boolean = true; 
+
   
 
 
 
-  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService,private errorService: ErrorService, private disponibiliteService: DisponibiliteService,
-    private gestion:GestionReservationService
-  ) { }
+  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService,private errorService: ErrorService, private disponibiliteService: DisponibiliteService  ) { }
 
   ngOnInit() {
     let id=0;
@@ -54,12 +54,13 @@ export class DetailsParkingComponent {
         
     
         this.detailserv.getVoituresByParking(id).subscribe((data)=> {
-          console.log(data["parking"].voitures);
+          // console.log(data["parking"].voitures);
           
           this.voitures=data["parking"].voitures;
           this.voitures = this.voitures.filter((voiture: any) => voiture.isVisible ==1);
           this.filtres = this.voitures.filter((voiture: any) => voiture.isVisible ==1);
           this.totalLength=this.voitures.length;
+          this.loading=false;
           // console.log("donnees",data);
           
           // this.objets.push(data.voitures)
@@ -79,6 +80,7 @@ export class DetailsParkingComponent {
           //   voiture.etatSwitch = voiture.etat === 'DISPONIBLE';
           // });
         }, (error:any)=>{
+          this.loading=false;
           // console.log(error);
           //  this.toastr.error("Vous n'êtes pas autorisé à accéder aux voitures de ce parking.","error");
           // alert("Attention, quelque chose s'est mal passée !")

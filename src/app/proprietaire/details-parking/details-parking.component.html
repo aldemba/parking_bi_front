@@ -1,118 +1,66 @@
+<ng-container *ngIf="loading; else content" >
+  <app-loader></app-loader>
+</ng-container>
 
-<div class="back">
-  <ng-container *ngIf="errorMessage">
-    <h1 class="error-message pad">{{ errorMessage }}</h1>
-  </ng-container>
-  
-  <ng-container *ngIf="!errorMessage">
-  
-  
-    <app-navbar (clickchanged)="clickchanged($event)"></app-navbar>
+<ng-template #content>
+
+  <div class="back">
+    <ng-container *ngIf="errorMessage">
+      <h1 class="error-message pad">{{ errorMessage }}</h1>
+    </ng-container>
     
-    <ng-container *ngIf="taille()" >
+    <ng-container *ngIf="!errorMessage">
+      <app-navbar (clickchanged)="clickchanged($event)"></app-navbar>
       
-      <div class="container">
-        <div class="row">
-          <div class="d-flex justify-content-center mt-5">
-            <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher...">
-          </div>
-                <div class="text-end mb-3">
-                    <a class="btn btn-warning text-white" (click)="redirectToAdd()"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
-                </div>
-    
-          <ng-container *ngFor="let car of voitures | filter: searchTerm">
-  
-            <div class="col-12 col-md-4 col-lg-3 mt-3">
-              <div class="card mb-3 shadow maxw" (click)="redirectToReservation(car.id)">
-                <div class="row g-0">
-                  <div class="col-md-5">
-                    <img src="data:image/PNG;base64, {{car.image}}" class="img-fluid rounded-start haut" alt="..." />
-                  </div>
-                  <div class="col-md-7">
-                    <div class="card-body">
-                      <h5 class="card-title">{{car.nom}}</h5>
-                      <p class="card-text">{{car.marque}}</p>
-                      <p class="card-text">{{car.modele}}
-    
-                        <span class="text-danger float-end">
-                          <i class="fa fa-exclamation-circle me-2 bouge" data-toggle="tooltip" data-placement="top" title="Assurance" aria-hidden="true" *ngIf="getDifferenceInDays(car.assurance.date_fin)" ></i>
-                          <i class="fa fa-exclamation-triangle bouge" data-toggle="tooltip" data-placement="top" title="Visite" aria-hidden="true" *ngIf="getDifferenceInDays(car.visite.date_fin_visite)"></i>
-                        </span>
-                      </p>
-                      <p class="card-text">
-                        <i class="fa fa-eye text-warning me-3" data-toggle="tooltip" data-placement="top" title="Voir details" (click)="afficherDetailsVoiture(car);redirectToReservation(car.id);mettreAJourDisponibiliteVoiture(car.etat)"></i>
-                        <i class="fas fa-trash text-danger me-3" data-toggle="tooltip" data-placement="top" title="Supprimer" (click)="changeVisibility(car)"></i>
-                        <i class="fas fa-edit text-dark" data-toggle="tooltip" data-placement="top" title="Editer" (click)="redirectToEdit(car.id)"></i>
+      <ng-container *ngIf="taille()">
+        <div class="container">
+          <div class="row">
+            <div class="d-flex justify-content-center mt-5">
+              <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher...">
+            </div>
+            <div class="text-end mb-3">
+              <a class="btn btn-warning text-white" (click)="redirectToAdd()"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
+            </div>
+      
+            <ng-container *ngFor="let car of voitures | filter: searchTerm">
+              <div class="col-10 col-md-4 col-lg-3 mt-3">
+                <div class="card mb-3 shadow" (click)="redirectToReservation(car.id)">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <img src="data:image/PNG;base64, {{car.image}}" class="img-fluid haut" alt="..." />
+                    </div>
+                    <div class="col-md-12">
+                      <div class="card-body">
+                        <h5 class="card-title">{{car.nom}}</h5>
+                        <p class="card-text">{{car.marque}}</p>
+                        <p class="card-text">{{car.modele}}
+                          <span class="text-danger float-end">
+                            <i class="fa fa-exclamation-circle me-2 bouge" data-toggle="tooltip" data-placement="top" title="Assurance" aria-hidden="true" *ngIf="getDifferenceInDays(car.assurance.date_fin)" ></i>
+                            <i class="fa fa-exclamation-triangle bouge" data-toggle="tooltip" data-placement="top" title="Visite" aria-hidden="true" *ngIf="getDifferenceInDays(car.visite.date_fin_visite)"></i>
+                          </span>
                         </p>
+                        <p class="card-text mb-1">
+                          <i class="fa fa-eye text-warning me-3" data-toggle="tooltip" data-placement="top" title="Voir details" (click)="afficherDetailsVoiture(car);redirectToReservation(car.id);mettreAJourDisponibiliteVoiture(car.etat)"></i>
+                          <i class="fas fa-trash text-danger me-3" data-toggle="tooltip" data-placement="top" title="Supprimer" (click)="changeVisibility(car)"></i>
+                          <i class="fas fa-edit text-dark" data-toggle="tooltip" data-placement="top" title="Editer" (click)="redirectToEdit(car.id)"></i>
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </ng-container>
+            </ng-container>
+          </div>
         </div>
-      </div>
+      </ng-container>
+      
+      <ng-container *ngIf="!taille()">
+        <div class="bout mb-3">
+          <a class="btn btn-warning text-white" (click)="redirectToAdd()"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
+        </div>
+        <h2 class="d-flex justify-content-center to">Vous n'avez pas de voitures, veuillez en ajouter !</h2>
+      </ng-container>
     </ng-container>
-    
-    <ng-container *ngIf="!taille()" > 
-      <div class="bout mb-3">
-        <a class="btn btn-warning text-white" (click)="redirectToAdd()"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
-      </div>
-      <h2 class="d-flex justify-content-center to">Vous n'avez pas de voitures, veuillez en ajouter !</h2>
-    </ng-container>
-  </ng-container>
-</div>
-
-
-
- <!--<div class="modal posi" id="myModal">
-  <div class="modal-dialog posi modal-dialog-centered modal-dialog-scrollable modal-xl">
-    <div class="modal-content tall">
-      <div class="modal-header">
-        <h1 class="h5 modal-title">Details Voiture</h1>
-        <button
-          class="btn-close"
-          type="button"
-          data-bs-dismiss="modal"
-        ></button>
-      </div>
-      <div class="modal-body d-flex">
-        <div>
-          <img
-            class="imgbis"
-            src="data:image/PNG;base64, {{ voitureSelectionnee?.image }}"
-            alt=""
-          />
-        </div>
-        <div>
-        <div class="d-flex flex-column spac">
-          <span class="h4">Marque: {{voitureSelectionnee?.marque}}</span>
-          <hr>
-          <span class="h4 mt-2">Modèle: {{voitureSelectionnee?.modele}}</span>
-          <hr>
-          <span class="h4 mt-2">Matricule: {{voitureSelectionnee?.matricule}}</span>
-          <hr>
-          <span class="h4 mt-2 visite-date">Visite Technique: {{voitureSelectionnee?.visite.date_fin_visite | date:'dd-MM-yyyy'}}</span>
-          <hr>
-          <span class="h4 mt-2">Assurance: {{voitureSelectionnee?.assurance.date_fin | date:'dd-MM-yyyy'}}</span>
-          <hr>
-          <span class="h4 mt-2 d-flex justify-content-between" *ngIf="voitureSelectionnee"> 
-            <p class="me-1">État: {{voitureSelectionnee?.etat}}</p>
-            <p><label class="switch">
-              <input type="checkbox" [checked]="voitureSelectionnee.etatSwitch"  (change)="updateEtat(voitureSelectionnee)">
-              <span class="slider round"></span>
-            </label>
-          </p>
-          </span>
-
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-warning text-white">
-        Editer
-      </button>
-    </div>
   </div>
-</div>-->
+</ng-template>
 

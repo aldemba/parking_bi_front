@@ -70,6 +70,7 @@ export class TokenService {
     localStorage.removeItem("id");
     localStorage.removeItem("nom");
     localStorage.removeItem("prenom");
+    localStorage.removeItem("idP");
     this.router.navigate(["security/login"])
   }
 

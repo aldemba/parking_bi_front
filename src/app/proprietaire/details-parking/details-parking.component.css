@@ -6,166 +6,64 @@
 
 } */
 
-.pad{
-    padding-top: 3%;
+.back {
+  /* background-image: url(../../../assets/img/design.png);
+  background-size: cover;
+   */
 }
 
-.img{
-    height: 5vh;
+.card {
+  width: 100%;
+}
+.card img {
+  width: 100%;
+  height: 25vh;
 }
 
-.inp{
-    margin-left: 30%;
+.card-body {
+  display: flex;
+  flex-direction: column;
 }
 
-.etat{
-    border: none;
-    cursor: pointer;
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.posit{
-    padding-top: 6%;
+.haut {
+  width: 100%;
+  height: auto;
 }
 
-.imgbis{
-    height: 49vh;
-    width: 20vw;
-}
-.tall{
-    position: absolute;
-    height: 80vh;
-    width: 48vw !important;
-    margin-right: 60% !important;
+.error-message {
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.posi{
-    margin-left: 12% !important;
-   
-  
-}
-.visite-date{
-    white-space: nowrap;
+.pad {
+  padding-top: 20%;
 }
 
-.spac{
-    /* padding: 3%; */
-    padding-left: 10%;
+.bouge {
+  animation: bouge 1s infinite;
 }
 
-.to{
-    margin-top: 10%;
-}
-.maxw{
-    max-width: 540px;
-    height: 95%;
-}
-
-.bout{
-    display: flex;
-    justify-content: center;
-    padding-top: 10%;
-    
-}
-
-.haut{
-    height: 100%;
-}
-
-
-/* The switch - the box around the slider */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 31px;
+@keyframes bouge {
+  0% {
+    transform: scale(1.5);
   }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+  25% {
+    transform: scale(var(--fa-beat-scale, 1.1));
   }
-  
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
+  40% {
+    transform: scale(1.5);
   }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+  60% {
+    transform: scale(var(--fa-beat-scale, 1.1));
   }
-  
-  input:checked + .slider {
-    background-color: #2196F3;
+  100% {
+    transform: scale(1.5);
   }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-  }
-  
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
-
-  .error-message {
-    color: red;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-  }
-  
-  .pad{
-    padding-top: 20%;
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
-  
-  .bouge {
-    animation: bouge 1s infinite;
-  }
-  
-  @keyframes bouge {
-    0% {
-      transform: scale(1.5);
-    }
-    25% {
-      transform: scale(var(--fa-beat-scale, 1.1));
-    }
-    40% {
-      transform: scale(1.5);
-    }
-    60% {
-      transform: scale(var(--fa-beat-scale, 1.1));
-    }
-    100% {
-      transform: scale(1.5);
-    }
-  }
-
+}
