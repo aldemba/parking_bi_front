@@ -26,8 +26,8 @@ export class TokenInterceptorService implements HttpInterceptor {
                Swal.fire({
                 title: "Session expirée !",
                 icon: "warning",
-                showConfirmButton: false,
-                width: '300px', // spécifiez la largeur de la fenêtre modale
+                showConfirmButton: true,
+                width: '320px', // spécifiez la largeur de la fenêtre modale
                 padding: '2rem' // spécifiez l'espacement intérieur de la fenêtre modale
               });
               

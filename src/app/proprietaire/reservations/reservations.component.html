@@ -23,27 +23,33 @@
               <div class="text-center mt-4">
                 <h4>Nom: {{ voiture?.nom }}</h4>
               </div>
+              <hr>
               <div class="text-center mt-4">
                 <h4>Modele: {{ voiture?.modele }}</h4>
               </div>
+              <hr>
               <div class="text-center mt-4">
                 <h4>Marque: {{ voiture?.marque }}</h4>
               </div>
+              <hr>
               <div class="text-center mt-4">
                 <h4>Matricule :{{ voiture?.matricule }}</h4>
               </div>
+              <hr>
               <div class="text-center mt-4">
                 <h4>Categorie: {{ voiture?.categorie }}</h4>
               </div>
+              <hr>
               <div class="text-center mt-4">
                 <h4>
-                  Fin_assurance:
+                  Fin assurance:
                   {{ voiture?.assurance?.date_fin | date : "dd-MM-yyyy" }}
                 </h4>
               </div>
+              <hr>
               <div class="text-center mt-4">
                 <h4>
-                  Fin_visite:
+                  Fin visite:
                   {{ voiture?.visite?.date_fin_visite | date : "dd-MM-yyyy" }}
                 </h4>
               </div>
