@@ -1,121 +1,128 @@
-<div class="container mt-3">
-  <button class="btn btn-outline-warning mr-3" (click)="goBack()">Retour</button>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-6 mt-5 h-25 flex-nowrap">
-      <div class="card mb-5 vn shadow">
-        <div class="row g-0">
-          <div class="col-md-6">
-            <img
-              src="data:image/PNG;base64,{{ voiture?.image }}"
-              class="img-fluid img"
-              alt="..."
-            />
-          </div>
-          <div class="col-md-6">
-            <div class="text-center mt-4">
-              <h4>Nom: {{ voiture?.nom }}</h4>
+<ng-container *ngIf="loading; else content" >
+  <app-loader></app-loader>
+</ng-container>
+
+<ng-template #content >
+
+  <div class="container mt-3">
+    <button class="btn btn-outline-warning mr-3" (click)="goBack()">Retour</button>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-6 mt-5 h-25 flex-nowrap">
+        <div class="card mb-5 vn shadow">
+          <div class="row g-0">
+            <div class="col-md-6">
+              <img
+                src="data:image/PNG;base64,{{ voiture?.image }}"
+                class="img-fluid img"
+                alt="..."
+              />
             </div>
-            <div class="text-center mt-4">
-              <h4>Modele: {{ voiture?.modele }}</h4>
-            </div>
-            <div class="text-center mt-4">
-              <h4>Marque: {{ voiture?.marque }}</h4>
-            </div>
-            <div class="text-center mt-4">
-              <h4>Matricule :{{ voiture?.matricule }}</h4>
-            </div>
-            <div class="text-center mt-4">
-              <h4>Categorie: {{ voiture?.categorie }}</h4>
-            </div>
-            <div class="text-center mt-4">
-              <h4>
-                Fin_assurance:
-                {{ voiture?.assurance?.date_fin | date : "dd-MM-yyyy" }}
-              </h4>
-            </div>
-            <div class="text-center mt-4">
-              <h4>
-                Fin_visite:
-                {{ voiture?.visite?.date_fin_visite | date : "dd-MM-yyyy" }}
-              </h4>
+            <div class="col-md-6">
+              <div class="text-center mt-4">
+                <h4>Nom: {{ voiture?.nom }}</h4>
+              </div>
+              <div class="text-center mt-4">
+                <h4>Modele: {{ voiture?.modele }}</h4>
+              </div>
+              <div class="text-center mt-4">
+                <h4>Marque: {{ voiture?.marque }}</h4>
+              </div>
+              <div class="text-center mt-4">
+                <h4>Matricule :{{ voiture?.matricule }}</h4>
+              </div>
+              <div class="text-center mt-4">
+                <h4>Categorie: {{ voiture?.categorie }}</h4>
+              </div>
+              <div class="text-center mt-4">
+                <h4>
+                  Fin_assurance:
+                  {{ voiture?.assurance?.date_fin | date : "dd-MM-yyyy" }}
+                </h4>
+              </div>
+              <div class="text-center mt-4">
+                <h4>
+                  Fin_visite:
+                  {{ voiture?.visite?.date_fin_visite | date : "dd-MM-yyyy" }}
+                </h4>
+              </div>
             </div>
           </div>
         </div>
+  
+        <div></div>
+        <div class="mt-4 justify-content-center d-flex align-items-center">
+          <button (click)="showModal()" class="btn btn-lg btn-outline-warning" *ngIf="boutonVisible">
+            Faire une location
+          </button>
+        </div>
       </div>
-
-      <div></div>
-      <div class="mt-4 justify-content-center d-flex align-items-center">
-        <button (click)="showModal()" class="btn btn-lg btn-outline-warning" *ngIf="boutonVisible">
-          Faire une location
-        </button>
-      </div>
-    </div>
-
-    <div class="col-5 offset-1 animation" *ngIf="visible">
-      <h2>Ajouter une location</h2>
-      <div class="">
-        <div class="shadow p-2 p-md-4">
-          <form [formGroup]="formulaire" (ngSubmit)="onSubmitRervation()">
-            <div class="form-group mt-2">
-              <label class="form-label" for="nom_complet">Nom Complet</label>
-
-              <input type="text" id="nom_complet"  class="form-control form-control-lg" formControlName="nom_complet" />
-              <span class="error" *ngIf="fm['nom_complet'].errors?.['minlength']">Le nom doit faire au minimum 6 caractères </span>
-              <span class="error" *ngIf="fm['nom_complet'].errors?.['required']" >Le nom est obligatoire ! </span>
-              <span class="error" *ngIf="fm['nom_complet'].errors?.['maxlength']" >Le nom doit faire au maximum 30 caractères</span>
-            </div>
-
-            <div class="form-group mt-2">
-              <label class="form-label" for="adresse">Adresse</label>
-              <input type="text" id="adresse" class="form-control form-control-lg" formControlName="adresse" />
-              <span class="error" *ngIf="fm['adresse'].errors?.['pattern']"> Le format de l'adresse n'est pas correcte </span>
-              <span class="error" *ngIf="fm['adresse'].errors?.['required']"  >L'adresse est obligatoire !</span>
-              <span class="error" *ngIf="fm['adresse'].errors?.['minlength']"  >L'adresse doit faire au minimum 3 caractères </span>
-            </div>
-
-            <div class="form-group mt-2">
-              <label class="form-label" for="telephone">Téléphone</label>
-              <input type="text" id="telephone"  class="form-control form-control-lg" formControlName="telephone" />
-              <span class="error" *ngIf="fm['telephone'].errors?.['pattern']"> Le format du téléphone n'est pas correcte </span>
-              <span class="error" *ngIf="fm['telephone'].errors?.['required']"  >Le téléphone est obligatoire !</span>
-            </div>
-            <div class="form-group mt-2">
-              <label class="form-label" for="date_debut_reservation" >Date début réservation</label >
-              <input type="date" id="date_debut_reservation" class="form-control form-control-lg" formControlName="date_debut_reservation"/>
-              <span class="error" *ngIf="fm['date_debut_reservation'].errors?.['required']"  >La date de début de réservation est obligatoire !</span>
-              <span class="error" *ngIf="fm['date_debut_reservation'].errors?.['LessThanToday']"  >La date doit être supérieure à la date du jour</span>
-              <span class="error" *ngIf="formulaire.get('date_debut_reservation')?.errors?.['LessThanTo']">La date de début doit être antérieure à la date de fin.</span>
-
-
-            </div>
-            <div class="form-group mt-2">
-              <label class="form-label" for="date_fin_reservation" >Date fin réservation</label >
-              <input type="date" id="date_fin_reservation" class="form-control form-control-lg" formControlName="date_fin_reservation" />
-              <span class="error" *ngIf="fm['date_fin_reservation'].errors?.['required']"  >La date de fin de réservation est obligatoire !</span>
-              <span class="error" *ngIf="fm['date_fin_reservation'].errors?.['LessThanToday']"  >La date doit être supérieure à la date du jour</span>
-              <span class="error" *ngIf="formulaire.get('date_fin_reservation')?.errors?.['LessThanTo']">La date de début doit être antérieure à la date de fin.</span>
-              
-
-                
-
-            </div>
-
-            <div class="form-group mt-2 d-flex">
-              <div class="design me-4 mt-4">
-                <label for="image" class="form-label">Choisir une image</label>
+  
+      <div class="col-5 offset-1 animation" *ngIf="visible">
+        <h2>Ajouter une location</h2>
+        <div class="">
+          <div class="shadow p-2 p-md-4">
+            <form [formGroup]="formulaire" (ngSubmit)="onSubmitRervation()">
+              <div class="form-group mt-2">
+                <label class="form-label" for="nom_complet">Nom Complet</label>
+  
+                <input type="text" id="nom_complet"  class="form-control form-control-lg" formControlName="nom_complet" />
+                <span class="error" *ngIf="fm['nom_complet'].errors?.['minlength']">Le nom doit faire au minimum 6 caractères </span>
+                <span class="error" *ngIf="fm['nom_complet'].errors?.['required']" >Le nom est obligatoire ! </span>
+                <span class="error" *ngIf="fm['nom_complet'].errors?.['maxlength']" >Le nom doit faire au maximum 30 caractères</span>
               </div>
-
-              <input type="file" class="form-control form-control-lg" accept="image/*" id="image" (change)="onFileChange($event); onChange($event)" />
-            </div>
-
-            <div class="mt-4 justify-content-center d-flex align-items-center">
-              <button type="submit" class="btn btn-lg btn-outline-warning" [disabled]="formulaire.invalid">  Ajouter</button>
-            </div>
-          </form>
+  
+              <div class="form-group mt-2">
+                <label class="form-label" for="adresse">Adresse</label>
+                <input type="text" id="adresse" class="form-control form-control-lg" formControlName="adresse" />
+                <span class="error" *ngIf="fm['adresse'].errors?.['pattern']"> Le format de l'adresse n'est pas correcte </span>
+                <span class="error" *ngIf="fm['adresse'].errors?.['required']"  >L'adresse est obligatoire !</span>
+                <span class="error" *ngIf="fm['adresse'].errors?.['minlength']"  >L'adresse doit faire au minimum 3 caractères </span>
+              </div>
+  
+              <div class="form-group mt-2">
+                <label class="form-label" for="telephone">Téléphone</label>
+                <input type="text" id="telephone"  class="form-control form-control-lg" formControlName="telephone" />
+                <span class="error" *ngIf="fm['telephone'].errors?.['pattern']"> Le format du téléphone n'est pas correcte </span>
+                <span class="error" *ngIf="fm['telephone'].errors?.['required']"  >Le téléphone est obligatoire !</span>
+              </div>
+              <div class="form-group mt-2">
+                <label class="form-label" for="date_debut_reservation" >Date début réservation</label >
+                <input type="date" id="date_debut_reservation" class="form-control form-control-lg" formControlName="date_debut_reservation"/>
+                <span class="error" *ngIf="fm['date_debut_reservation'].errors?.['required']"  >La date de début de réservation est obligatoire !</span>
+                <span class="error" *ngIf="fm['date_debut_reservation'].errors?.['LessThanToday']"  >La date doit être supérieure à la date du jour</span>
+                <span class="error" *ngIf="formulaire.get('date_debut_reservation')?.errors?.['LessThanTo']">La date de début doit être antérieure à la date de fin.</span>
+  
+  
+              </div>
+              <div class="form-group mt-2">
+                <label class="form-label" for="date_fin_reservation" >Date fin réservation</label >
+                <input type="date" id="date_fin_reservation" class="form-control form-control-lg" formControlName="date_fin_reservation" />
+                <span class="error" *ngIf="fm['date_fin_reservation'].errors?.['required']"  >La date de fin de réservation est obligatoire !</span>
+                <span class="error" *ngIf="fm['date_fin_reservation'].errors?.['LessThanToday']"  >La date doit être supérieure à la date du jour</span>
+                <span class="error" *ngIf="formulaire.get('date_fin_reservation')?.errors?.['LessThanTo']">La date de début doit être antérieure à la date de fin.</span>
+                
+  
+                  
+  
+              </div>
+  
+              <div class="form-group mt-2 d-flex">
+                <div class="design me-4 mt-4">
+                  <label for="image" class="form-label">Choisir une image</label>
+                </div>
+  
+                <input type="file" class="form-control form-control-lg" accept="image/*" id="image" (change)="onFileChange($event); onChange($event)" />
+              </div>
+  
+              <div class="mt-4 justify-content-center d-flex align-items-center">
+                <button type="submit" class="btn btn-lg btn-outline-warning" [disabled]="formulaire.invalid">  Ajouter</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ng-template>

@@ -1,16 +1,24 @@
-<app-navbar [user]="parkings"></app-navbar>
+<ng-container *ngIf="loading; else content" >
+    <app-loader></app-loader>
+  </ng-container>
 
-<div class="container">
-    <div class="row">
-        <ng-container *ngFor="let park of parkings">
+  <ng-template #content>
 
-            <div class="col-12 col-md-4 col-lg-3 mt-3">
-                <app-card-parking [parkinglist]="park"></app-card-parking>
-            </div>
-        </ng-container>
-  
-    </div>
-</div>
+      <app-navbar [user]="parkings"></app-navbar>
+      
+      <div class="container">
+          <div class="row">
+              <ng-container *ngFor="let park of parkings">
+      
+                  <div class="col-12 col-md-4 col-lg-3 mt-3">
+                      <app-card-parking [parkinglist]="park"></app-card-parking>
+                  </div>
+              </ng-container>
+        
+          </div>
+      </div>
+      
+      <app-footer></app-footer>
 
-<app-footer></app-footer>
+  </ng-template>
 

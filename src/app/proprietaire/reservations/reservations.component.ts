@@ -22,6 +22,8 @@ export class ReservationsComponent {
   file!:File
   imageSrc=""
   boutonVisible = true;
+  loading: boolean = true; 
+
 
 
   constructor(private route:ActivatedRoute,private voitureServ : VoituresService,private formBuilder:FormBuilder, private locationserv:LocationService,private router:Router,private toast:ToastrService, private disponibiliteService: DisponibiliteService) {
@@ -53,8 +55,11 @@ export class ReservationsComponent {
       if (carId) {
         this.voitureServ.getVoitureById(+carId).subscribe(data=>{
           this.voiture=data;
+          this.loading=false
           // console.log(this.voiture);
           
+        },(error:any)=>{
+          this.loading=false
         })
       }
       

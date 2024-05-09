@@ -16,6 +16,8 @@ export class MesParkingsComponent {
   // routerObservableInstance$!: Subscription;
 
   parkings:any
+  loading: boolean = true; 
+
 
   constructor(private tokserv:TokenService, private parkserv:ParkingsService,private router:Router){
     //  this.subscribeToRouteChange();
@@ -33,7 +35,14 @@ export class MesParkingsComponent {
     this.parkserv.getParkingsById(+idClientConnecté).subscribe({next:data =>{
      console.log(data);
       
-      this.parkings=data.allParkings}})
+      this.parkings=data.allParkings
+      this.loading = false;
+    }, 
+  
+  }), (error:any)=>{
+    this.loading = false;
+
+  }
     
 
     // console.log(this.parkings);  

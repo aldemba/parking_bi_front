@@ -17,6 +17,9 @@ reservations:any;
 
 idp:number|0=0
 
+loading: boolean = true; 
+
+
 
 constructor(private activatedroute:ActivatedRoute,private locationsserv:LocationService,private tokserv:TokenService,private parkserv:ParkingsService, private router:Router){
 
@@ -53,8 +56,12 @@ this.idp= +localStorage.getItem("idP")!;
     // this.reservations=data.allReservations
    this.reservations=data.allReservations.filter((r:any) => r.voiture.parking==this.idp)
 
+   this.loading=false;
+
     console.log(this.reservations);
-  })
+  }),(error:any)=>{
+    this.loading=false;
+  }
 
   
 }
