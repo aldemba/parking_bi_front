@@ -20,6 +20,8 @@ export class EditCarComponent {
   parkingId: number=0
   imageSrc=""
   imageSrci:string|undefined=""
+  loading: boolean = true; 
+
 
   idv:number=0
 
@@ -54,6 +56,7 @@ export class EditCarComponent {
       this.voitureServ.getVoitureById(+carId).pipe(
         switchMap((data)=>{
           this.voiture=data
+          this.loading=false
           if(this.voiture){
             const assuranceDate = this.voiture.assurance.date_fin;
             const visiteDate = this.voiture.visite.date_fin_visite;
