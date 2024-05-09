@@ -46,8 +46,19 @@
   padding-top: 20%;
 }
 
+.to{
+  margin-top: 10%;
+}
+
 .bouge {
   animation: bouge 1s infinite;
+}
+
+.bout{
+  display: flex;
+  justify-content: center;
+  padding-top: 10%;
+  
 }
 
 @keyframes bouge {

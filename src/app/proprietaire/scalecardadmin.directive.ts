@@ -16,7 +16,7 @@ export class ScalecardadminDirective {
   }
 
   enlargeImage() {
-    this.renderer.setStyle(this.el.nativeElement, 'transform', 'scale(1.05)');
+    this.renderer.setStyle(this.el.nativeElement, 'transform', 'scale(1.1)');
     this.renderer.setStyle(this.el.nativeElement, 'transition', 'transform 0.3s ease');
   }
 
