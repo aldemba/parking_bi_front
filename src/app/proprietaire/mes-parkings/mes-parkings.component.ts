@@ -33,7 +33,7 @@ export class MesParkingsComponent {
     
 
     this.parkserv.getParkingsById(+idClientConnecté).subscribe({next:data =>{
-     console.log(data);
+    //  console.log(data);
       
       this.parkings=data.allParkings
       this.loading = false;

@@ -1,7 +1,7 @@
 .content{
-    background-image: url('.././../../assets/img/design.png');
+    background-image: url('.././../../assets/img/park.jpg');
     width:100%;
-    min-height:90vh;
+    min-height:81.7vh;
     background-repeat: no-repeat;
     background-size: cover;
 }
