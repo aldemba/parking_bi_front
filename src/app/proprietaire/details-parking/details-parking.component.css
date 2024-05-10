@@ -10,7 +10,7 @@
   /* background-image: url(../../../assets/img/design.png);
   background-size: cover;
    */
-   background-image: url('.././../../assets/img/design.png');
+   background-image: url('.././../../assets/img/park.jpg');
    width:100%;
    min-height:100vh;
    background-repeat: no-repeat;
@@ -48,7 +48,7 @@
 }
 
 .pad {
-  padding-top: 20%;
+  padding-top: 25%;
 }
 
 .to{

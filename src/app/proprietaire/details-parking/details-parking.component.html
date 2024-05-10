@@ -2,12 +2,13 @@
   <app-loader></app-loader>
 </ng-container>
 
-<ng-template #content>
 
-  <ng-container *ngIf="errorMessage">
-    <h1 class="error-message pad">{{ errorMessage }}</h1>
-  </ng-container>
+<ng-template #content>
+  
   <div class="back">
+    <ng-container *ngIf="errorMessage">
+      <h1 class="error-message pad">{{ errorMessage }}</h1>
+    </ng-container>
     
     <ng-container *ngIf="!errorMessage">
       <app-navbar (clickchanged)="clickchanged($event)"></app-navbar>
@@ -58,7 +59,7 @@
         <div class="bout mb-3">
           <a class="btn btn-warning text-white" (click)="redirectToAdd()"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
         </div>
-        <h2 class="d-flex justify-content-center to">Vous n'avez pas de voitures, veuillez en ajouter !</h2>
+        <h2 class="d-flex justify-content-center to text-white h1">Vous n'avez pas de voitures, veuillez en ajouter !</h2>
       </ng-container>
     </ng-container>
   </div>
