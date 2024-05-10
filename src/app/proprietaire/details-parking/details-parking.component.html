@@ -4,10 +4,10 @@
 
 <ng-template #content>
 
+  <ng-container *ngIf="errorMessage">
+    <h1 class="error-message pad">{{ errorMessage }}</h1>
+  </ng-container>
   <div class="back">
-    <ng-container *ngIf="errorMessage">
-      <h1 class="error-message pad">{{ errorMessage }}</h1>
-    </ng-container>
     
     <ng-container *ngIf="!errorMessage">
       <app-navbar (clickchanged)="clickchanged($event)"></app-navbar>

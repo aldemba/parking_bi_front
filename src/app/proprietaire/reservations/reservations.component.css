@@ -16,6 +16,15 @@ h2{
     
 }
 
+.back{
+    background-image: url('.././../../assets/img/parkingb.jpg');
+    width:100%;
+    min-height:98vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+ 
+}
+
 
 /* 
 .card-body{

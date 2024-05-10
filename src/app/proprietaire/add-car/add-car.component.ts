@@ -106,7 +106,10 @@ export class AddCarComponent {
     return null;
 }
 
-goBack() {}
+goBack() {
+  this.router.navigate(["/admin/parkings/"+this.idParking+"/voitures"]);
+
+}
 
   onSubmit() {
     if (this.file) {

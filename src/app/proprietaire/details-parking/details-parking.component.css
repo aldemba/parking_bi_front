@@ -6,10 +6,15 @@
 
 } */
 
-.back {
+.back{
   /* background-image: url(../../../assets/img/design.png);
   background-size: cover;
    */
+   background-image: url('.././../../assets/img/design.png');
+   width:100%;
+   min-height:100vh;
+   background-repeat: no-repeat;
+   background-size: cover;
 }
 
 .card {
