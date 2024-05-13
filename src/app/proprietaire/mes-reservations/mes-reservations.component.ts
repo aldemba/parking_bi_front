@@ -4,6 +4,7 @@ import { Reservation } from 'src/app/shared/models/reservation';
 import { LocationService } from 'src/app/shared/services/location.service';
 import { ParkingsService } from 'src/app/shared/services/parkings.service';
 import { TokenService } from 'src/app/shared/services/token.service';
+import { VoituresService } from 'src/app/shared/services/voitures.service';
 
 @Component({
   selector: 'app-mes-reservations',
@@ -21,7 +22,7 @@ loading: boolean = true;
 
 
 
-constructor(private activatedroute:ActivatedRoute,private locationsserv:LocationService,private tokserv:TokenService,private parkserv:ParkingsService, private router:Router){
+constructor(private activatedroute:ActivatedRoute,private locationsserv:LocationService,private tokserv:TokenService,private parkserv:ParkingsService, private router:Router, private voitureService: VoituresService){
 
 }
 
@@ -59,11 +60,20 @@ this.idp= +localStorage.getItem("idP")!;
    this.loading=false;
 
     console.log(this.reservations);
-  }),(error:any)=>{
-    this.loading=false;
-  }
+  // }),(error:any)=>{
+  //   this.loading=false;
+  // }
+
+  this.reservations.forEach((reservation: any) => {
+    this.updateCarStateIfExpired(reservation);
+  });
+}, (error: any) => {
+  this.loading = false;
+});
 
   
+
+
 }
 
 // ngOnDestroy() {
@@ -82,6 +92,29 @@ getIdParking():string|null{
 goBack() {
   this.router.navigate(["/admin/parkings/"+this.idp+"/voitures"]);
 
+}
+
+updateCarStateIfExpired(reservation: any) {
+  const currentDate = new Date();
+  const endDate = new Date(reservation.date_fin_reservation);
+
+  if (endDate <= currentDate) {
+    // Mettez à jour l'état de la voiture.
+    const voitureToUpdate = {
+      id: reservation.voiture.id, // Assurez-vous que cet objet contient un identifiant unique.
+      etat: 'DISPONIBLE' // Vous pouvez ajuster cette valeur selon vos besoins.
+    };
+
+    // Appelez la méthode changeState de VoituresService pour mettre à jour l'état de la voiture.
+    this.voitureService.changeState(voitureToUpdate).subscribe(
+      () => {
+        console.log('État de la voiture mis à jour avec succès.');
+      },
+      (error:any) => {
+        console.error('Une erreur est survenue lors de la mise à jour de l\'état de la voiture : ', error);
+      }
+    );
+  }
 }
 
 

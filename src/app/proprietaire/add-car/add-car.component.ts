@@ -83,7 +83,7 @@ export class AddCarComponent {
   }
 
   showSuccess() {
-    this.toastr.warning('La voiture a été ajouté avec success!', 'Ajout!');
+    this.toastr.success('La voiture a été ajouté avec success!', 'Ajout!');
   }
 
   dateSupérieureValidator(control: AbstractControl): { [key: string]: any } | null {

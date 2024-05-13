@@ -5,8 +5,6 @@
     background: #fff;
     border-radius: 10px;
     padding:20px;
-    box-sizing: border-box;
-    height: 100vh;
    
 
 }
@@ -55,7 +53,7 @@ input[type="file"]{
 .bac{
     background-image: url('.././../../assets/img/park.png');
     width:100%;
-    min-height:98vh;
+    min-height:100vh;
     background-repeat: no-repeat;
     background-size: cover;
  
