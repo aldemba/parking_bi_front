@@ -25,7 +25,7 @@
       
             <ng-container *ngFor="let car of voitures | filter: searchTerm">
               <div class="col-10 col-md-4 col-lg-3 mt-3">
-                <div class="card mb-3 shadow" (click)="redirectToReservation(car.id)">
+                <div class="card mb-3 shadow" (click)="redirectToReservation(car.id);mettreAJourDisponibiliteVoiture(car.etat)">
                   <div class="row">
                     <div class="col-md-12">
                       <img src="data:image/PNG;base64, {{car.image}}" class="img-fluid haut" alt="..." />
