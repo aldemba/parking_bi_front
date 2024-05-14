@@ -33,7 +33,7 @@ export class ReservationsComponent {
       adresse: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-zÀ-ÿ0-9 ]+$/),Validators.minLength(3)])),
       telephone: new FormControl("", Validators.compose([Validators.required, Validators.pattern('[- +()0-9]{9,}')])),
       date_debut_reservation:new FormControl('', Validators.compose([Validators.required, this.LessThanToday])),
-      date_fin_reservation:new FormControl('', Validators.compose([Validators.required, this.LessThanToday])),
+      date_fin_reservation:new FormControl('', Validators.compose([Validators.required, this.LessThanTodayToom])),
       images: ['']
     },{validators:this.LessThanTo.bind(this)})
    }
@@ -70,7 +70,7 @@ export class ReservationsComponent {
     })
   }
 
-  LessThanToday(control: FormControl): ValidationErrors | null {
+  LessThanTodayToom(control: FormControl): ValidationErrors | null {
     let today : Date = new Date();
 
     if (new Date(control.value) < today)
@@ -78,6 +78,20 @@ export class ReservationsComponent {
 
     return null;
 }
+
+LessThanToday(control: FormControl): ValidationErrors | null {
+  let today: Date = new Date();
+  today.setHours(0, 0, 0, 0); // Réinitialiser l'heure de la date actuelle à minuit pour comparer uniquement les dates
+  
+  let selectedDate = new Date(control.value);
+  selectedDate.setHours(0, 0, 0, 0); // Réinitialiser l'heure de la date sélectionnée à minuit
+  
+  if (selectedDate < today)
+      return { "LessThanToday": true };
+
+  return null;
+}
+
 
 
 // fonction pour controler la date de sorite et d'entrée d'une réservation
@@ -157,7 +171,7 @@ goBack(){
         next: (data: any) => {
           // Succès de l'appel à saveCar(), exécuter les actions suivantes
           this.formulaire.reset();
-          this.router.navigate(["/admin/parkings/"+this.parkingId+"/voitures"]);
+          this.router.navigate(["/admin/parkings//reservations"]);
           this.showSuccess();
         },
         error: (err: any) => {

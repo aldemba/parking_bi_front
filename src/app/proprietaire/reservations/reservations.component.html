@@ -93,18 +93,18 @@
                   <span class="error" *ngIf="fm['telephone'].errors?.['required']"  >Le téléphone est obligatoire !</span>
                 </div>
                 <div class="form-group mt-2">
-                  <label class="form-label" for="date_debut_reservation" >Date début réservation</label >
+                  <label class="form-label" for="date_debut_reservation" >Date début location</label >
                   <input type="date" id="date_debut_reservation" class="form-control form-control-lg" formControlName="date_debut_reservation"/>
-                  <span class="error" *ngIf="fm['date_debut_reservation'].errors?.['required']"  >La date de début de réservation est obligatoire !</span>
-                  <span class="error" *ngIf="fm['date_debut_reservation'].errors?.['LessThanToday']"  >La date doit être supérieure à la date du jour</span>
+                  <span class="error" *ngIf="fm['date_debut_reservation'].errors?.['required']"  >La date de début de location est obligatoire !</span>
+                  <span class="error" *ngIf="fm['date_debut_reservation'].errors?.['LessThanToday']"  >La date ne doit pas être antérieure à la date du jour</span>
                   <span class="error" *ngIf="formulaire.get('date_debut_reservation')?.errors?.['LessThanTo']">La date de début doit être antérieure à la date de fin.</span>
     
     
                 </div>
                 <div class="form-group mt-2">
-                  <label class="form-label" for="date_fin_reservation" >Date fin réservation</label >
+                  <label class="form-label" for="date_fin_reservation" >Date fin location</label >
                   <input type="date" id="date_fin_reservation" class="form-control form-control-lg" formControlName="date_fin_reservation" />
-                  <span class="error" *ngIf="fm['date_fin_reservation'].errors?.['required']"  >La date de fin de réservation est obligatoire !</span>
+                  <span class="error" *ngIf="fm['date_fin_reservation'].errors?.['required']"  >La date de fin de location est obligatoire !</span>
                   <span class="error" *ngIf="fm['date_fin_reservation'].errors?.['LessThanToday']"  >La date doit être supérieure à la date du jour</span>
                   <span class="error" *ngIf="formulaire.get('date_fin_reservation')?.errors?.['LessThanTo']">La date de début doit être antérieure à la date de fin.</span>
                   
