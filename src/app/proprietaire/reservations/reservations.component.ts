@@ -109,9 +109,18 @@ LessThanTo(controls: FormGroup): ValidationErrors | null {
      return null;
 }
 
+afficherMessageErreur() {
+  if (this.formulaire.errors?.['LessThanTo']) {
+    return 'La date de début doit être antérieure à la date de fin.';
+  }
+  return '';
+}
+
 
 get fm(){
     // console.log("deux", this.formulaire.get('date_debut_reservation'), this.formulaire.get('date_fin_reservation'));
+    // console.log(this.formulaire.errors?.['LessThanTo']);
+    
     
   return this.formulaire.controls;
 }

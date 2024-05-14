@@ -64,9 +64,9 @@ this.idp= +localStorage.getItem("idP")!;
   //   this.loading=false;
   // }
 
-  this.reservations.forEach((reservation: any) => {
-    this.updateCarStateIfExpired(reservation);
-  });
+  // this.reservations.forEach((reservation: any) => {
+  //   this.updateCarStateIfExpired(reservation);
+  // });
 }, (error: any) => {
   this.loading = false;
 });

@@ -97,7 +97,9 @@
                   <input type="date" id="date_debut_reservation" class="form-control form-control-lg" formControlName="date_debut_reservation"/>
                   <span class="error" *ngIf="fm['date_debut_reservation'].errors?.['required']"  >La date de début de location est obligatoire !</span>
                   <span class="error" *ngIf="fm['date_debut_reservation'].errors?.['LessThanToday']"  >La date ne doit pas être antérieure à la date du jour</span>
-                  <span class="error" *ngIf="formulaire.get('date_debut_reservation')?.errors?.['LessThanTo']">La date de début doit être antérieure à la date de fin.</span>
+                  <div *ngIf="afficherMessageErreur()" class="error">
+                    {{ afficherMessageErreur() }}
+                  </div>
     
     
                 </div>
