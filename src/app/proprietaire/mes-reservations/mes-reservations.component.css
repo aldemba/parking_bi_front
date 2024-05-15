@@ -9,7 +9,8 @@
 }
 
 .cont{
-    background-image: url('.././../../assets/img/park.png');
+    /* background-image: url('.././../../assets/img/park.png'); */
+    background-color: #DED6D6;
     width:100%;
     min-height:92vh;
     background-repeat: no-repeat;
