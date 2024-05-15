@@ -14,4 +14,13 @@
     min-height:92vh;
     background-repeat: no-repeat;
     background-size: cover;
+    padding-top: 60px;
 }
+
+.fixed-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Assurez-vous que le z-index est supérieur à celui des autres éléments de la page */
+  }
