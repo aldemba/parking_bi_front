@@ -116,6 +116,13 @@ export class DetailsParkingComponent {
     return false
   }
 
+  testEtat(etat:string){
+    if(etat =="DISPONIBLE"){
+      return true
+    }
+      return false
+  }
+
   getDifferenceInDaysbis(dateString: string): boolean {
     const today = new Date();
     const date = new Date(dateString);
