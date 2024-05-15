@@ -109,6 +109,8 @@ LessThanTo(controls: FormGroup): ValidationErrors | null {
 }
 
 get fm(){
+  // console.log(this.formulaire);
+  
   return this.formulaire.controls;
 }
 

@@ -119,9 +119,11 @@
                   <div class="design me-4 mt-4">
                     <label for="image" class="form-label">Image permis</label>
                   </div>
-    
+                  
+                  
                   <input type="file" class="form-control form-control-lg" accept="image/*" id="image" (change)="onFileChange($event); onChange($event)" />
                 </div>
+                <span class="error" *ngIf="message" >L'image est obligatoire</span>
     
                 <div class="mt-4 justify-content-center d-flex align-items-center">
                   <button type="submit" class="btn btn-lg btn-outline-warning" [disabled]="formulaire.invalid">  Ajouter</button>

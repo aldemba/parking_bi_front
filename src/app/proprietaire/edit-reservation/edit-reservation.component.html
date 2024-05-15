@@ -17,13 +17,13 @@
                         </div>
                         <div class="form-group mt-2">
                             <label class="form-label" for="date_fin_reservation">Date Fin Réservation</label>
-                            <input type="date" id="date_fin_reservation" class="form-control form-control-lg"
-                                formControlName="date_fin_reservation" />
+                            <input type="date" id="date_fin_reservation" class="form-control form-control-lg" formControlName="date_fin_reservation" />
                             <span class="error"
                                 *ngIf="fm[('date_fin_reservation')]?.hasError('required')">La date de la réservation est obligatoire ! </span>
-                            <span class="error"
-                                *ngIf="fm[('date_fin_reservation')]?.hasError('LessThanToday')">La date doit être supérieure à la date du jour ! </span>
-                            <span class="error" *ngIf="fm['date_fin_reservation']?.errors?.['LessThanTo']">La date de début doit être antérieure à la date de fin! </span>
+                            <!--<span class="error" *ngIf="fm['date_fin_reservation']?.errors?.['LessThanTo']">La date de début doit être antérieure à la date de fin! </span> -->
+                           <span class="error" *ngIf="fm['date_fin_reservation'].errors?.['LessThanToday']"  >La date ne doit pas être antérieure ou égale à la date du jour</span>
+                            
+
 
 
                         </div>

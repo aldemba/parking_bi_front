@@ -20,6 +20,8 @@ idp:number|0=0
 
 loading: boolean = true; 
 
+updatedReservations: Set<number> = new Set<number>();
+
 
 
 constructor(private activatedroute:ActivatedRoute,private locationsserv:LocationService,private tokserv:TokenService,private parkserv:ParkingsService, private router:Router, private voitureService: VoituresService){
@@ -28,19 +30,7 @@ constructor(private activatedroute:ActivatedRoute,private locationsserv:Location
 
 
 ngOnInit() {
-  // let id=0;
-  // this.activatedroute.paramMap.subscribe(
-  //   param=> {
-  //     id=+param.get("id")!;
 
-  //     this.locationsserv.getReservationsByParking(id).subscribe((data)=> {
-  //       this.reservations=data;
-  //       console.log(data);
-        
-
-  //     })
-  //   }
-  // )
 this.idp= +localStorage.getItem("idP")!;
 
 
@@ -56,6 +46,7 @@ this.idp= +localStorage.getItem("idP")!;
   this.parkserv.getParkingsById(+idClientConnecté).subscribe(data=>{
     // this.reservations=data.allReservations
    this.reservations=data.allReservations.filter((r:any) => r.voiture.parking==this.idp)
+  //  this.reservations=this.reservations.filter((r:any) => r.voiture.etat="INDISPONIBLE")
 
    this.loading=false;
 
@@ -64,21 +55,26 @@ this.idp= +localStorage.getItem("idP")!;
   //   this.loading=false;
   // }
 
-  // this.reservations.forEach((reservation: any) => {
-  //   this.updateCarStateIfExpired(reservation);
-  // });
+  this.reservations.forEach((reservation: any) => {
+    this.updateCarStateIfExpired(reservation);
+  });
+
+
+
+ this.reservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation) > new Date());
+
 }, (error: any) => {
   this.loading = false;
 });
+
+
 
   
 
 
 }
 
-// ngOnDestroy() {
-//   localStorage.removeItem("idP")
-// }
+
 
 
 redirectToEditR(idr: number) {
@@ -98,6 +94,12 @@ updateCarStateIfExpired(reservation: any) {
   const currentDate = new Date();
   const endDate = new Date(reservation.date_fin_reservation);
 
+  
+  
+  // console.log('Current Date:', currentDate);
+  // console.log('End Date:', endDate);
+  // console.log(typeof endDate)
+
   if (endDate <= currentDate) {
     // Mettez à jour l'état de la voiture.
     const voitureToUpdate = {
@@ -116,6 +118,37 @@ updateCarStateIfExpired(reservation: any) {
     );
   }
 }
+
+// updateCarStateIfExpired(reservation: any) {
+//   const reservationId = reservation.id;
+
+//   // Vérifie si la réservation a déjà été mise à jour
+//   if (this.updatedReservations.has(reservationId)) {
+//     console.log(`La réservation ${reservationId} a déjà été mise à jour. Ignorée.`);
+//     return;
+//   }
+
+//   const currentDate = new Date();
+//   const endDate = new Date(reservation.date_fin_reservation);
+
+//   if (endDate <= currentDate) {
+//     const voitureToUpdate = {
+//       id: reservation.voiture.id,
+//       etat: 'DISPONIBLE'
+//     };
+
+//     this.voitureService.changeState(voitureToUpdate).subscribe(
+//       () => {
+//         console.log('État de la voiture mis à jour avec succès.');
+//         // Ajoute l'identifiant de la réservation à la liste des réservations mises à jour
+//         this.updatedReservations.add(reservationId);
+//       },
+//       (error:any) => {
+//         console.error('Une erreur est survenue lors de la mise à jour de l\'état de la voiture : ', error);
+//       }
+//     );
+//   }
+// }
 
 
 }

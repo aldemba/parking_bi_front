@@ -23,6 +23,8 @@ export class ReservationsComponent {
   imageSrc=""
   boutonVisible = true;
   loading: boolean = true; 
+  message:string=""
+
 
 
 
@@ -127,6 +129,7 @@ get fm(){
 
 goBack(){
   this.router.navigate(["/admin/parkings/"+this.parkingId+"/voitures"]);
+  // this.router.navigate(["/admin/parkings/"+this.parkingId+"/voitures/add/"+this.idv]);
 }
 
 
@@ -168,6 +171,8 @@ goBack(){
   }
 
   onSubmitRervation() {
+    if(this.file){
+
       let formValues = this.formulaire.value;
       console.log(formValues);
       formValues = Object.assign({}, formValues, {
@@ -180,7 +185,8 @@ goBack(){
         next: (data: any) => {
           // Succès de l'appel à saveCar(), exécuter les actions suivantes
           this.formulaire.reset();
-          this.router.navigate(["/admin/parkings//reservations"]);
+          // this.router.navigate(["/admin/parkings/reservations"]);
+          this.router.navigate(["/admin/parkings/"+this.parkingId+"/voitures"]);
           this.showSuccess();
         },
         error: (err: any) => {
@@ -197,8 +203,12 @@ goBack(){
           // Vous pouvez également afficher un message d'erreur ici si vous le souhaitez
         }
       });
+    }else{
+      this.message="a"
     }
  
+
+    }
   }
 
   

@@ -10,7 +10,8 @@
   /* background-image: url(../../../assets/img/design.png);
   background-size: cover;
    */
-   background-image: url('.././../../assets/img/park.png');
+   /* background-image: url('.././../../assets/img/park.png'); */
+   background-color: grey;
    width:100%;
    min-height:100vh;
    background-repeat: no-repeat;
