@@ -22,9 +22,6 @@ loading: boolean = true;
 
 reservSelect: any;
 
-updatedReservations: Set<number> = new Set<number>();
-
-
 
 constructor(private activatedroute:ActivatedRoute,private locationsserv:LocationService,private tokserv:TokenService,private parkserv:ParkingsService, private router:Router, private voitureService: VoituresService){
 
@@ -49,6 +46,7 @@ this.idp= +localStorage.getItem("idP")!;
     // this.reservations=data.allReservations
    this.reservations=data.allReservations.filter((r:any) => r.voiture.parking==this.idp)
   //  this.reservations=this.reservations.filter((r:any) => r.voiture.etat="INDISPONIBLE")
+  this.reservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation).getTime() > new Date().getTime());
 
    this.loading=false;
 
