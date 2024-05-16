@@ -57,12 +57,12 @@ this.idp= +localStorage.getItem("idP")!;
   //   this.loading=false;
   // }
 
-  this.reservations.forEach((reservation: any) => {
-      this.updateCarStateIfExpired(reservation);
-      this.reservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation).getTime() > new Date().getTime());
-  });
+  // this.reservations.forEach((reservation: any) => {
+  //     this.updateCarStateIfExpired(reservation);
+  //     // this.reservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation).getTime() > new Date().getTime());
+  // });
 
-
+    this.updateCarStateIfMultipleReservations();
 
 
 }, (error: any) => {
@@ -96,50 +96,81 @@ afficherDetailsVoiture(reservation: any) {
   this.reservSelect = reservation; // Affecter les informations de la reservation sélectionnée à la variable
 }
 
-updateCarStateIfExpired(reservation: any) {
-  const currentDate = new Date().getTime();
-  const endDate = new Date(reservation.date_fin_reservation).getTime();
+updateCarStateIfMultipleReservations() {
+  const reservationsParVoiture = new Map<number, any>(); // Map pour stocker les réservations regroupées par identifiant de voiture
 
-  
-  
-  // console.log('Current Date:', currentDate);
-  // console.log('End Date:', endDate);
-  // console.log(typeof endDate)
+  // Regrouper les réservations par identifiant de voiture
+  this.reservations.forEach((reservation: any) => {
+    const idVoiture = reservation.voiture.id;
+    if (!reservationsParVoiture.has(idVoiture)) {
+      reservationsParVoiture.set(idVoiture, []);
+    }
+    reservationsParVoiture.get(idVoiture)?.push(reservation);
+  });
 
-  if (endDate <= currentDate) {
-    // Mettez à jour l'état de la voiture.
-    const voitureToUpdate = {
-      id: reservation.voiture.id, // Assurez-vous que cet objet contient un identifiant unique.
-      etat: 'DISPONIBLE' // Vous pouvez ajuster cette valeur selon vos besoins.
-    };
+  // Traiter les réservations pour chaque voiture
+  reservationsParVoiture.forEach((reservationsVoiture: any[], idVoiture: number) => {
+    // Trier les réservations par date de fin pour obtenir la dernière en premier
+    reservationsVoiture.sort((a, b) => new Date(b.date_fin_reservation).getTime() - new Date(a.date_fin_reservation).getTime());
 
-    // Appelez la méthode changeState de VoituresService pour mettre à jour l'état de la voiture.
-    this.voitureService.changeState(voitureToUpdate).subscribe(
-      () => {
-        console.log('État de la voiture mis à jour avec succès.');
-      },
-      (error:any) => {
-        console.error('Une erreur est survenue lors de la mise à jour de l\'état de la voiture : ', error);
-      }
-    );
-  }else{
-    const voitureToUpdate = {
-      id: reservation.voiture.id, // Assurez-vous que cet objet contient un identifiant unique.
-      etat: 'INDISPONIBLE' // Vous pouvez ajuster cette valeur selon vos besoins.
-    };
+    // Obtenir la dernière réservation pour la voiture
+    const derniereReservation = reservationsVoiture[0];
 
-    // Appelez la méthode changeState de VoituresService pour mettre à jour l'état de la voiture.
-    this.voitureService.changeState(voitureToUpdate).subscribe(
-      () => {
-        console.log('Pas encore');
-      },
-      (error:any) => {
-        console.error('Une erreur est survenue lors de la mise à jour de l\'état de la voiture : ', error);
-      }
-    );
+    // Vérifier s'il existe une dernière réservation
+    if (derniereReservation) {
+      const dateActuelle = new Date().getTime();
+      const dateFin = new Date(derniereReservation.date_fin_reservation).getTime();
 
-  }
+      // Mettre à jour l'état de la voiture en fonction de la dernière réservation
+      const nouvelEtat = dateFin > dateActuelle ? 'INDISPONIBLE' : 'DISPONIBLE';
+
+      const voitureAMettreAJour = {
+        id: derniereReservation.voiture.id,
+        etat: nouvelEtat
+      };
+
+      // Mettre à jour l'état de la voiture en utilisant VoituresService
+      this.voitureService.changeState(voitureAMettreAJour).subscribe(
+        () => {
+          console.log('État de la voiture mis à jour avec succès en fonction de plusieurs réservations.');
+        },
+        (erreur: any) => {
+          console.error('Une erreur est survenue lors de la mise à jour de l\'état de la voiture : ', erreur);
+        }
+      );
+    }
+  });
 }
+
+
+// updateCarStateIfExpired(reservation: any) {
+//   const currentDate = new Date().getTime();
+//   const endDate = new Date(reservation.date_fin_reservation).getTime();
+
+  
+  
+//   // console.log('Current Date:', currentDate);
+//   // console.log('End Date:', endDate);
+//   // console.log(typeof endDate)
+
+//   if (endDate <= currentDate) {
+//     // Mettez à jour l'état de la voiture.
+//     const voitureToUpdate = {
+//       id: reservation.voiture.id, // Assurez-vous que cet objet contient un identifiant unique.
+//       etat: 'DISPONIBLE' // Vous pouvez ajuster cette valeur selon vos besoins.
+//     };
+
+//     // Appelez la méthode changeState de VoituresService pour mettre à jour l'état de la voiture.
+//     this.voitureService.changeState(voitureToUpdate).subscribe(
+//       () => {
+//         console.log('État de la voiture mis à jour avec succès.');
+//       },
+//       (error:any) => {
+//         console.error('Une erreur est survenue lors de la mise à jour de l\'état de la voiture : ', error);
+//       }
+//     );
+//   }
+// }
 
 // updateCarStateIfExpired(reservation: any) {
 //   const reservationId = reservation.id;
