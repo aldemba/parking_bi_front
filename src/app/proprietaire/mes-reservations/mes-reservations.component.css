@@ -12,7 +12,7 @@
     /* background-image: url('.././../../assets/img/park.png'); */
     background-color: #DED6D6;
     width:100%;
-    min-height:92vh;
+    min-height:100vh;
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 60px;
@@ -25,3 +25,34 @@
     width: 100%;
     z-index: 1000; /* Assurez-vous que le z-index est supérieur à celui des autres éléments de la page */
   }
+
+  .imgbis{
+    height: 66vh;
+    width: 20vw;
+}
+
+.imgb{
+    height: 14vh;
+    width: 6vw;
+}
+
+.spac{
+    /* padding: 3%; */
+    padding-left: 10%;
+}
+
+.visite-date{
+    white-space: nowrap;
+}
+
+
+.tall{
+    position: absolute;
+    height: 80vh;
+    width: 40vw !important;
+    margin-right: 60% !important;
+}
+
+.posi{
+    margin-left: 14% !important;
+}

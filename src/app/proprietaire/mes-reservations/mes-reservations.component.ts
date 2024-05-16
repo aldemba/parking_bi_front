@@ -20,6 +20,8 @@ idp:number|0=0
 
 loading: boolean = true; 
 
+reservSelect: any;
+
 updatedReservations: Set<number> = new Set<number>();
 
 
@@ -56,12 +58,12 @@ this.idp= +localStorage.getItem("idP")!;
   // }
 
   this.reservations.forEach((reservation: any) => {
-    this.updateCarStateIfExpired(reservation);
+      this.updateCarStateIfExpired(reservation);
+      this.reservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation).getTime() > new Date().getTime());
   });
 
 
 
- this.reservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation) > new Date());
 
 }, (error: any) => {
   this.loading = false;
@@ -90,9 +92,13 @@ goBack() {
 
 }
 
+afficherDetailsVoiture(reservation: any) {
+  this.reservSelect = reservation; // Affecter les informations de la reservation sélectionnée à la variable
+}
+
 updateCarStateIfExpired(reservation: any) {
-  const currentDate = new Date();
-  const endDate = new Date(reservation.date_fin_reservation);
+  const currentDate = new Date().getTime();
+  const endDate = new Date(reservation.date_fin_reservation).getTime();
 
   
   
@@ -116,6 +122,22 @@ updateCarStateIfExpired(reservation: any) {
         console.error('Une erreur est survenue lors de la mise à jour de l\'état de la voiture : ', error);
       }
     );
+  }else{
+    const voitureToUpdate = {
+      id: reservation.voiture.id, // Assurez-vous que cet objet contient un identifiant unique.
+      etat: 'INDISPONIBLE' // Vous pouvez ajuster cette valeur selon vos besoins.
+    };
+
+    // Appelez la méthode changeState de VoituresService pour mettre à jour l'état de la voiture.
+    this.voitureService.changeState(voitureToUpdate).subscribe(
+      () => {
+        console.log('Pas encore');
+      },
+      (error:any) => {
+        console.error('Une erreur est survenue lors de la mise à jour de l\'état de la voiture : ', error);
+      }
+    );
+
   }
 }
 
