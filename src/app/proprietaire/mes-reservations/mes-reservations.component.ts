@@ -46,7 +46,6 @@ this.idp= +localStorage.getItem("idP")!;
     // this.reservations=data.allReservations
    this.reservations=data.allReservations.filter((r:any) => r.voiture.parking==this.idp)
   //  this.reservations=this.reservations.filter((r:any) => r.voiture.etat="INDISPONIBLE")
-  this.reservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation).getTime() > new Date().getTime());
 
    this.loading=false;
 
@@ -131,6 +130,8 @@ updateCarStateIfMultipleReservations() {
       this.voitureService.changeState(voitureAMettreAJour).subscribe(
         () => {
           console.log('État de la voiture mis à jour avec succès en fonction de plusieurs réservations.');
+          this.reservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation).getTime() > new Date().getTime());
+
         },
         (erreur: any) => {
           console.error('Une erreur est survenue lors de la mise à jour de l\'état de la voiture : ', erreur);
