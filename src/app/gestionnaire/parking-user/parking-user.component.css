@@ -1,0 +1,31 @@
+.pi{
+    height: 5vh;
+}
+
+
+h4{
+    text-align: center;
+    
+}
+
+h3{
+   margin: 2rem  0  0  30rem;
+}
+
+.animation{
+    animation-name: contenu;
+    animation-duration: 2s;
+}
+
+@keyframes contenu{
+    0% {
+        opacity: 0;
+        transform: scale3d(.3, .3, .3);
+    }
+    50% {
+        opacity: 1;
+    }
+}
+.error{
+    color: red;
+}

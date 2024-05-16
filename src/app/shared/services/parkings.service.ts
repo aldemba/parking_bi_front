@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { TokenService } from './token.service';
+import { Parking } from '../models/parking';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,39 @@ export class ParkingsService {
     return this.http.get<any>(PARKINGS_PROPRIO).pipe( catchError(this.handleError))
     // console.log(this.http.get<any>(PARKINGS_PROPRIO, httpOptions));
     
+  }
+
+  saveParking(parking:Parking):Observable<any>{
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': `Bearer ${this.toksev.getTokenFromStorage()}`
+      })
+    };
+  let addParking:string=`http://127.0.0.1:8000/api/parkings`
+
+    return this.http.post<Parking>(addParking,parking,httpOptions).pipe
+    (catchError(this.handleError));
+    
+  } 
+
+
+  editCar(body:Parking, parkingId:number):Observable<Parking>{
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/merge-patch+json'
+      })
+    };
+    return this.http.patch<Parking>(`http://127.0.0.1:8000/api/parkings/${parkingId}`,body,httpOptions).pipe(catchError(this.handleError));
+  }
+
+ 
+  getParkingById(parkingId:number):Observable<any>{
+    return this.http.get<any>(`http://127.0.0.1:8000/api/parkings/${parkingId}`).pipe(  
+    catchError(this.handleError)
+    )
   }
 
 

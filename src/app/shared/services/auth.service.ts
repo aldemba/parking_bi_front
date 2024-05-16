@@ -66,7 +66,7 @@ export class AuthService {
       //   this.tokenserv.saveId(m)        
       // );
             
-       (this.hasRole("ROLE_PROPRIETAIRE")) ?  this.router.navigate(["/admin/parkings"]) : this.router.navigate(["/superadmin/"])
+       (this.hasRole("ROLE_PROPRIETAIRE")) ?  this.router.navigate(["/admin/parkings"]) : this.router.navigate(["/superadmin/accueil"])
     })
   }
 

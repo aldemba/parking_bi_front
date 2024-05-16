@@ -1,0 +1,66 @@
+
+
+.b{
+    border-radius: 10px;
+    border: solid 2px;
+}
+
+h2{
+    text-align: center;
+    
+}
+
+
+*{
+    box-sizing: border-box;
+}
+
+.test{
+    display: flex;
+}
+
+/* input[type="file"]{
+    display: none;
+} */
+
+.design{
+    align-items: center;
+    align-content: center;
+    border-radius: 10px;
+    border: 2px solid #ffdd75;
+}
+
+.ava{
+    height: 10vh;
+    width: 10vh;
+
+}
+.vn{
+    border: none;
+}
+
+.animation{
+    animation-name: contenu;
+    animation-duration: 2s;
+}
+
+@keyframes contenu{
+    0% {
+        opacity: 0;
+        transform: scale3d(.3, .3, .3);
+    }
+    50% {
+        opacity: 1;
+    }
+}
+.error{
+    color: red;
+}
+.fo{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    height: 4vh;
+
+
+}

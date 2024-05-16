@@ -1,0 +1,60 @@
+<app-sidebar></app-sidebar>
+<div class="container mt-3">
+    <div class="container mt-3">
+        <button class="btn btn-outline-warning mr-3" (click)="goBack()">Retour</button>
+    </div>
+    <div class="row">
+
+        <div class="animation p-3">
+            <h2>Ajout d'un parking</h2>
+            <div class="">
+                <div class="shadow p-2 p-md-4">
+                    <form [formGroup]="formulaire" (ngSubmit)="submitParking()">
+
+                        <div class="form-group mt-2">
+
+                            <label class="form-label" for="nom">Nom</label>
+                            <input type="text" id="nom" class="form-control form-control-lg" formControlName="nom" />
+                            <span class="error" *ngIf="fm['nom'].errors?.['minlength']">Le nom doit faire au minimum 6
+                                caractères </span>
+                            <span class="error" *ngIf="fm['nom'].errors?.['required']">Le nom est obligatoire ! </span>
+                            <span class="error" *ngIf="fm['nom'].errors?.['maxlength']">Le nom doit faire au maximum 30
+                                caractères</span>
+                        </div>
+
+
+                        <div class="form-group mt-2">
+                            <label class="form-label" for="adresse">Adresse</label>
+                            <input type="text" id="adresse" class="form-control form-control-lg"
+                                formControlName="adresse" />
+                            <span class="error" *ngIf="fm['adresse'].errors?.['pattern']"> Le format de l'adresse n'est
+                                pas correcte </span>
+                            <span class="error" *ngIf="fm['adresse'].errors?.['required']">L'adresse est obligatoire
+                                !</span>
+                            <span class="error" *ngIf="fm['adresse'].errors?.['minlength']">L'adresse doit faire au
+                                minimum 3 caractères </span>
+                        </div>
+
+                        <div class="form-group mt-2 d-flex">
+
+                            <div class="design me-4 mt-4">
+                                <label for="image" class="form-label">Choisir une image</label>
+                            </div>
+                            <img [src]="imageSrc" class="ava" alt="">
+
+                            <input type="file" class="form-control form-control-lg" accept="image/*" (change)="onFileChange($event);onChange($event)" id="image" />
+
+                        </div>
+                        <span class="error" *ngIf="message">L'image est obligatoire</span>
+
+
+                        <div class="mt-4 justify-content-center d-flex align-items-center">
+                            <button type="submit" class="btn btn-lg btn-outline-warning" [disabled]="formulaire.invalid">
+                                Ajouter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

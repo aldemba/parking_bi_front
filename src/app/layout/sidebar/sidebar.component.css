@@ -1,0 +1,117 @@
+
+body{
+    background-color: white;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+  /* Track */
+::-webkit-scrollbar-track {
+    background: black; 
+}
+
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #f1b607; 
+    border-radius: 10px;
+}
+/* navbar */
+
+.navbar{
+    /* width: 100%; */
+    /* height: 100px; */
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    color: white;
+    display: flex;
+    padding: 0px 100px;
+}
+
+.logo{
+    cursor: pointer;
+}
+.nav{
+    list-style: none;
+    display: flex;
+    /* padding: 30px; */
+}
+
+/* .nav-items{
+     padding: 10px; 
+} */
+
+.nav-items a {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    color: black;
+    font-weight: 700;
+    padding: 20px;
+    z-index: 1;
+    text-decoration: none;
+    justify-content: center; /* Metni yatayda ortalamak için ekledik */
+}
+
+.nav-items a .link-text {
+    margin-left: 8px;
+    transition: opacity 0.4s;
+    opacity: 1;
+}
+
+.nav-items a i {
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 0.4s;
+    position: absolute;
+    left: 50%; /* Ikonu yatayda ortalamak için ekledik */
+    transform: translateX(-50%); /* Ikonu yatayda ortalamak için ekledik */
+}
+
+.nav-items a:hover .link-text {
+    opacity: 0;
+}
+
+.nav-items a:hover i {
+    opacity: 1;
+}
+
+.nav-items a::before{
+    content: ''; 
+    width: 100%;
+    height: 0px;
+    background: #f1b607;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    bottom: -0px;
+    border-radius: 8px;
+    transition: height 0.4s;
+}
+.nav-items a:hover::before{
+    height: 100%;
+}
+.btn{
+    color: white;
+    padding: 10px 30px ;
+    background-color: #f1b607;
+    border-radius: 15px;
+    font-weight: 700;
+    transition: all 0.4s;
+
+}
+.btn .ok{
+    transition: all 0.4s;
+}
+
+.btn:hover{
+    padding: 10px 40px;
+}
+
+a{
+    cursor: pointer;
+}
+/* navbar end */

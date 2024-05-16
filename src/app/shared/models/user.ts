@@ -16,4 +16,8 @@ export interface User {
     telephone? : string;
 
     adresse? :string
+
+    "@type": string
+
+    isVisible:boolean
 }

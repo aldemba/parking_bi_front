@@ -1,0 +1,68 @@
+<app-sidebar></app-sidebar>
+<div class="container mt-3">
+  <div class="container mt-3">
+    <button class="btn btn-outline-warning mr-3" (click)="goBack()">Retour</button>
+</div>
+ 
+    <div class="row">
+   
+      <div class="animation p-3">
+        <h2>Mise à jour des informations d'un utilisateur</h2>
+        <div class="">
+          <div class="shadow p-2 p-md-4">
+            <form [formGroup]="formulaire" (ngSubmit)="onEditUser()">
+
+              <div class="form-group mt-2">
+                <label class="form-label" for="nom">Prénom</label>
+  
+                <input type="text" id="prenom"  class="form-control form-control-lg" formControlName="prenom" />
+                <span class="error" *ngIf="fm['prenom'].errors?.['minlength']">Le prenom doit faire au minimum 6 caractères </span>
+                <span class="error" *ngIf="fm['prenom'].errors?.['required']" >Le prenom est obligatoire ! </span>
+                <span class="error" *ngIf="fm['prenom'].errors?.['maxlength']" >Le prenom doit faire au maximum 30 caractères</span>
+              </div>
+
+              <div class="form-group mt-2">
+
+                <label class="form-label" for="nom">Nom</label>
+                <input type="text" id="nom"  class="form-control form-control-lg" formControlName="nom" />
+                <span class="error" *ngIf="fm['nom'].errors?.['minlength']">Le nom doit faire au minimum 2 caractères </span>
+                <span class="error" *ngIf="fm['nom'].errors?.['required']" >Le nom est obligatoire ! </span>
+                <span class="error" *ngIf="fm['nom'].errors?.['maxlength']" >Le nom doit faire au maximum 30 caractères</span>
+              </div>
+            
+  
+              <div class="form-group mt-2">
+                <label class="form-label" for="adresse">Adresse</label>
+                <input type="text" id="adresse" class="form-control form-control-lg" formControlName="adresse" />
+                <span class="error" *ngIf="fm['adresse'].errors?.['pattern']"> Le format de l'adresse n'est pas correcte </span>
+                <span class="error" *ngIf="fm['adresse'].errors?.['required']"  >L'adresse est obligatoire !</span>
+                <span class="error" *ngIf="fm['adresse'].errors?.['minlength']"  >L'adresse doit faire au minimum 3 caractères </span>
+              </div>
+  
+              <div class="form-group mt-2">
+                <label class="form-label" for="telephone">Téléphone</label>
+                <input type="text" id="telephone"  class="form-control form-control-lg" formControlName="telephone" />
+                <span class="error" *ngIf="fm['telephone'].errors?.['pattern']"> Le format du téléphone n'est pas correcte </span>
+                <span class="error" *ngIf="fm['telephone'].errors?.['required']"  >Le téléphone est obligatoire !</span>
+              </div>
+
+              <div class="form-group mt-2">
+                <label class="form-label" for="email">E-mail</label>
+                <input type="text" id="email"  class="form-control form-control-lg" formControlName="email" />
+                <span class="error" *ngIf="fm['email'].errors?.['pattern']"> Le format de l'email n'est pas correcte </span>
+                <span class="error" *ngIf="fm['email'].errors?.['email']"> Revoir ton email</span>
+                <span class="error" *ngIf="fm['email'].errors?.['required']"  >L'email est obligatoire !</span>
+              </div>
+           
+          
+              <div class="mt-4 justify-content-center d-flex align-items-center">
+                <button type="submit" class="btn btn-lg btn-outline-warning b" [disabled]="formulaire.invalid">Ajouter</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+

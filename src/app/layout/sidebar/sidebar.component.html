@@ -1,0 +1,32 @@
+
+<body>
+    <nav class="navbar shadow">
+        <div class="logo">
+            <a href=""><img src="https://1000logos.net/wp-content/uploads/2018/10/Minecraft-Logo.png" alt="logo" width="150px"></a> <!-- Your Logo -->
+        </div>
+        <ul class="nav">
+            <li class="nav-items" (click)="redirectToAccueil()"><a ><span class="link-text">Accueil</span><i class="fa-solid fa-house"></i></a></li>
+            <li class="nav-items"  (click)="redirectToUser()"><a ><span class="link-text">Users</span><i class="fa-solid fa-store"></i></a></li>
+            <li class="nav-items"><a ><span class="link-text">Parkings</span><i class="fa-solid fa-user"></i></a></li>
+            <li class="nav-items"><a ><span class="link-text">Infos</span><i class="fa-solid fa-circle-info"></i></a></li>
+        </ul>
+        <!-- <a  class="btn">Login<i class="fa-solid fa-chevron-right ok"></i></a> -->
+
+        <div class="text-end">
+        
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-dark btn" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               Mame
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item">Paramètres</a></li>
+                <!--<li><a class="dropdown-item btn btn-outline-warning" href="">Deconnexion</a></li>-->
+                <li class="dropdown-item curs" (click)="logout()"> <a >Deconnexion</a> </li>
+              </ul>
+            </li>
+                <!-- <li><button type="button" (click)="logout()" class="btn btn-outline-warning me-2">Deconnexion</button></li> -->
+          </div>
+    </nav>
+</body>
+
+
