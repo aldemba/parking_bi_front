@@ -36,12 +36,13 @@ export class DetailsParkingComponent {
   expectedUrl=''
   errorMessage: string | null = null;
   loading: boolean = true; 
+  reservations:any;
 
   
 
 
 
-  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService,private errorService: ErrorService, private disponibiliteService: DisponibiliteService  ) { }
+  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService,private errorService: ErrorService, private gestionserv:GestionReservationService, private disponibiliteService:DisponibiliteService ) { }
 
   ngOnInit() {
     let id=0;
@@ -75,6 +76,12 @@ export class DetailsParkingComponent {
               this.voitureserv.changeState(voiture).subscribe();
             }
           });
+          this.gestionserv.idObservable$.subscribe(reserv=>{
+            this.reservations=reserv.filter((r:any) => r.voiture.parking==id);
+            // this.reservations=this.reservations
+          })
+          console.log(this.reservations);
+          
           
           // this.voitures.forEach((voiture: any) => {
           //   voiture.etatSwitch = voiture.etat === 'DISPONIBLE';

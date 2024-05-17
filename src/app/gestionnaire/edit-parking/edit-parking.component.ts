@@ -77,10 +77,8 @@ export class EditParkingComponent {
   onEditParking() {
     let formValues = this.formulaire.value;
 
-    formValues = Object.assign({}, formValues, {
-      "proprietaire": {
+    formValues = Object.assign({}, formValues, { 
         "id": this.userId
-      }
     });
 
     console.log(formValues);

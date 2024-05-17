@@ -7,11 +7,11 @@ import { BehaviorSubject } from 'rxjs';
 export class GestionReservationService {
 
 
-  private idSubject= new BehaviorSubject<number|0>(0);
+  private idSubject= new BehaviorSubject<any>([]);
 
   idObservable$=this.idSubject.asObservable();
 
-  setId(id:number): void {
+  setR(id:any): void {
     this.idSubject.next(id);
   }
 

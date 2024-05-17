@@ -7,6 +7,7 @@ import { EditCarComponent } from './edit-car/edit-car.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { MesReservationsComponent } from './mes-reservations/mes-reservations.component';
 import { EditReservationComponent } from './edit-reservation/edit-reservation.component';
+import { roleGuard } from '../shared/guards/role.guard';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'parkings/:id/voitures',component:DetailsParkingComponent},
   {path:'parkings/reservations',component:MesReservationsComponent},
   {path:'parkings',component:MesParkingsComponent},
+  // {path:'parkings',component:MesParkingsComponent, canActivate:[roleGuard], data: { role: "ROLE_PROPRIETAIRE"}}
   // {path:'parkings/voitures',component:DetailsParkingComponent}
 ];
 

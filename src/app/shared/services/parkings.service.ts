@@ -54,11 +54,23 @@ export class ParkingsService {
 
  
   getParkingById(parkingId:number):Observable<any>{
-    return this.http.get<any>(`http://127.0.0.1:8000/api/parkings/${parkingId}`).pipe(  
+    return this.http.get<any>(`http://127.0.0.1:8000/api/parkings/${parkingId}/voitures`).pipe(  
     catchError(this.handleError)
     )
   }
 
+  changeVisibility(parking: Parking) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/merge-patch+json'
+      })
+    };
+    const parkingId = parking.id; // Assurez-vous que votre objet voiture contient un identifiant unique.
+    const updateUrl = `http://127.0.0.1:8000/api/parkings/${parkingId}`;
+    return this.http.patch(updateUrl, { isVisible: false }, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

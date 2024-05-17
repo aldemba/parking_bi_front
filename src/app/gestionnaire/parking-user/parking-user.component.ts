@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Parking } from 'src/app/shared/models/parking';
 import { User } from 'src/app/shared/models/user';
+import { ParkingsService } from 'src/app/shared/services/parkings.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-parking-user',
@@ -16,7 +19,7 @@ export class ParkingUserComponent {
   parkings:any
   parkingselected!:Parking
 
-  constructor(private route:ActivatedRoute,private proprioserv:UserService,private router:Router){}
+  constructor(private route:ActivatedRoute,private proprioserv:UserService,private router:Router, private parkinserv:ParkingsService, private toastr:ToastrService){}
 
   ngOnInit(){
     let userId=0;
@@ -64,6 +67,35 @@ export class ParkingUserComponent {
   
   afficherDetailsParking(parking: Parking) {
     this.parkingselected = parking; // Affecter les informations de la voiture sélectionnée à la variable
+  }
+
+  showSuccess() {
+    this.toastr.success('Le parking a été supprimée avec succès!', 'Suppression!');
+  }
+
+  deleteParking(parking: Parking) {
+    Swal.fire({
+      title: 'Êtes-vous sûr?',
+      text: "Voulez-vous vraiment supprimer le parking?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimer ce parking !',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Si l'utilisateur confirme, changer l'état de l'utilisateur
+        this.parkinserv.changeVisibility(parking).subscribe({
+
+        });
+        this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+          this.router.navigate(["/superadmin/users/"+this.id+"/details-user"]);
+          this.showSuccess()
+        });
+
+      }
+    });
   }
 
 }

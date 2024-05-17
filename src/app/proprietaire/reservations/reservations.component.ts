@@ -185,8 +185,8 @@ goBack(){
         next: (data: any) => {
           // Succès de l'appel à saveCar(), exécuter les actions suivantes
           this.formulaire.reset();
-          // this.router.navigate(["/admin/parkings/reservations"]);
-          this.router.navigate(["/admin/parkings/"+this.parkingId+"/voitures"]);
+          this.router.navigate(["/admin/parkings/reservations"]);
+          // this.router.navigate(["/admin/parkings/"+this.parkingId+"/voitures"]);
           this.showSuccess();
         },
         error: (err: any) => {
@@ -194,7 +194,7 @@ goBack(){
         // alert(err.error);
          let errorData;
          errorData=err
-        console.log(errorData);
+        // console.log(errorData);
         // if (err.status === 422 && err.error.violations) {
         //   const validationErrors = err.error.violations.map((violation: any) => violation.message);
         //   console.log(validationErrors);
