@@ -26,6 +26,7 @@ loading: boolean = true;
 reservSelect: any;
 
 
+
 constructor(private activatedroute:ActivatedRoute,private locationsserv:LocationService,private tokserv:TokenService,private parkserv:ParkingsService, private router:Router, private voitureService: VoituresService, private gestionreserv:GestionReservationService){
 
 }
@@ -48,10 +49,12 @@ this.idp= +localStorage.getItem("idP")!;
   this.parkserv.getParkingsById(+idClientConnecté).subscribe(data=>{
    this.allReserv=data.allReservations
    this.gestionreserv.setR(this.allReserv);
-   this.reservations=data.allReservations.filter((r:any) => r.voiture.parking==this.idp)
+   this.reservations=data.allReservations.filter((r:any) => r.voiture.parking==this.idp && r.etat==1)
   //  this.reservations=this.reservations.filter((r:any) => r.voiture.etat="INDISPONIBLE")
 
    this.loading=false;
+
+   this.updateExpiredReservations();
 
     console.log(this.reservations);
   // }),(error:any)=>{
@@ -102,6 +105,8 @@ updateCarStateIfMultipleReservations() {
       reservationsParVoiture.set(idVoiture, []);
     }
     reservationsParVoiture.get(idVoiture)?.push(reservation);
+    
+    // console.log("re",reservationsParVoiture);
   });
 
   // Traiter les réservations pour chaque voiture
@@ -120,6 +125,7 @@ updateCarStateIfMultipleReservations() {
       // Mettre à jour l'état de la voiture en fonction de la dernière réservation
       const nouvelEtat = dateFin > dateActuelle ? 'INDISPONIBLE' : 'DISPONIBLE';
 
+
       const voitureAMettreAJour = {
         id: derniereReservation.voiture.id,
         etat: nouvelEtat
@@ -128,18 +134,52 @@ updateCarStateIfMultipleReservations() {
       // Mettre à jour l'état de la voiture en utilisant VoituresService
       this.voitureService.changeState(voitureAMettreAJour).subscribe(
         () => {
-          console.log('État de la voiture mis à jour avec succès en fonction de plusieurs réservations.');
+           console.log('État de la voiture mis à jour avec succès en fonction de plusieurs réservations.');
           this.reservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation).getTime() > new Date().getTime());
+          // if (nouvelEtat === 'DISPONIBLE') {
+          //   this.updateReservationStateToFalse(derniereReservation);
+          // }
 
         },
         (erreur: any) => {
           console.error('Une erreur est survenue lors de la mise à jour de l\'état de la voiture : ', erreur);
         }
       );
+        // Update the state of the reservation to false
+        // this.updateReservationStateToFalse(derniereReservation);
     }
   });
 }
 
+updateExpiredReservations() {
+  const expiredReservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation).getTime() +6000 < new Date().getTime());
+  if (expiredReservations.length > 0) {
+    expiredReservations.forEach((reservation: any) => {
+      reservation.etat = false; // Mettre à jour l'état de la réservation à 'INDISPONIBLE'
+      this.gestionreserv.changeState(reservation).subscribe(
+        () => {
+          // Succès : mettez à jour localement l'état de la réservation
+          reservation.etat = false;
+        },
+        (error: any) => {
+          console.error('Une erreur est survenue lors de la mise à jour de l\'état de la réservation : ', error);
+        }
+      );
+    });
+  }
+}
+
+// updateReservationStateToFalse(reservation: any) {
+//   reservation.etat = false;
+//   this.gestionreserv.changeState(reservation).subscribe(
+//     () => {
+//       console.log('État de la réservation mis à jour avec succès à false.');
+//     },
+//     (error: any) => {
+//       console.error('Une erreur est survenue lors de la mise à jour de l\'état de la réservation : ', error);
+//     }
+//   );
+// }
 
 
 

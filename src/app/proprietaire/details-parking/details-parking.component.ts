@@ -76,11 +76,11 @@ export class DetailsParkingComponent {
               this.voitureserv.changeState(voiture).subscribe();
             }
           });
-          this.gestionserv.idObservable$.subscribe(reserv=>{
-            this.reservations=reserv.filter((r:any) => r.voiture.parking==id);
-            // this.reservations=this.reservations
-          })
-          console.log(this.reservations);
+          // this.gestionserv.idObservable$.subscribe(reserv=>{
+          //   this.reservations=reserv.filter((r:any) => r.voiture.parking==id);
+          //   // this.reservations=this.reservations
+          // })
+          // console.log(this.reservations);
           
           
           // this.voitures.forEach((voiture: any) => {

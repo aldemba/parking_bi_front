@@ -1,4 +1,5 @@
 export interface Reservation {
+    id:number
     nom_complet: string
     adresse: string
     telephone: string

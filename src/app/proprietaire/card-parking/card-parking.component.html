@@ -3,7 +3,7 @@
         <img src="data:image/PNG;base64, {{parkinglist.image}}" class="card__image" alt="">
         <div class="card-body">
             <h1 class="h3 card-title text-center">{{parkinglist.nom}}</h1>
-            <h3 class="card-text">{{parkinglist.adresse}}</h3>
+            <p class="card-text">{{parkinglist.adresse}}</p>
             <div class="btn-group d-flex justify-content-center">
                 <a (click)="navigateWithParams(parkinglist.id);setId(parkinglist.id)" class="btn btn-sm btn-warning">Mes voitures</a>
             </div>
