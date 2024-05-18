@@ -42,7 +42,7 @@ export class DetailsParkingComponent {
 
 
 
-  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService,private errorService: ErrorService, private gestionserv:GestionReservationService, private disponibiliteService:DisponibiliteService ) { }
+  constructor(private activatedroute:ActivatedRoute,private location: Location, private detailserv:DetailsService, private voitureserv: VoituresService, private router:Router, private toastr: ToastrService,private errorService: ErrorService, private gestionserv:GestionReservationService, private disponibiliteService:DisponibiliteService, private voitureService: VoituresService, private gestionreserv:GestionReservationService ) { }
 
   ngOnInit() {
     let id=0;
@@ -76,11 +76,17 @@ export class DetailsParkingComponent {
               this.voitureserv.changeState(voiture).subscribe();
             }
           });
-          // this.gestionserv.idObservable$.subscribe(reserv=>{
-          //   this.reservations=reserv.filter((r:any) => r.voiture.parking==id);
-          //   // this.reservations=this.reservations
-          // })
-          // console.log(this.reservations);
+          this.gestionserv.idObservable$.subscribe(reserv=>{
+            this.reservations=reserv.filter((r:any) => r.voiture.parking==id && r.etat==1);
+            // this.reservations=this.reservations
+          })
+
+         this.updateExpiredReservations();
+
+        this.updateCarStateIfMultipleReservations();
+
+
+          console.log(this.reservations);
           
           
           // this.voitures.forEach((voiture: any) => {
@@ -239,6 +245,80 @@ getDifferenceInDays(dateString: string): boolean {
         this.voitures=this.filtres
 
         break;
+    }
+  }
+
+  updateCarStateIfMultipleReservations() {
+    const reservationsParVoiture = new Map<number, any>(); // Map pour stocker les réservations regroupées par identifiant de voiture
+  
+    // Regrouper les réservations par identifiant de voiture
+    this.reservations.forEach((reservation: any) => {
+      const idVoiture = reservation.voiture.id;
+      if (!reservationsParVoiture.has(idVoiture)) {
+        reservationsParVoiture.set(idVoiture, []);
+      }
+      reservationsParVoiture.get(idVoiture)?.push(reservation);
+      
+      // console.log("re",reservationsParVoiture);
+    });
+  
+    // Traiter les réservations pour chaque voiture
+    reservationsParVoiture.forEach((reservationsVoiture: any[], idVoiture: number) => {
+      // Trier les réservations par date de fin pour obtenir la dernière en premier
+      reservationsVoiture.sort((a, b) => new Date(b.date_fin_reservation).getTime() - new Date(a.date_fin_reservation).getTime());
+  
+      // Obtenir la dernière réservation pour la voiture
+      const derniereReservation = reservationsVoiture[0];
+  
+      // Vérifier s'il existe une dernière réservation
+      if (derniereReservation) {
+        const dateActuelle = new Date().getTime();
+        const dateFin = new Date(derniereReservation.date_fin_reservation).getTime();
+  
+        // Mettre à jour l'état de la voiture en fonction de la dernière réservation
+        const nouvelEtat = dateFin > dateActuelle ? 'INDISPONIBLE' : 'DISPONIBLE';
+  
+  
+        const voitureAMettreAJour = {
+          id: derniereReservation.voiture.id,
+          etat: nouvelEtat
+        };
+  
+        // Mettre à jour l'état de la voiture en utilisant VoituresService
+        this.voitureService.changeState(voitureAMettreAJour).subscribe(
+          () => {
+             console.log('État de la voiture mis à jour avec succès en fonction de plusieurs réservations.');
+            this.reservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation).getTime() > new Date().getTime());
+            // if (nouvelEtat === 'DISPONIBLE') {
+            //   this.updateReservationStateToFalse(derniereReservation);
+            // }
+  
+          },
+          (erreur: any) => {
+            console.error('Une erreur est survenue lors de la mise à jour de l\'état de la voiture : ', erreur);
+          }
+        );
+          // Update the state of the reservation to false
+          // this.updateReservationStateToFalse(derniereReservation);
+      }
+    });
+  }
+  
+  updateExpiredReservations() {
+    const expiredReservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation).getTime() +6000 < new Date().getTime());
+    if (expiredReservations.length > 0) {
+      expiredReservations.forEach((reservation: any) => {
+        reservation.etat = false; // Mettre à jour l'état de la réservation à 'INDISPONIBLE'
+        this.gestionreserv.changeState(reservation).subscribe(
+          () => {
+            // Succès : mettez à jour localement l'état de la réservation
+            reservation.etat = false;
+          },
+          (error: any) => {
+            console.error('Une erreur est survenue lors de la mise à jour de l\'état de la réservation : ', error);
+          }
+        );
+      });
     }
   }
 
