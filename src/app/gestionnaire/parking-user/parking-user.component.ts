@@ -18,6 +18,8 @@ export class ParkingUserComponent {
   user:User|undefined
   parkings:any
   parkingselected!:Parking
+  loading: boolean = true; 
+
 
   constructor(private route:ActivatedRoute,private proprioserv:UserService,private router:Router, private parkinserv:ParkingsService, private toastr:ToastrService){}
 
@@ -37,9 +39,13 @@ export class ParkingUserComponent {
       // console.log("1",data['parkings']);
       
       this.parkings = this.parkings.filter((park: any) => park.isVisible==1);
+      this.loading = false;
+
 
       console.log("m10",this.parkings);
       
+    },(error:any)=>{
+        this.loading = false;
     })
   }
  

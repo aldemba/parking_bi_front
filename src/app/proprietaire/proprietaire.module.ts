@@ -41,6 +41,9 @@ import { LoaderComponent } from './loader/loader.component';
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule
+  ],
+  exports: [
+    LoaderComponent
   ]
 })
 export class ProprietaireModule { }

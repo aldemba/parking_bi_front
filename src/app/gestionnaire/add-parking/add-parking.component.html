@@ -40,7 +40,8 @@
                             <div class="design me-4 mt-4">
                                 <label for="image" class="form-label">Choisir une image</label>
                             </div>
-                            <img [src]="imageSrc" class="ava" alt="">
+
+                            <img *ngIf="imageSrc" [src]="imageSrc" class="ava" alt="">
 
                             <input type="file" class="form-control form-control-lg" accept="image/*" (change)="onFileChange($event);onChange($event)" id="image" />
 

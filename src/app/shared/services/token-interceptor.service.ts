@@ -36,6 +36,12 @@ export class TokenInterceptorService implements HttpInterceptor {
                 this.errorService.setErrorMessage(error.error.detail);
                 
              }
+            //  else if(error.status == 500){
+            //     // console.log(error);
+            //     this.errorService.setErrorMessage("Ce matricule est déja pris, veuillez en choisir un autre");
+
+                
+            //  }
              
              return throwError(() => (""))
          })

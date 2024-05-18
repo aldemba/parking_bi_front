@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ErrorService } from 'src/app/shared/services/error.service';
 import { VoituresService } from 'src/app/shared/services/voitures.service';
 
 @Component({
@@ -18,8 +19,10 @@ export class AddCarComponent {
   defaultImageSrc: string = '../../assets/img/avatar.jpg';
   imageSrc:string=this.defaultImageSrc
   message:string=""
+  // messMat:any;
 
-  constructor(private activatedroute:ActivatedRoute,  private router:Router, private toastr: ToastrService, private formBuilder:FormBuilder,private voitureserv:VoituresService) {
+  constructor(private activatedroute:ActivatedRoute,  private router:Router, private toastr: ToastrService, private formBuilder:FormBuilder,private voitureserv:VoituresService, private err:ErrorService
+  ) {
     this.formulaire=this.formBuilder.group({
       nom: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-zÀ-ÿ ]+$/), Validators.minLength(2), Validators.maxLength(20)])),
       marque: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-zÀ-ÿ ]+$/), Validators.minLength(2), Validators.maxLength(20)])),
@@ -45,7 +48,9 @@ export class AddCarComponent {
       this.idParking=id;
       // console.log(id);
       // console.log(this.formulaire.controls);
-      
+      // this.err.errorMessage$.subscribe(mess=>{
+      //   this.messMat=mess
+      // })
     })
   }
 

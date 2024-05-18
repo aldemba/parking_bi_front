@@ -11,6 +11,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { MesusersComponent } from './mesusers/mesusers.component';
+import { ProprietaireModule } from '../proprietaire/proprietaire.module';
 
 
 
@@ -30,6 +31,7 @@ import { MesusersComponent } from './mesusers/mesusers.component';
     ReactiveFormsModule,
     GestionnaireRoutingModule,
     LayoutModule,
+    ProprietaireModule
     
   ]
 })

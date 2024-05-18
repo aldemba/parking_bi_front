@@ -11,6 +11,15 @@ export class SidebarComponent {
 
   constructor(private tokserv:TokenService,private router:Router){}
 
+  nom:string|null=""
+  prenom:string|null=""
+    
+  ngOnInit(){
+  this.nom=this.getNom()
+  this.prenom=this.getPrenom()
+  }
+
+
   logout() {
     this.tokserv.clearTokenAndId();
   }
@@ -22,5 +31,13 @@ export class SidebarComponent {
 
   redirectToAccueil(){
     this.router.navigate(["/superadmin/accueil"])
+  }
+
+  getNom(){
+    return localStorage.getItem("nom")
+  }
+
+  getPrenom(){
+    return localStorage.getItem("prenom")
   }
 }
