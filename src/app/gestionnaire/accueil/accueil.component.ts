@@ -11,6 +11,8 @@ export class AccueilComponent {
   voitures:number=0;
   parkings:number=0;
   proprietaires:number=0;
+  loading: boolean = true; 
+
 
   constructor(private catalogue: CatalogueService) { }
 
@@ -21,10 +23,12 @@ export class AccueilComponent {
       this.voitures = cata.voitures.length;
       this.parkings = cata.parkings.length;
       this.proprietaires= cata.proprietaires.length;
-   
+      this.loading = false;
       
       
       
+    },(error:any)=>{
+      this.loading = false;
     }
 
     )
