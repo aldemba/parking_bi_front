@@ -13,8 +13,8 @@ private urlCatalogue:string="http://localhost:8000/api/catalogues"
 
   constructor(private http:HttpClient) { }
 
-  getCatalogue():Observable<Catalogue>{
-    return this.http.get<any>(this.urlCatalogue).pipe(catchError(this.handleError), map(response=>response['parkings']))
+  getCatalogue():Observable<any>{
+    return this.http.get<any>(this.urlCatalogue).pipe(catchError(this.handleError))
   }
 
 
