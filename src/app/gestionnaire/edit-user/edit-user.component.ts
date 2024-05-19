@@ -34,6 +34,8 @@ formulaire!:FormGroup
         switchMap((data)=>{          
           this.user=data
           if(this.user){
+            console.log(this.user);
+            
             this.formulaire.patchValue({
               prenom:this.user.prenom,
               nom:this.user.nom,
