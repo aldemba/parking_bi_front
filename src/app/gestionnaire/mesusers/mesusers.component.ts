@@ -14,6 +14,8 @@ export class MesusersComponent {
 
   users: any
   userselected!:User
+  totalLength:any;
+  page:number=1; 
 
   constructor(private userserv: UserService, private router: Router, private toastr: ToastrService) {
 

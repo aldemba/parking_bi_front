@@ -19,6 +19,8 @@ export class ParkingUserComponent {
   parkings:any
   parkingselected!:Parking
   loading: boolean = true; 
+  totalLength:any;
+  page:number=1; 
 
 
   constructor(private route:ActivatedRoute,private proprioserv:UserService,private router:Router, private parkinserv:ParkingsService, private toastr:ToastrService){}

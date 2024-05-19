@@ -12,6 +12,8 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { MesusersComponent } from './mesusers/mesusers.component';
 import { ProprietaireModule } from '../proprietaire/proprietaire.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 
@@ -31,7 +33,9 @@ import { ProprietaireModule } from '../proprietaire/proprietaire.module';
     ReactiveFormsModule,
     GestionnaireRoutingModule,
     LayoutModule,
-    ProprietaireModule
+    ProprietaireModule,
+    NgxPaginationModule
+
     
   ]
 })
