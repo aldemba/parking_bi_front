@@ -4,9 +4,9 @@
 
 <ng-template #content>
 
-  <app-navbar class="fixed-navbar"></app-navbar>
+  <app-navbar class=""></app-navbar>
   <div class="cont">
-    <div class="container-fluid pt-4 mr-4">
+    <div class="container-fluid pt-1 mr-4">
       <button class="btn btn-warning" (click)="goBack()">Retour</button>
     </div>
     <div class="container">
@@ -27,8 +27,8 @@
                        <i class="fa fa-eye text-warning me-3" data-toggle="tooltip" data-placement="top" title="Voir details" (click)="afficherDetailsVoiture(reserv)" data-bs-toggle="modal" data-bs-target="#myModal"></i> 
                       <i class="fas fa-edit text-dark me-3" data-toggle="tooltip" data-placement="top" title="Editer"
                       (click)="redirectToEditR(reserv.id)"></i>
-                      <i class="fas fa-trash text-danger me-3" data-toggle="tooltip" data-placement="top"
-                        title="Supprimer"></i>
+                      <!--<i class="fas fa-trash text-danger me-3" data-toggle="tooltip" data-placement="top"
+                        title="Supprimer"></i>-->
                     </p>
                   </div>
                 </div>
@@ -46,7 +46,7 @@
   <div class="modal-dialog posi modal-dialog-centered modal-dialog-scrollable modal-xl">
     <div class="modal-content tall">
       <div class="modal-header">
-        <h1 class="h5 modal-title">Details Reservation</h1>
+        <h1 class="h5 modal-title">Details Location</h1>
         <button
           class="btn-close"
           type="button"
@@ -56,33 +56,33 @@
       <div class="modal-body d-flex">
         <div>
           <img
-            class="imgbis"
-            src="data:image/PNG;base64, {{ reservSelect?.voiture.image }}"
+            class="imgbis d-none d-lg-block"
+            src="data:image/PNG;base64, {{ reservSelect?.image }}"
             alt=""
           />
         </div>
         <div>
 
         <div class="d-flex flex-column spac">
-          <span class="h5 visite-date">Nom: {{ reservSelect?.voiture.nom }} </span>
-          <hr>
-          <span class="h5 mt-2 visite-date">Marque: {{ reservSelect?.voiture.marque }}</span>
-          <hr>
-          <span class="h5 mt-2 visite-date">Modèle: {{ reservSelect?.voiture.modele }} </span>
-          <hr>
-          <span class="h5 mt-2 visite-date">Matricule: {{ reservSelect?.voiture.matricule }}</span>
-          <hr>
           <span class="h5 mt-2 visite-date">Client: {{ reservSelect?.nom_complet }}</span>
           <hr>
           <span class="h5 mt-2 visite-date">Adresse: {{ reservSelect?.adresse }}</span>
           <hr>
           <span class="h5 mt-2 visite-date">Téléphone: {{ reservSelect?.telephone }}</span>
           <hr>
+          <span class="h5 visite-date">Voiture: {{ reservSelect?.voiture.nom }} </span>
+          <hr>
+          <span class="h5 mt-2 visite-date">Début location: {{ reservSelect?.date_debut_reservation | date:"dd-MM-yyyy" }}</span>
+          <hr>
+          <span class="h5 mt-2 visite-date">Fin location: {{ reservSelect?.date_fin_reservation | date:"dd-MM-yyyy" }} </span>
+          <hr>
+          <!--<span class="h5 mt-2 visite-date">Matricule: {{ reservSelect?.voiture.matricule }}</span>
+          <hr>-->
           <span class="h5 mt-2 justify-content-between">
-            <p>Permis:</p>  
+            <p>Image Voiture:</p>  
              <img
             class="imgb"
-            src="data:image/PNG;base64, {{ reservSelect?.image }}"
+            src="data:image/PNG;base64, {{ reservSelect?.voiture.image }}"
             alt=""
           /></span>
 
