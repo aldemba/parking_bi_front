@@ -81,7 +81,7 @@ export class EditReservationComponent {
   }
 
   showSuccess() {
-    this.toastr.success('La date a été rallongée avec success!', 'Edition!');
+    this.toastr.warning('La date a été rallongée avec success!', 'Edition!');
   }
 
 
