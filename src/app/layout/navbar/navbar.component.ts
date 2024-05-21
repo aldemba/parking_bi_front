@@ -14,6 +14,8 @@ export class NavbarComponent {
 
   prenom:string|null=null;
   nom:string|null=null;
+  id: number = 0;
+
 
   @Input() user:any;
   selectedItem: string | null = null; // Pour suivre l'élément sélectionné
@@ -26,6 +28,8 @@ export class NavbarComponent {
     // console.log("nom",this.tokserv.getNomFromStorage());
     this.getNom();
     this.getPrenom();
+    this.getId();
+
     
   }
 
@@ -56,6 +60,14 @@ export class NavbarComponent {
 
     goToResreservation(){
       this.router.navigate(["/admin/parkings/reservations"]);
+    }
+
+    getId() {
+      this.id = +this.tokserv.getIdFromStorage()!
+    }
+
+    miseAjourPassword() {
+      this.router.navigate(["/superadmin/users/update-password/" + this.id])
     }
 
 }

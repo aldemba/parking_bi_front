@@ -13,6 +13,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { MesusersComponent } from './mesusers/mesusers.component';
 import { ProprietaireModule } from '../proprietaire/proprietaire.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 
 
@@ -26,7 +27,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     EditUserComponent,
     ParkingUserComponent,
     AddParkingComponent,
-    EditParkingComponent
+    EditParkingComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     CommonModule,

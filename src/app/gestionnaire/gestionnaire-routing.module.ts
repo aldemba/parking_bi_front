@@ -7,10 +7,12 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { ParkingUserComponent } from './parking-user/parking-user.component';
 import { AddParkingComponent } from './add-parking/add-parking.component';
 import { EditParkingComponent } from './edit-parking/edit-parking.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 const routes: Routes = [
   
   {path:'users/:id/parking/edit/:idp',component:EditParkingComponent},
+  {path:'users/update-password/:id',component:UpdatePasswordComponent},
   {path:'users/:id/details-user',component:ParkingUserComponent},
   {path:'users/:id/add/parkings',component:AddParkingComponent},
   {path:'users/edit/:id',component:EditUserComponent},

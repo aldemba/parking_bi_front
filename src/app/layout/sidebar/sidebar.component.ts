@@ -13,10 +13,13 @@ export class SidebarComponent {
 
   nom:string|null=""
   prenom:string|null=""
+  id: number = 0;
+
     
   ngOnInit(){
   this.nom=this.getNom()
   this.prenom=this.getPrenom()
+  this.getId();
   }
 
 
@@ -40,4 +43,14 @@ export class SidebarComponent {
   getPrenom(){
     return localStorage.getItem("prenom")
   }
+
+  getId() {
+    this.id = +this.tokserv.getIdFromStorage()!
+  }
+
+
+  miseAjourPassword() {
+    this.router.navigate(["/superadmin/users/update-password/" + this.id])
+  }
+
 }

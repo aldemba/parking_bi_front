@@ -57,7 +57,6 @@ formulaire!:FormGroup
       adresse: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^[A-Za-zÀ-ÿ0-9 ]+$/), Validators.minLength(2)])),
       email: new FormControl("", Validators.compose([Validators.required, Validators.email, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)])),
       // password: new FormControl("", Validators.compose([Validators.required, Validators.pattern(/^([A-Za-zÀ-ÿ0-9])[A-Za-z\d@$!%*?&]{5,}$/)])),
-
     })  
 
   }
@@ -74,7 +73,14 @@ formulaire!:FormGroup
   onEditUser() {
 
     let formValues = this.formulaire.value;
-    //  console.log(formValues);
+
+       // Exclude password from the update if it is not changed
+      //  if (this.user) {
+      //   // formValues = { ...formValues, password: this.user.password };
+      //   formValues = { ...formValues, skipPasswordEncoding: true };
+      // }
+    
+     console.log(formValues);
   
     this.userserv.editUser(formValues,+this.id).subscribe({
       next: (data: any) => {
