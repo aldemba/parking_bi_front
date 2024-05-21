@@ -56,7 +56,7 @@ this.idp= +localStorage.getItem("idP")!;
 
    this.updateExpiredReservations();
 
-    console.log(this.reservations);
+    // console.log(this.reservations);
   // }),(error:any)=>{
   //   this.loading=false;
   // }
@@ -134,7 +134,7 @@ updateCarStateIfMultipleReservations() {
       // Mettre à jour l'état de la voiture en utilisant VoituresService
       this.voitureService.changeState(voitureAMettreAJour).subscribe(
         () => {
-           console.log('État de la voiture mis à jour avec succès en fonction de plusieurs réservations.');
+          //  console.log('État de la voiture mis à jour avec succès en fonction de plusieurs réservations.');
           this.reservations = this.reservations.filter((r: any) => new Date(r.date_fin_reservation).getTime() > new Date().getTime());
           // if (nouvelEtat === 'DISPONIBLE') {
           //   this.updateReservationStateToFalse(derniereReservation);

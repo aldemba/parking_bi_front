@@ -36,7 +36,7 @@ export class MesParkingsComponent {
     //  console.log(data);
       
       this.parkings=data.allParkings.filter((p:any) => p.isVisible==1)
-      console.log(this.parkings);
+      // console.log(this.parkings);
       
       this.loading = false;
     }, 

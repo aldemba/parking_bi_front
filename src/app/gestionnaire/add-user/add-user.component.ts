@@ -41,7 +41,7 @@ export class AddUserComponent {
       '@type': this.optionrole.nativeElement.value
     }
     )
-    console.log(formValues);
+    // console.log(formValues);
 
     this.userserv.saveUser(formValues).subscribe({
       next: (data: any) => {
@@ -55,7 +55,7 @@ export class AddUserComponent {
         // alert(err.error);
         let errorData;
         errorData = err
-        console.log(errorData);
+        // console.log(errorData);
 
       }
     });

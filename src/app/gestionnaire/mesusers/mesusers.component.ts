@@ -24,7 +24,7 @@ export class MesusersComponent {
     this.userserv.getUsers().subscribe({
       next: data => {
         this.users = data
-        console.log("m10", this.users);
+        // console.log("m10", this.users);
 
         this.users = this.users.filter((user: any) => user.isVisible == 1);
 

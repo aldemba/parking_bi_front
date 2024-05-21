@@ -54,12 +54,12 @@ export class AddParkingComponent {
         }
       }
       )
-      console.log("m10", formValues);
+      // console.log("m10", formValues);
 
       this.parkingserv.saveParking(formValues).subscribe({
 
         next: (data: any) => {
-          console.log(data);
+          // console.log(data);
 
           // Succès de l'appel à saveParking(), exécuter les actions suivantes
           this.formulaire.reset();
@@ -71,7 +71,7 @@ export class AddParkingComponent {
           // alert(err.error);
           let errorData;
           errorData = err
-          console.log(errorData);
+          // console.log(errorData);
 
         }
       });
@@ -105,7 +105,7 @@ export class AddParkingComponent {
 
   onChange(event: any) {
     this.file = event.target.files[0];
-    console.log(this.file);
+    // console.log(this.file);
 
   }
 

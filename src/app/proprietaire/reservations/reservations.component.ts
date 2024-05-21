@@ -174,7 +174,7 @@ goBack(){
     if(this.file){
 
       let formValues = this.formulaire.value;
-      console.log(formValues);
+      // console.log(formValues);
       formValues = Object.assign({}, formValues, {
         "voiture": {
           "id": this.voiture?.id

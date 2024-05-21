@@ -87,7 +87,7 @@ export class UpdatePasswordComponent {
 
     this.userserv.editUser(formValues, +this.id).subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
 
         this.formulaire.reset();
         (this.authserv.hasRole("ROLE_PROPRIETAIRE")) ? this.router.navigate(["/admin/parkings"]) : this.router.navigate(["/superadmin/accueil"])

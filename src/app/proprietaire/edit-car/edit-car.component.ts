@@ -184,7 +184,7 @@ export class EditCarComponent {
   
     this.voitureServ.editCar(formValues,+this.idv).subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
         
         // Succès de l'appel à saveCar(), exécuter les actions suivantes
         this.formulaire.reset();

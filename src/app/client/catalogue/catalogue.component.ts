@@ -18,7 +18,7 @@ export class CatalogueComponent {
     this.catalogue.getCatalogue().subscribe((data)=>{
       this.parkings=data
 
-      console.log(data);
+      // console.log(data);
       
     })
   }

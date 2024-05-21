@@ -83,7 +83,7 @@ export class AddCarComponent {
 
   onChange(event: any) {
     this.file = event.target.files[0];
-    console.log(this.file);
+    // console.log(this.file);
     
   }
 
@@ -120,7 +120,7 @@ goBack() {
     if (this.file) {
 
       let formValues = this.formulaire.value;
-      console.log(formValues);
+      // console.log(formValues);
       
     
       formValues = Object.assign({}, formValues, {
@@ -141,7 +141,7 @@ goBack() {
         // alert(err.error);
          let errorData;
          errorData=err
-        console.log(errorData);
+        // console.log(errorData);
         // if (err.status === 422 && err.error.violations) {
         //   const validationErrors = err.error.violations.map((violation: any) => violation.message);
         //   console.log(validationErrors);

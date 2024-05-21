@@ -33,8 +33,10 @@ export class AuthService {
     return await firstValueFrom(
       this.http.post<Token>(this.url, body).pipe(
         catchError( error => {            
-          if(error.status == 401)
-            console.log("Login et/ou mot de passe incorrect(s)!")
+          if(error.status == 401){
+
+            // console.log("Login et/ou mot de passe incorrect(s)!")
+          }
           return throwError(() => ("Login et/ou mot de passe incorrect(s)!"))
         })
       )

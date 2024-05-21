@@ -36,7 +36,7 @@ export class ParkingUserComponent {
 
     this.proprioserv.getProprioById(userId).subscribe(data=>{
       this.user=data
-      console.log("mam",data);
+      // console.log("mam",data);
       this.parkings=data.allParkings
       // console.log("1",data['parkings']);
       
@@ -44,7 +44,7 @@ export class ParkingUserComponent {
       this.loading = false;
 
 
-      console.log("m10",this.parkings);
+      // console.log("m10",this.parkings);
       
     },(error:any)=>{
         this.loading = false;

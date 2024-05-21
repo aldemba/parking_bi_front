@@ -66,7 +66,7 @@ export class EditReservationComponent {
 
     this.locationserv.editLocation(formValues,+this.idr).subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
         
         // Succès de l'appel à saveCar(), exécuter les actions suivantes
         this.formulaire.reset();

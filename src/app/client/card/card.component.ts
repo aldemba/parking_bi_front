@@ -11,7 +11,7 @@ export class CardComponent {
  @Input() catalogue:any 
 
  ngOnInit(){
-  console.log(this.catalogue);
+  // console.log(this.catalogue);
   
  }
 

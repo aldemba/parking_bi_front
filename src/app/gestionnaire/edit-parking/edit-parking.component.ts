@@ -42,7 +42,7 @@ export class EditParkingComponent {
       this.parkingserv.getParkingById(+parkingId).pipe(
         switchMap((data) => {
           this.parking = data
-          console.log(this.parking);
+          // console.log(this.parking);
           
           if (this.parking) {
 
@@ -81,11 +81,11 @@ export class EditParkingComponent {
         "id": this.userId
     });
 
-    console.log(formValues);
+    // console.log(formValues);
 
     this.parkingserv.editCar(formValues, +this.idp).subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
 
         // Succès de l'appel à editParking(), exécuter les actions suivantes
         this.formulaire.reset();

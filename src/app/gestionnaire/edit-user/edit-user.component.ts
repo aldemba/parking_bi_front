@@ -34,7 +34,7 @@ formulaire!:FormGroup
         switchMap((data)=>{          
           this.user=data
           if(this.user){
-            console.log(this.user);
+            // console.log(this.user);
             
             this.formulaire.patchValue({
               prenom:this.user.prenom,
@@ -80,11 +80,11 @@ formulaire!:FormGroup
       //   formValues = { ...formValues, skipPasswordEncoding: true };
       // }
     
-     console.log(formValues);
+    //  console.log(formValues);
   
     this.userserv.editUser(formValues,+this.id).subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
         
         this.formulaire.reset();
         this.router.navigate(["/superadmin/users"]);
