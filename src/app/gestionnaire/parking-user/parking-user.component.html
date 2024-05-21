@@ -64,7 +64,7 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      <tr *ngFor="let park of parkings | paginate :{itemsPerPage:4,currentPage:page,totalItems:totalLength}">
+                                      <tr *ngFor="let park of parkings | paginate :{itemsPerPage:8,currentPage:page,totalItems:totalLength}">
                                           <td>
                                               <img src="data:image/PNG;base64, {{park.image}}"
                                                   class="img-fluid rounded-start pi" alt="..." />
