@@ -99,12 +99,32 @@ export class UpdatePasswordComponent {
     });
   }
 
-  retour(){
-    if(this.authserv.hasRole("ROLE_PROPRIETAIRE")){
-      this.router.navigate(["/admin/parkings"])
-    }else{
-      this.router.navigate(["/superadmin/accueil"])
+  // retour(){
+  //   if(this.authserv.hasRole("ROLE_PROPRIETAIRE")){
+  //     this.router.navigate(["/admin/parkings"])
+  //   }else{
+  //     this.router.navigate(["/superadmin/accueil"])
+  //   }
+  // }
+
+  redirectionUtilisateur() {
+    const redirections:any = {
+      "ROLE_PROPRIETAIRE": "/admin/parkings",
+      "ROLE_GESTIONNAIRE": "/superadmin/accueil"
+    };
+
+    for (const role in redirections) {
+      if (this.authserv.hasRole(role)) {
+        this.router.navigate([redirections[role]]);
+        return;
+      }
     }
+    // Optionally, add a default redirection or an error handling here
+    // console.error("Aucun rôle correspondant trouvé pour l'utilisateur.");
+  }
+
+  retour() {
+    this.redirectionUtilisateur();
   }
 
   get fm() {
