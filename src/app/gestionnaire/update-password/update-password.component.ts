@@ -99,6 +99,13 @@ export class UpdatePasswordComponent {
     });
   }
 
+  retour(){
+    if(this.authserv.hasRole("ROLE_PROPRIETAIRE")){
+      this.router.navigate(["/admin/parkings"])
+    }else{
+      this.router.navigate(["/superadmin/accueil"])
+    }
+  }
 
   get fm() {
     return this.formulaire.controls;
