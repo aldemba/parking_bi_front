@@ -70,4 +70,14 @@ export class NavbarComponent {
       this.router.navigate(["/superadmin/users/update-password/" + this.id])
     }
 
+    redirectToParking() {
+      this.router.navigate(["/admin/parkings"])
+    }
+
+
+    redirectToReservations() {
+      this.router.navigate(["/admin/parkings/reservations"])
+    }
+    
+
 }

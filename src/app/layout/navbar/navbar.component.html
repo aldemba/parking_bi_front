@@ -1,4 +1,4 @@
-<header class="p-3 b shadow">
+<!--<header class="p-3 b shadow">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
@@ -14,13 +14,13 @@
               <li class="nav-item"><button class="btn btn-outline-warning text-dark me-2" (click)="filterCar('all')" [class.selected]="selectedItem === 'all'" >Liste Voitures</button></li>
               <li class="nav-item"><button class="btn btn-outline-warning text-dark me-2" (click)="filterCar('disponibles')" [class.selected]="selectedItem === 'disponibles'" >Voitures Disponibles</button></li>
               <li class="nav-item"><button class="btn btn-outline-warning text-dark me-2" (click)="goToResreservation()" >Locations</button></li>
-              <!--<li class="nav-item"><button class="btn btn-outline-warning text-white me-2" (click)="filterCar('indisponibles')" [class.selected]="selectedItem === 'indisponibles'" >Voitures Indisponibles</button></li>-->
+              <li class="nav-item"><button class="btn btn-outline-warning text-white me-2" (click)="filterCar('indisponibles')" [class.selected]="selectedItem === 'indisponibles'" >Voitures Indisponibles</button></li>
             </ng-container>
 
-            <!--<li class="nav-item"><a class="nav-link px-2 text-white">Catalogue</a></li>-->
-          <!--<li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+            <li class="nav-item"><a class="nav-link px-2 text-white">Catalogue</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
           <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">About</a></li> -->
+          <li><a href="#" class="nav-link px-2 text-white">About</a></li> 
         </ul>
 
         <div class="text-end">
@@ -31,14 +31,47 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item curs" (click)="miseAjourPassword()">Paramètres</a></li>
-                <!--<li><a class="dropdown-item btn btn-outline-warning" href="">Deconnexion</a></li>-->
+                <li><a class="dropdown-item btn btn-outline-warning" href="">Deconnexion</a></li>
                 <li class="dropdown-item curs"> <a (click)="logout()">Deconnexion</a> </li>
+              </ul>
+            </li>
+               <li><button type="button" (click)="logout()" class="btn btn-outline-warning me-2">Deconnexion</button></li> 
+          </div>
+         <button type="button" class="btn btn-warning">Sign-up</button>-
+        </div>
+        
+      </div>
+  </header>-->
+
+  <header>
+    <nav class="navbar shadow">
+        <div class="logo">
+            <a ><img src="../../../assets/img/nautx.jpg" alt="logo" width="100px" height="80px" ></a> <!-- Your Logo -->
+        </div>
+        <ul class="nav">
+            <li class="nav-items" (click)="redirectToParking()"><a ><span class="link-text">Accueil</span><i class="fa-solid fa-house"></i></a></li>
+            <ng-container *ngIf="isVisible">
+            <li class="nav-items"  (click)="filterCar('all')" ><a ><span class="link-text">Liste Voitures</span><i class="fa-solid fa-truck"></i></a></li>
+            <li class="nav-items"  (click)="filterCar('disponibles')" ><a ><span class="link-text">Voitures Disponibles</span><i class="fa-solid fa-car"></i></a></li>
+            <li class="nav-items"  (click)="redirectToReservations()"><a ><span class="link-text">Réservations</span><i class="fa-solid fa-location-arrow"></i></a></li>
+            <!-- <li class="nav-items"><a ><span class="link-text">Infos</span><i class="fa-solid fa-circle-info"></i></a></li> -->
+          </ng-container>
+        </ul>
+        <!-- <a  class="btn">Login<i class="fa-solid fa-chevron-right ok"></i></a> -->
+  
+        <div class="text-end">
+        
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-dark btn" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               {{prenom}} {{nom}}
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" (click)="miseAjourPassword()">Paramètres</a></li>
+                <!--<li><a class="dropdown-item btn btn-outline-warning" href="">Deconnexion</a></li>-->
+                <li class="dropdown-item curs" (click)="logout()"> <a >Deconnexion</a> </li>
               </ul>
             </li>
                 <!-- <li><button type="button" (click)="logout()" class="btn btn-outline-warning me-2">Deconnexion</button></li> -->
           </div>
-         <!-- <button type="button" class="btn btn-warning">Sign-up</button>-->
-        </div>
-        
-      </div>
+    </nav>
   </header>
