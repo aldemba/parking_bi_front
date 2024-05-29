@@ -94,3 +94,17 @@
   z-index: 1000; /* Assurez-vous que le z-index est supérieur à celui des autres éléments de la page */
 }
 
+.animation{
+  animation-name: contenu;
+  animation-duration: 2s;
+}
+
+@keyframes contenu{
+  0% {
+      opacity: 0;
+      transform: scale3d(.3, .3, .3);
+  }
+  50% {
+      opacity: 1;
+  }
+}
