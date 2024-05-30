@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,8 @@ export class GestionReservationService {
     };
     const reservationId = reservation.id; // Assurez-vous que votre objet reservation contient un identifiant unique.
     // alert(reservationId)
-    const updateUrl = `http://127.0.0.1:8000/api/reservations/${reservationId}`;
+    // const updateUrl = `http://127.0.0.1:8000/api/reservations/${reservationId}`;
+    const updateUrl=`${environment.api}/reservations`+reservationId
     return this.http.patch(updateUrl, { etat: reservation.etat }, httpOptions).pipe(
       catchError(this.handleError)
     );

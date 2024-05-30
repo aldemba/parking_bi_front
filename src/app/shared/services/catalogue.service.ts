@@ -2,19 +2,28 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Catalogue } from '../models/catalogue';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogueService {
 
-private urlCatalogue:string="http://localhost:8000/api/catalogues"
+// private urlCatalogue:string="http://localhost:8000/api/catalogues"
+
+private url:string=environment.api
+
+private urlc=`${this.url}/catalogues`
+
+
+
+
 
 
   constructor(private http:HttpClient) { }
 
   getCatalogue():Observable<any>{
-    return this.http.get<any>(this.urlCatalogue).pipe(catchError(this.handleError))
+    return this.http.get<any>(this.urlc).pipe(catchError(this.handleError))
   }
 
 

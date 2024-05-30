@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { catchError, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class DetailsService {
         'Authorization': `Bearer ${this.tokserv.getTokenFromStorage()}`
       })
     };
-    let DETAILS_URL = "http://127.0.0.1:8000/api/dtos/"+id
+    // let DETAILS_URL = "http://127.0.0.1:8000/api/dtos/"+id
+      let DETAILS_URL = `${environment.api}/dtos/`+id;
     
     return this.http.get<any>(DETAILS_URL)
     // console.log(this.http.get<any>(PARKINGS_PROPRIO, httpOptions));

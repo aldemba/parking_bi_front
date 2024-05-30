@@ -6,6 +6,7 @@ import { Credentials } from '../models/credentials';
 import { Token } from '../models/token';
 import { TokenService } from './token.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -14,13 +15,13 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  // url=environment.api;
-  // urlLogin=`${this.url}/login_check`
+ private  url :string= environment.api
+   urlLogin=`${this.url}/login_check`
 
   user:User|undefined
   tok:any
 
-   url="http://localhost:8000/api/login_check"
+  //  url="http://localhost:8000/api/login_check"
 
 
   constructor(private http:HttpClient, private tokenserv:TokenService, private router:Router) { }
@@ -31,7 +32,7 @@ export class AuthService {
   public async login(body : Credentials)
   {
     return await firstValueFrom(
-      this.http.post<Token>(this.url, body).pipe(
+      this.http.post<Token>(this.urlLogin, body).pipe(
         catchError( error => {            
           if(error.status == 401){
 
