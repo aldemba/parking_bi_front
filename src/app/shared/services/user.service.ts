@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { User } from '../models/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,9 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
-  private addProprio:string="http://127.0.0.1:8000/api/proprietaires"
+  private addProprio:string=`${environment.api}/proprietaires`
   // private addUser:string="http://127.0.0.1:8000/api/users"
-  private addGestionnaire:string="http://127.0.0.1:8000/api/gestionnaires"
+  private addGestionnaire:string=`${environment.api}/gestionnaires`
 
   public getUsers():Observable<User>
   {
@@ -37,13 +38,13 @@ export class UserService {
       })
     };
   
-    return this.http.patch<any>(`http://127.0.0.1:8000/api/users/${userId}`,user,httpOptions).pipe(catchError(this.handleError));
+    return this.http.patch<any>(`${environment.api}/users/${userId}`,user,httpOptions).pipe(catchError(this.handleError));
 
   }
 
 
   getUserById(userId:number):Observable<any>{
-    return this.http.get<any>(`http://localhost:8000/api/users/${userId}`).pipe(  
+    return this.http.get<any>(`${environment.api}/users/${userId}`).pipe(  
     catchError(this.handleError)
     )
     
@@ -51,7 +52,7 @@ export class UserService {
 
 
   getProprioById(userId:number):Observable<any>{
-    return this.http.get<any>(`http://localhost:8000/api/proprietaire/${userId}/parkings`).pipe(  
+    return this.http.get<any>(`${environment.api}/proprietaire/${userId}/parkings`).pipe(  
     catchError(this.handleError)
     )
   
@@ -65,7 +66,7 @@ export class UserService {
       })
     };
     const userId = user.id; // Assurez-vous que votre objet voiture contient un identifiant unique.
-    const updateUrl = `http://127.0.0.1:8000/api/users/${userId}`;
+    const updateUrl = `${environment.api}/users/${userId}`;
     return this.http.patch(updateUrl, { isVisible: false }, httpOptions).pipe(
       catchError(this.handleError)
     );

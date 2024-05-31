@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class VoituresService {
 
   constructor(private http: HttpClient) { }
 
-  private addCarUrl:string="http://127.0.0.1:8000/api/voitures"
+  private addCarUrl:string=`${environment.api}/voitures`
 
 
   changeState(voiture: any) {
@@ -19,7 +20,7 @@ export class VoituresService {
       })
     };
     const voitureId = voiture.id; // Assurez-vous que votre objet voiture contient un identifiant unique.
-    const updateUrl = `http://127.0.0.1:8000/api/voitures/${voitureId}`;
+    const updateUrl = `${environment.api}/voitures/${voitureId}`;
     return this.http.patch(updateUrl, { etat: voiture.etat }, httpOptions).pipe(
       catchError(this.handleError)
     );
@@ -33,7 +34,7 @@ export class VoituresService {
       })
     };
     const voitureId = voiture.id; // Assurez-vous que votre objet voiture contient un identifiant unique.
-    const updateUrl = `http://127.0.0.1:8000/api/voitures/${voitureId}`;
+    const updateUrl = `${environment.api}/voitures/${voitureId}`;
     return this.http.patch(updateUrl, { isVisible: false }, httpOptions).pipe(
       catchError(this.handleError)
     );
@@ -41,7 +42,8 @@ export class VoituresService {
 
   
   public getVoituresByEtat(id: number): Observable<any> {
-    let DETAILS_URL = "http://127.0.0.1:8000/api/parkings/"+id+"/voitures";
+    // let DETAILS_URL = "http://127.0.0.1:8000/api/parkings/"+id+"/voitures";
+    let DETAILS_URL=`${environment.api}/parkings/${id}/voitures`
     
     return this.http.get<any>(DETAILS_URL).pipe(
       map((response) => {
@@ -82,7 +84,7 @@ export class VoituresService {
   editCar(body:any, voitureId:number):Observable<any>{
     // const voitureId = voitureData.id; // Assurez-vous que votre objet voiture contient un identifiant unique.
     // const CarUrl = `http://127.0.0.1:8000/api/voitures/${voitureId}`;
-    return this.http.put<any>(`http://127.0.0.1:8000/api/voitures/${voitureId}`,body).pipe(catchError(this.handleError));
+    return this.http.put<any>(`${environment.api}/voitures/${voitureId}`,body).pipe(catchError(this.handleError));
   }
 
 
@@ -92,7 +94,7 @@ export class VoituresService {
 
 
   getVoitureById(voitureId:number):Observable<any>{
-    return this.http.get<any>(`http://localhost:8000/api/voitures/${voitureId}`).pipe(  
+    return this.http.get<any>(`${environment.api}/voitures/${voitureId}`).pipe(  
     catchError(this.handleError)
     )
   }

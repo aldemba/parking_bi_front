@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { TokenService } from './token.service';
 import { Parking } from '../models/parking';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class ParkingsService {
         'Authorization': `Bearer ${this.toksev.getTokenFromStorage()}`
       })
     };
-    let PARKINGS_PROPRIO = "http://127.0.0.1:8000/api/proprietaire/"+id+"/parkings"
+    // let PARKINGS_PROPRIO = "http://127.0.0.1:8000/api/proprietaire/"+id+"/parkings"
+    let PARKINGS_PROPRIO = `${environment.api}/proprietaire/${id}/parkings`
     
     return this.http.get<any>(PARKINGS_PROPRIO).pipe( catchError(this.handleError))
     // console.log(this.http.get<any>(PARKINGS_PROPRIO, httpOptions));
@@ -34,7 +36,7 @@ export class ParkingsService {
         'Authorization': `Bearer ${this.toksev.getTokenFromStorage()}`
       })
     };
-  let addParking:string=`http://127.0.0.1:8000/api/parkings`
+  let addParking:string=`${environment.api}/parkings`
 
     return this.http.post<Parking>(addParking,parking,httpOptions).pipe
     (catchError(this.handleError));
@@ -49,12 +51,12 @@ export class ParkingsService {
         'Content-type': 'application/merge-patch+json'
       })
     };
-    return this.http.patch<Parking>(`http://127.0.0.1:8000/api/parkings/${parkingId}`,body,httpOptions).pipe(catchError(this.handleError));
+    return this.http.patch<Parking>(`${environment.api}/parkings/${parkingId}`,body,httpOptions).pipe(catchError(this.handleError));
   }
 
  
   getParkingById(parkingId:number):Observable<any>{
-    return this.http.get<any>(`http://127.0.0.1:8000/api/parkings/${parkingId}/voitures`).pipe(  
+    return this.http.get<any>(`${environment.api}/parkings/${parkingId}/voitures`).pipe(  
     catchError(this.handleError)
     )
   }
@@ -66,7 +68,7 @@ export class ParkingsService {
       })
     };
     const parkingId = parking.id; // Assurez-vous que votre objet voiture contient un identifiant unique.
-    const updateUrl = `http://127.0.0.1:8000/api/parkings/${parkingId}`;
+    const updateUrl = `${environment.api}/parkings/${parkingId}`;
     return this.http.patch(updateUrl, { isVisible: false }, httpOptions).pipe(
       catchError(this.handleError)
     );

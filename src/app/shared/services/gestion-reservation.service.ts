@@ -33,7 +33,7 @@ export class GestionReservationService {
     const reservationId = reservation.id; // Assurez-vous que votre objet reservation contient un identifiant unique.
     // alert(reservationId)
     // const updateUrl = `http://127.0.0.1:8000/api/reservations/${reservationId}`;
-    const updateUrl=`${environment.api}/reservations`+reservationId
+    const updateUrl=`${environment.api}/reservations/${reservationId}`
     return this.http.patch(updateUrl, { etat: reservation.etat }, httpOptions).pipe(
       catchError(this.handleError)
     );

@@ -21,7 +21,7 @@ export class DetailsService {
       })
     };
     // let DETAILS_URL = "http://127.0.0.1:8000/api/dtos/"+id
-      let DETAILS_URL = `${environment.api}/dtos/`+id;
+      let DETAILS_URL = `${environment.api}/dtos/${id}`;
     
     return this.http.get<any>(DETAILS_URL)
     // console.log(this.http.get<any>(PARKINGS_PROPRIO, httpOptions));

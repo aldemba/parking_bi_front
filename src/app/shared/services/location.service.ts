@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Reservation } from '../models/reservation';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class LocationService {
 
   constructor(private http: HttpClient) { }
 
-  private addReservation:string="http://127.0.0.1:8000/api/reservations"
+  private addReservation:string=`${environment.api}/reservations`
 
 
 
@@ -21,7 +22,7 @@ export class LocationService {
         'Content-type': 'application/merge-patch+json'
       })
     };
-    return this.http.patch<any>(`http://127.0.0.1:8000/api/reservations/${locationId}`,body,httpOptions).pipe(catchError(this.handleError));
+    return this.http.patch<any>(`${environment.api}/reservations/${locationId}`,body,httpOptions).pipe(catchError(this.handleError));
 
   }
 
@@ -35,14 +36,15 @@ export class LocationService {
 
 
   public getReservationsByParking(id:number){
-    let RESERV_URL = "http://127.0.0.1:8000/api/proprietaire/"+id+"/parkings"
+    // let RESERV_URL = "http://127.0.0.1:8000/api/proprietaire/"+id+"/parkings"
+    let RESERV_URL=`${environment.api}/api/proprietaire/${id}/parkings`
     
     return this.http.get<any>(RESERV_URL).pipe( catchError(this.handleError))
   }
 
   
   getReservationById(reservationId:number):Observable<any>{
-    return this.http.get<any>(`http://localhost:8000/api/reservations/${reservationId}`).pipe(  
+    return this.http.get<any>(`${environment.api}/reservations/${reservationId}`).pipe(  
     catchError(this.handleError)
     )
   }
